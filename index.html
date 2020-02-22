@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="Valley.css">
+</head>
+<body ondragstart="return false" id="body-4">
+	<div id="mouse">
+		<img src="" alt="">
+	</div>
+	<div id="preview"></div>
+	<div id="catalog">
+		<div id="catalogBtn">
+			<div class="catalogBtn">
+				<img src="imges/menu-furniture-2.png" alt="" id="furniture-img">
+			</div>
+			<div class="catalogBtn">
+				<img src="imges/menu-production-1.png" alt="" id="production-img">
+			</div>
+			<div class="catalogBtn">
+				<img src="imges/menu-Wall-1.png" alt="" id="Wall-img">
+			</div>
+		</div>
+		<div id="menu">
+			<div id="furniture">
+				<div class="menuNum">1</div>
+				<div class="menuNum">2</div>
+				<div class="menuNum">3</div>
+				<div class="menuNum">4</div>
+				<div class="menuNum">5</div>
+			</div>
+			<div id="production">
+				<div class="menuNum">1</div>
+				<div class="menuNum">2</div>
+				<div class="menuNum">3</div>
+				<div class="menuNum">4</div>
+				<div class="menuNum">5</div>
+				<div class="menuNum">6</div>
+			</div>
+			<div id="Wall">
+				<div class="menuNum">1</div>
+				<div class="menuNum">2</div>
+				<div class="menuNum">3</div>
+				<div class="menuNum">4</div>
+				<div class="menuNum">5</div>
+				<div class="menuNum">6</div>
+				<div class="menuNum">7</div>
+			</div>
+		</div>
+		<div id="menu-num">
+			<div id="prev">
+				<img src="imges/prev.png" alt="" onclick="prev();">
+			</div>
+			<div id="Num-0">
+				<img src="imges/PageNumber/furniture-0.png" alt="" id="Num-img-0">
+			</div>
+			<div id="Num-1">
+				<img src="imges/PageNumber/production-0.png" alt="" id="Num-img-1" style="display: none;">
+			</div>
+			<div id="Num-2">
+				<img src="imges/PageNumber/Wall-0.png" alt="" id="Num-img-2" style="display: none;">
+			</div>
+			<div id="next">
+				<img src="imges/next.png" alt="" onclick="next();">
+			</div>
+		</div>
+	</div>
+	<div id="zoom">
+		<div id="zoom-narrow">
+			<img src="imges/zoom-narrow.png" alt="" onclick="narrow();">
+		</div>
+		<div id="zoom-enlarge">
+			<img src="imges/zoom-enlarge.png" alt="" onclick="enlarge();">
+		</div>
+	</div>
+	<div id="camera">
+		<div id="home">
+		<div id="bj-wall-1"></div>
+		<div id="bj-floor-1"></div>
+		<div id="canvas">
+			<!-- 分割线12 -->
+			<div id="canvas-1" class="home-1-not"><img src="" alt=""></div>
+			<div><img src="" alt=""></div>
+			<div><img src="" alt=""></div>
+			<div><img src="" alt=""></div>
+			<div><img src="" alt=""></div>
+			<div><img src="" alt=""></div>
+			<div><img src="" alt=""></div>
+			<div class="home-1-w-4"><img src="" alt=""></div>
+			<div class="home-1-w-3"><img src="" alt=""></div>
+			<div class="home-1-w-2"><img src="" alt=""></div>
+			<div class="home-1-w-1"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<!-- 分割线12 -->
+			<!-- 分割线11 -->
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div><img src="" alt=""></div>
+			<div><img src="" alt=""></div>
+			<div><img src="" alt=""></div>
+			<div><img src="" alt=""></div>
+			<div><img src="" alt=""></div>
+			<div><img src="" alt=""></div>
+			<div class="home-1-w-4"><img src="" alt=""></div>
+			<div class="home-1-w-3"><img src="" alt=""></div>
+			<div class="home-1-w-2"><img src="" alt=""></div>
+			<div class="home-1-w-1"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<!-- 分割线11 -->
+			<!-- 分割线10 -->
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<!-- 分割线10 -->
+			<!-- 分割线9 -->
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<!-- 分割线9 -->
+			<!-- 分割线8 -->
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<!-- 分割线8 -->
+			<!-- 分割线7 -->
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-w-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<!-- 分割线7 -->
+			<!-- 分割线6 -->
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-h-5 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-5 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-5 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-5 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-5 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-5 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-5 home-1-w-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-5 home-1-w-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-5 home-1-w-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-5 home-1-w-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<!-- 分割线6 -->
+			<!-- 分割线5 -->
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-h-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-4 home-1-w-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-4 home-1-w-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-4 home-1-w-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-4 home-1-w-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<!-- 分割线5 -->
+			<!-- 分割线4 -->
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-h-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-3 home-1-w-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-3 home-1-w-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-3 home-1-w-2"><img src="imges/bed.png" alt="" id="bed-1"></div>
+			<div class="home-1-h-3 home-1-w-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<!-- 分割线4 -->
+			<!-- 分割线3 -->
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-h-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-2 home-1-w-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-2 home-1-w-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-2 home-1-w-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-2 home-1-w-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<!-- 分割线3 -->
+			<!-- 分割线2 -->
+			<div><img src="imges/home-1-bj-x.png" alt="" id="home-1-bj-x"></div>
+			<div class="home-1-h-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-1 home-1-w-4 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-1 home-1-w-3 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-1 home-1-w-2 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-h-1 home-1-w-1 home-1-h-wall"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<!-- 分割线2 -->
+			<!-- 分割线1 -->
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<div class="home-1-not"><img src="" alt=""></div>
+			<!-- 分割线1 -->
+		</div>
+		</div>
+	</div>
+</body>
+<script src="html2canvas.min.js"></script>
+<script src="Valley.js"></script>
+
+
+<script>
+
+</script>
+</html>

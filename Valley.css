@@ -1,0 +1,181 @@
+img{
+	display: block;
+}
+body{
+	margin: 0;
+	background: #050304;
+	overflow-x: hidden;
+    overflow-y: hidden;
+   	display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: center;
+}
+#mouse{
+	width: 1em;
+	height: 1em;
+	position: absolute;
+	pointer-events: none;
+	z-index: 99;
+}
+#body-1{
+	font-size: 16px;
+}
+
+#body-2{
+	font-size: 32px;
+}
+#body-3{
+	font-size: 48px;
+}
+#body-4{
+	font-size: 64px;
+}
+#catalog{
+	width: 320px;
+	height: 640px;
+	background: url(imges/menu.png);
+	position: absolute;
+	z-index: 20;
+	top: 2em;
+	left: 0.2em;
+}
+#catalogBtn{
+	width: 320px;
+	height: 72px;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+.catalogBtn{
+	width: 92px;
+	height: 72px;
+}
+#menu{
+	width: 320px;
+	height: 504px;
+}
+#menu-num{
+	width: 320px;
+	height: 64px;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+#furniture{
+	width: 320px;
+	height: 504px;
+}
+.menuNum{
+	width: 320px;
+	height: 504px;
+}
+#production{
+	width: 320px;
+	height: 504px;
+	display: none;
+		
+}
+#Wall{
+	width: 320px;
+	height: 504px;
+	display: none;
+}
+#zoom{
+	width: 448px;
+	height: 128px;
+	background:url(imges/zoom-100.png);
+	position: absolute;
+	z-index: 21;
+	top: 85%;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+#camera{
+	/*background: #fff;*/
+	width: 13em;
+	height: 12em;
+	position: absolute;
+	z-index: -3;
+	top: 1em;
+}
+#home{
+	width: 12em;
+	height: 12em;
+	background:url(imges/home-1-bj.png);
+	background-size:12em;
+	margin: auto;
+	position: absolute;
+	/*overflow:hidden*/	
+}
+.home{
+	position: absolute;
+
+}
+
+#canvas{
+	width: 12em !important;
+	height: 12em !important;
+	position: absolute;
+	z-index: 5;
+	top: 0;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /*display: none;*/
+}
+.canvas{
+	pointer-events: none;
+}
+#canvas div{
+	width: 1em;
+	height: 1em;
+}
+#canvas div:first-child{
+	width: 1em !important;
+	height: 1em !important;
+}
+/*#canvas div img{
+	width: 1em;
+	height: 1em;
+}*/
+#bj-wall-1{
+	width: 10em;
+	height: 3em;
+	background:url(imges/wall-1.png);
+	background-size:1em;
+	margin: auto;
+	margin-top: 1em;
+	position: relative;
+	z-index: -1;
+}
+#bj-floor-1{
+	width: 10em;
+	height: 9em;
+	background:url(imges/floor-1.png);
+	background-size:2em;
+	margin: auto;
+	top: -1em;
+	position: relative;
+	z-index: -2;
+}
+.home-1-not{
+	pointer-events: none;
+	/*background: #000;*/
+	/*opacity:0.5;*/
+}
+#home-1-bj-x{
+	position: absolute;
+	z-index: 10;
+	pointer-events: none;
+	width: 12em !important;
+	height: 2em !important;
+}
+#bed-1{
+	width: 2em;
+	height: 3em;
+}
