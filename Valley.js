@@ -5,8 +5,8 @@ var hide = 0;  //隐藏UI功能标记
 var IMG = ""
 var IMGW = 0;
 var IMGH = 0;
-var imgw = "1em";
-var imgh = "1em";
+var imgw = "0em";
+var imgh = "0em";
 var zoomNum = 4;
 var catalog = document.getElementById('catalog');
 var zoom = document.getElementById('zoom');
@@ -195,12 +195,14 @@ for (var i = 0; i < canvasNum.length; i++) {
         canvasNum[i].index = i + 1;
 }
 canvas.addEventListener('click',function(e){
-        console.log(e.target);
-        console.log(IMG);
+        console.log(e.target.index);
         // console.log(e.target.nodeName);
-        e.target.src = IMG;
-        e.target.style.width = imgw;
-        e.target.style.height = imgh;
+
+        	e.target.src = IMG;
+        	e.target.style.width = imgw;
+        	e.target.style.height = imgh;
+
+        
         // alert(e.target.index);
 })
 //定位div位置----------------------------------------------------------
@@ -474,16 +476,20 @@ function screenshot(){
 	preview.style.display = "flex";
 	preview.style.width = screen.width + "px";
 	preview.style.height = screen.height + "px";
-	
+	huanchong();
 }
-
+// window.onload = function(){
+// 	huanchong();
+// 	alert(1);
+// }
+function huanchong(){
 	html2canvas(camera).then(function(canvas) {
     preview1.appendChild(canvas);
     var oCavans = document.getElementsByTagName('canvas')[0];
     var strDataURI1 = oCavans.toDataURL();
     downLoadFn(strDataURI1);
 	});
-
+};
 
 
 
