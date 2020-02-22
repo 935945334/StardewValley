@@ -548,14 +548,54 @@ function downLoadFn(url) {
 
 
 //隐藏UI----------------------------------------------------
-function hide(){
+function hide1(){
 	if (hide == 0) {
-		catalog.style.display = "none";
-		zoom.style.display = "none";
+		setTimeout(function(){ 
+			catalog.style.opacity = "1";
+			zoom.style.opacity = "1"; 
+		}, 40);
+		setTimeout(function(){ 
+			catalog.style.opacity = "0.8";
+			zoom.style.opacity = "0.8"; 
+		}, 80);
+		setTimeout(function(){ 
+			catalog.style.opacity = "0.6";
+			zoom.style.opacity = "0.6"; 
+		}, 120);
+		setTimeout(function(){ 
+			catalog.style.opacity = "0.4";
+			zoom.style.opacity = "0.4"; 
+		}, 160);
+		setTimeout(function(){ 
+			catalog.style.opacity = "0.2";
+			zoom.style.opacity = "0.2"; 
+		}, 200);
+		setTimeout(function(){ 
+			catalog.style.display = "none";
+			zoom.style.display = "none";
+		}, 240);
 		window.hide = 1;
 	}else{
-		catalog.style.display = "block";
+		setTimeout(function(){ 
+			catalog.style.display = "block";
 		zoom.style.display = "block";
+		}, 40);
+		setTimeout(function(){ 
+			catalog.style.opacity = "0.4";
+			zoom.style.opacity = "0.4"; 
+		}, 80);
+		setTimeout(function(){ 
+			catalog.style.opacity = "0.6";
+			zoom.style.opacity = "0.6"; 
+		}, 120);
+		setTimeout(function(){ 
+			catalog.style.opacity = "0.8";
+			zoom.style.opacity = "0.8"; 
+		}, 160);
+		setTimeout(function(){ 
+			catalog.style.opacity = "1";
+			zoom.style.opacity = "1"; 
+		}, 200);
 		window.hide = 0;
 	}
 }
