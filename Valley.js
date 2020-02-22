@@ -1,9 +1,7 @@
 var camera = document.getElementById("camera");
 var canvas = document.getElementById("canvas");
 var canvasNum = canvas.querySelectorAll("div");
-window.onload = function(){
-	alert(1)
-}
+
 var IMG = ""
 var IMGW = 0;
 var IMGH = 0;
@@ -472,6 +470,9 @@ function wNot(){
 	}
 }
 
+window.onload = function(){
+	huanchong()
+}
 function huanchong(){
 	html2canvas(camera).then(function(canvas) {
     preview.appendChild(canvas);
