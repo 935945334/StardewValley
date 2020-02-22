@@ -128,15 +128,15 @@ body{
 }
 #camera{
 	background: #050304;
-	width: 12em;
-	height: 12em;
+	width: 50em;
+	height: 50em;
 	position: absolute;
 	z-index: -3;
 	top: 1em;
 }
 #home{
-	width: 12em;
-	height: 12em;
+	width: 50em;
+	height: 50em;
 	background:url(imges/home-1-bj.png);
 	background-size:12em;
 	margin: auto;
