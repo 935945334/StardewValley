@@ -577,8 +577,8 @@ function hide1(){
 		window.hide = 1;
 	}else{
 		setTimeout(function(){ 
-			catalog.style.display = "block";
-		zoom.style.display = "block";
+		catalog.style.display = "block";
+		zoom.style.display = "flex";
 		}, 40);
 		setTimeout(function(){ 
 			catalog.style.opacity = "0.4";
