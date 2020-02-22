@@ -471,7 +471,8 @@ function wNot(){
 }
 
 window.onload = function(){
-	huanchong()
+	huanchong();
+	alert(1);
 }
 function huanchong(){
 	html2canvas(camera).then(function(canvas) {
