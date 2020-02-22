@@ -500,6 +500,7 @@ function myBrowser() {
    	 return "Edge";
 	} //判断是否Edge浏览器
 }
+myBrowser();
 //IE浏览器图片保存本地
 function SaveAs5(imgURL) {
     var oPop = window.open(imgURL, "", "width=1, height=1, top=5000, left=5000");
