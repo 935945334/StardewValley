@@ -38,6 +38,7 @@ body{
 	position: absolute;
 	pointer-events: none;
 	z-index: 99;
+	opacity: 0.7;
 }
 #screenshot{
 	position: absolute;
