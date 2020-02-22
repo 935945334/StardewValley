@@ -518,3 +518,10 @@ html2canvas(camera).then(function(canvas) {
 //     }, false);
 //     // document.body.appendChild(link);
 // };
+function downLoadFn(url) {
+    if(myBrowser() === "IE" || myBrowser() === "Edge") {
+        SaveAs5(url);
+    } else {
+        download(url);
+    }
+}
