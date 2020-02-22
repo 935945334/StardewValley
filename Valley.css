@@ -10,7 +10,7 @@ body{
     -webkit-justify-content: space-between;
     justify-content: center;
 }
-#canvas{
+canvas{
 	display: none;
 }
 #mouse{
