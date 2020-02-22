@@ -42,6 +42,7 @@ body{
 #preview{
 	position: absolute;
 	z-index: 100;
+	background: #050304;
 }
 #catalogBtn{
 	width: 320px;
