@@ -10,6 +10,9 @@ body{
     -webkit-justify-content: space-between;
     justify-content: center;
 }
+#canvas{
+	display: none;
+}
 #mouse{
 	width: 1em;
 	height: 1em;
