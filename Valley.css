@@ -39,6 +39,10 @@ body{
 	top: 2em;
 	left: 0.2em;
 }
+#preview{
+	position: absolute;
+	z-index: 100;
+}
 #catalogBtn{
 	width: 320px;
 	height: 72px;

@@ -469,14 +469,14 @@ function wNot(){
 		}
 	}
 }
-// var preview = document.getElementById("preview");
-// camera
-// html2canvas(camera).then(function(canvas) {
-//     preview.appendChild(canvas);
-//     var oCavans = document.getElementsByTagName('canvas')[0];
-//     var strDataURI1 = oCavans.toDataURL();
-//     downLoadFn(strDataURI1);
-// });
+var preview = document.getElementById("preview");
+camera
+html2canvas(camera).then(function(canvas) {
+    preview.appendChild(canvas);
+    var oCavans = document.getElementsByTagName('canvas')[0];
+    var strDataURI1 = oCavans.toDataURL();
+    downLoadFn(strDataURI1);
+});
 //  //判断浏览器类型
 // function myBrowser() {
 // 	var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
