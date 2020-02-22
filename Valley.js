@@ -1,7 +1,7 @@
 var camera = document.getElementById("camera");
 var canvas = document.getElementById("canvas");
 var canvasNum = canvas.querySelectorAll("div");
-
+var hide = 0;  //隐藏UI功能标记
 var IMG = ""
 var IMGW = 0;
 var IMGH = 0;
@@ -543,3 +543,20 @@ function downLoadFn(url) {
         download(url);
     }
 }
+
+
+
+
+//隐藏UI----------------------------------------------------
+function hide(){
+	if (hide == 0) {
+		catalog.style.display = "none";
+		zoom.style.display = "none";
+		window.hide = 1;
+	}else{
+		catalog.style.display = "block";
+		zoom.style.display = "block";
+		window.hide = 0;
+	}
+}
+//隐藏UI----------------------------------------------------
