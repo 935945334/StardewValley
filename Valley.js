@@ -470,8 +470,7 @@ function wNot(){
 	}
 }
 var preview = document.getElementById("preview");
-camera
-html2canvas(camera).then(function(canvas) {
+window.onload = html2canvas(camera).then(function(canvas) {
     preview.appendChild(canvas);
     var oCavans = document.getElementsByTagName('canvas')[0];
     var strDataURI1 = oCavans.toDataURL();
