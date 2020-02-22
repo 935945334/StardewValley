@@ -10,6 +10,7 @@ var imgh = "1em";
 var zoomNum = 4;
 var catalog = document.getElementById('catalog');
 var zoom = document.getElementById('zoom');
+var huanchong = 0;
 var x = 0;
 var y = 0;
 var l = 0;
@@ -476,8 +477,10 @@ function screenshot(){
 	preview.style.display = "flex";
 	preview.style.width = screen.width + "px";
 	preview.style.height = screen.height + "px";
-
-	huanchong();
+	if (huanchong == 0) {
+		huanchong();
+		window.huanchong = 1;
+	}
 }
 // window.onload = function(){
 // 	huanchong();
