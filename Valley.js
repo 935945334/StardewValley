@@ -469,14 +469,23 @@ function wNot(){
 		}
 	}
 }
+var preview = document.getElementById('preview');
+var preview1 = document.getElementById('preview1');
+function screenshot(){
+	var screenshot = document.getElementById('screenshot');
+	preview.style.display = "flex";
+	preview.style.width = screen.width + "px";
+	preview.style.height = screen.height + "px";
 
-window.onload = function(){
 	huanchong();
-	alert(1);
 }
+// window.onload = function(){
+// 	huanchong();
+// 	alert(1);
+// }
 function huanchong(){
 	html2canvas(camera).then(function(canvas) {
-    preview.appendChild(canvas);
+    preview1.appendChild(canvas);
     var oCavans = document.getElementsByTagName('canvas')[0];
     var strDataURI1 = oCavans.toDataURL();
     downLoadFn(strDataURI1);

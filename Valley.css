@@ -10,8 +10,27 @@ body{
     -webkit-justify-content: space-between;
     justify-content: center;
 }
-canvas{
+#save{
+	display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+#IsA{
+	width: 192px;
+	height: 192px;
+	display: block;
+	background: url(imges/download.png);
+	float: right;
+}
+#preview{
 	display: none;
+	top: 1em;
+	/*display: flex;*/
+    -webkit-justify-content: space-between;
+    justify-content: center;
 }
 #mouse{
 	width: 1em;
@@ -19,6 +38,11 @@ canvas{
 	position: absolute;
 	pointer-events: none;
 	z-index: 99;
+}
+#screenshot{
+	position: absolute;
+	right: 1em;
+	bottom: 1em;
 }
 #body-1{
 	font-size: 16px;
@@ -103,8 +127,8 @@ canvas{
     justify-content: space-between;
 }
 #camera{
-	/*background: #fff;*/
-	width: 13em;
+	background: #050304;
+	width: 12em;
 	height: 12em;
 	position: absolute;
 	z-index: -3;
