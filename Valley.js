@@ -28,7 +28,19 @@ var WallNum = Wall.querySelectorAll("div");
 var NumImg0 = document.getElementById("Num-img-0");
 var NumImg1 = document.getElementById("Num-img-1");
 var NumImg2 = document.getElementById("Num-img-2");
-
+var mouseImg = document.getElementById("mouse-img");
+function bigImg(x){
+	alert(1)
+}
+function normalImg(x){
+	alert(1)
+}
+// var can11 = document.getElementsByTagName("body")[0]
+// var can11Num = can11.querySelectorAll("canvas");
+// console.log(can11Num);
+// can11Num[0].parentNode.removeChild(can11Num[0]);
+// can11Num[1].parentNode.removeChild(can11Num[1]);
+// can11Num[2].parentNode.removeChild(can11Num[2]);
 var flag = false;
 var cur = {
 	x:0,
@@ -449,12 +461,13 @@ function television1(){
 	wNot();
 }
 function hNot(){
-	// 
 	var arr1 = document.getElementsByClassName("home-1-h-1");
 	var arr2 = document.getElementsByClassName("home-1-h-2");
 	var arr3 = document.getElementsByClassName("home-1-h-3");
 	var arr4 = document.getElementsByClassName("home-1-h-4");
 	var arr5 = document.getElementsByClassName("home-1-h-wall");
+	mouseImg.style.width = imgw;
+	mouseImg.style.height = imgh;
 	console.log(arr1.length);
 	if (IMGH != 99){
 		for (var i = 0; i < arr5.length; i++) {
