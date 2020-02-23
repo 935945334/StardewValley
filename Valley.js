@@ -2,19 +2,14 @@ var camera = document.getElementById("camera");
 var canvas = document.getElementById("canvas");
 var canvasNum = canvas.querySelectorAll("img");
 var hide = 0;  //隐藏UI功能标记
-var IMG = ""
+var IMG = "imges/y.png"
 var IMGW = 0;
 var IMGH = 0;
-var imgw = "0em";
-var imgh = "0em";
+var imgw = "1em";
+var imgh = "1em";
 var zoomNum = 4;
 var catalog = document.getElementById('catalog');
 var zoom = document.getElementById('zoom');
-var x = 0;
-var y = 0;
-var l = 0;
-var t = 0;
-var isDown = false;
 var arrNot = document.getElementsByClassName("home-1-not");
 var Label = 0;  //标记标签状态
 var PageNumber = 0; //初始化页码（活动）
@@ -33,6 +28,98 @@ var WallNum = Wall.querySelectorAll("div");
 var NumImg0 = document.getElementById("Num-img-0");
 var NumImg1 = document.getElementById("Num-img-1");
 var NumImg2 = document.getElementById("Num-img-2");
+
+var flag = false;
+var cur = {
+	x:0,
+	y:0
+}
+var div0 = document.getElementById("camera");
+var nx,ny,dx,dy,x,y ;
+function down(){
+    flag = true;
+    var touch ;
+    if(event.touches){
+        touch = event.touches[0];
+    }else {
+        touch = event;
+    }
+    cur.x = touch.clientX;
+    cur.y = touch.clientY;
+    dx = div0.offsetLeft;
+    dy = div0.offsetTop;
+}
+function move(){
+    if(flag){
+        var touch ;
+        if(event.touches){
+            touch = event.touches[0];
+        }else {
+        touch = event;
+        }
+        nx = touch.clientX - cur.x;
+        ny = touch.clientY - cur.y;
+        x = dx+nx;
+        y = dy+ny;
+        div0.style.left = x+"px";
+        div0.style.top = y +"px";    
+    }
+}
+//鼠标释放时候的函数
+function end(){
+    flag = false;
+}
+camera.addEventListener("touchstart", function(){
+	window.div0 = document.getElementById("camera");
+	console.log(div0);
+});
+catalog.addEventListener("touchstart", function(){
+	window.div0 = document.getElementById("catalog");
+	console.log(div0);
+});
+zoom.addEventListener("touchstart", function(){
+	window.div0 = document.getElementById("zoom");
+	console.log(div0);
+});
+camera.addEventListener("mousedown", function(){
+	window.div0 = document.getElementById("camera");
+	console.log(div0);
+});
+catalog.addEventListener("mousedown", function(){
+	window.div0 = document.getElementById("catalog");
+	console.log(div0);
+});
+zoom.addEventListener("mousedown", function(){
+	window.div0 = document.getElementById("zoom");
+	console.log(div0);
+});
+window.addEventListener("mousedown",function(){
+	down();
+},false);
+window.addEventListener("touchstart",function(){
+	down();
+},false)
+window.addEventListener("mousemove",function(){
+	move();
+},false);
+window.addEventListener("touchmove",function(){
+	move();
+},false)
+document.body.addEventListener("mouseup",function(){
+	end();
+},false);
+window.addEventListener("touchend",function(){
+	end();
+},false);
+
+
+
+
+
+
+
+
+
 //初始化目录子页面状态
 for (var i = 0; i < furnitureNum.length; i++) {
 	if (i > 0) {
@@ -197,7 +284,6 @@ for (var i = 0; i < canvasNum.length; i++) {
 canvas.addEventListener('click',function(e){
         console.log(e.target.index);
         // console.log(e.target.nodeName);
-
         	e.target.src = IMG;
         	e.target.style.width = imgw;
         	e.target.style.height = imgh;
@@ -209,95 +295,100 @@ canvas.addEventListener('click',function(e){
 
 
 //拖拽功能--------------------------------------------------------------
+// var x = 0;
+// var y = 0;
+// var l = 0;
+// var t = 0;
+// var isDown = false;
 //鼠标按下catalog
-catalog.onmousedown = function(e) {
-    //获取x坐标和y坐标
-    x = e.clientX;
-    y = e.clientY;
-    //获取左部和顶部的偏移量
-    l = catalog.offsetLeft;
-    t = catalog.offsetTop;
-    //开关打开
-    isDown = true;
-    //设置样式  
-    catalog.style.cursor = 'move';
-    window.isDIV = 1;
-}
-//鼠标抬起catalog
-catalog.onmouseup = function() {
-    //开关关闭
-    isDown = false;
-    catalog.style.cursor = 'default';
-    window.isDIV = 0;
-}
-//鼠标按下zoom
-zoom.onmousedown = function(e) {
-    //获取x坐标和y坐标
-    x = e.clientX;
-    y = e.clientY;
+// catalog.onmousedown = function(e) {
+//     //获取x坐标和y坐标
+//     x = e.clientX;
+//     y = e.clientY;
+//     //获取左部和顶部的偏移量
+//     l = catalog.offsetLeft;
+//     t = catalog.offsetTop;
+//     //开关打开
+//     isDown = true;
+//     //设置样式  
+//     catalog.style.cursor = 'move';
+//     window.isDIV = 1;
+// }
+// //鼠标抬起catalog
+// catalog.onmouseup = function() {
+//     //开关关闭
+//     isDown = false;
+//     catalog.style.cursor = 'default';
+//     window.isDIV = 0;
+// }
+// //鼠标按下zoom
+// zoom.onmousedown = function(e) {
+//     //获取x坐标和y坐标
+//     x = e.clientX;
+//     y = e.clientY;
 
-    //获取左部和顶部的偏移量
-    l = zoom.offsetLeft;
-    t = zoom.offsetTop;
-    //开关打开
-    isDown = true;
-    //设置样式  
-    zoom.style.cursor = 'move';
-    window.isDIV = 2;
-}
-//鼠标抬起zoom
-zoom.onmouseup = function() {
-    //开关关闭
-    isDown = false;
-    zoom.style.cursor = 'default';
-    window.isDIV = 0;
-}
-//鼠标按下camera
-camera.onmousedown = function(e) {
-    //获取x坐标和y坐标
-    x = e.clientX;
-    y = e.clientY;
-    //获取左部和顶部的偏移量
-    l = camera.offsetLeft;
-    t = camera.offsetTop;
-    //开关打开
-    isDown = true;
-    //设置样式  
-    camera.style.cursor = 'move';
-    window.isDIV = 3;
-}
-//鼠标抬起camera
-camera.onmouseup = function() {
-    //开关关闭
-    isDown = false;
-    camera.style.cursor = 'default';
-    canvas.style.width = "12em";
-    canvas.style.height = "12em";
-    window.isDIV = 0;
-}
-//鼠标移动
-window.onmousemove = function(e) {
-    if (isDown == false) {
-        return;
-    }
-    //获取x和y
-    var nx = e.clientX;
-    var ny = e.clientY;
-    //计算移动后的左偏移量和顶部的偏移量
-    var nl = nx - (x - l);
-    var nt = ny - (y - t);
-    if (isDIV == 1) {
-    	catalog.style.left = nl + 'px';
-    	catalog.style.top = nt + 'px';
-    }else if (isDIV == 2){
-    	zoom.style.left = nl + 'px';
-    	zoom.style.top = nt + 'px';
-    }else if (isDIV == 3){
-    	camera.style.left = nl + 'px';
-    	camera.style.top = nt + 'px';
-    }
+//     //获取左部和顶部的偏移量
+//     l = zoom.offsetLeft;
+//     t = zoom.offsetTop;
+//     //开关打开
+//     isDown = true;
+//     //设置样式  
+//     zoom.style.cursor = 'move';
+//     window.isDIV = 2;
+// }
+// //鼠标抬起zoom
+// zoom.onmouseup = function() {
+//     //开关关闭
+//     isDown = false;
+//     zoom.style.cursor = 'default';
+//     window.isDIV = 0;
+// }
+// // 鼠标按下camera
+// camera.onmousedown = function(e) {
+//     //获取x坐标和y坐标
+//     x = e.clientX;
+//     y = e.clientY;
+//     //获取左部和顶部的偏移量
+//     l = camera.offsetLeft;
+//     t = camera.offsetTop;
+//     //开关打开
+//     isDown = true;
+//     //设置样式  
+//     camera.style.cursor = 'move';
+//     window.isDIV = 3;
+// }
+// //鼠标抬起camera
+// camera.onmouseup = function() {
+//     //开关关闭
+//     isDown = false;
+//     camera.style.cursor = 'default';
+//     canvas.style.width = "12em";
+//     canvas.style.height = "12em";
+//     window.isDIV = 0;
+// }
+// //鼠标移动
+// window.onmousemove = function(e) {
+//     if (isDown == false) {
+//         return;
+//     }
+//     //获取x和y
+//     var nx = e.clientX;
+//     var ny = e.clientY;
+//     //计算移动后的左偏移量和顶部的偏移量
+//     var nl = nx - (x - l);
+//     var nt = ny - (y - t);
+//     if (isDIV == 1) {
+//     	catalog.style.left = nl + 'px';
+//     	catalog.style.top = nt + 'px';
+//     }else if (isDIV == 2){
+//     	zoom.style.left = nl + 'px';
+//     	zoom.style.top = nt + 'px';
+//     }else if (isDIV == 3){
+//     	camera.style.left = nl + 'px';
+//     	camera.style.top = nt + 'px';
+//     }
     
-}
+// }
 //拖拽功能---------------------------------------------------------
 
 

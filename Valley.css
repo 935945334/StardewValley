@@ -40,6 +40,15 @@ body{
 	z-index: 99;
 	opacity: 0.7;
 }
+#Eliminate{
+	position: absolute;
+	right: 1em;
+	top: 1em;
+}
+#Eliminate img{
+	float: left;
+	margin-left: 20px;
+}
 #screenshot{
 	position: absolute;
 	right: 1em;
