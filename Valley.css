@@ -52,7 +52,7 @@ body{
 #screenshot{
 	position: absolute;
 	right: 1em;
-	bottom: 1em;
+	bottom: 0em;
 }
 #screenshot img{
 	float: left;
@@ -114,8 +114,22 @@ body{
 	height: 504px;
 }
 .menuNum{
-	width: 320px;
-	height: 504px;
+	width: 252px;
+	height: 482px;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    margin: auto;
+    padding-top: 22px;
+    /*margin-top: 12px;*/
+}
+.menuNum img{
+	width: 72px;
+	height: 72px;
+	/*margin: 10px 12px 0 12px;*/
 }
 #production{
 	width: 320px;
@@ -142,28 +156,47 @@ body{
 }
 #camera{
 	background: #050304;
-	width: 12em;
+	width: 30em;
+	height: 12em;
+	position: absolute;
+	z-index: -3;
+	top: 1em;
+}
+#camera-1{
+	background: #050304;
+	width: 30em;
 	height: 12em;
 	position: absolute;
 	z-index: -3;
 	top: 1em;
 }
 #home{
-	width: 12em;
+	width: 30em;
 	height: 12em;
-	background:url(imges/home-1-bj.png);
-	background-size:12em;
+	background:url(imges/home-2-bj.png);
+	background-size:30em;
 	margin: auto;
 	position: absolute;
 	/*overflow:hidden*/	
 }
 .home{
 	position: absolute;
-
 }
 
-#canvas{
+.canvas-1{
 	width: 12em !important;
+	height: 12em !important;
+	position: absolute;
+	z-index: 5;
+	top: 0;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    /*display: none;*/
+}
+.canvas-2{
+	width: 30em !important;
 	height: 12em !important;
 	position: absolute;
 	z-index: 5;
@@ -189,25 +222,74 @@ body{
 	width: 1em;
 	height: 1em;
 }*/
+#wall-bj{
+	width: 30em;
+	height: 3em;
+	position: relative;
+	z-index: -1;
+	position: relative;
+	margin-top: 1em;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
 #bj-wall-1{
-	width: 10em;
+	width: 18em;
 	height: 3em;
 	background:url(imges/wall-1.png);
 	background-size:1em;
-	margin: auto;
-	margin-top: 1em;
+}
+#bj-wall-2{
+	width: 2em;
+	height: 3em;
+	background:url(imges/wall-1.png);
+	background-size:1em;
+	margin-top: 4em;
+}
+#bj-wall-3{
+	width: 9em;
+	height: 3em;
+	background:url(imges/wall-1.png);
+	background-size:1em;
+}
+#floor-bj{
+	width: 30em;
+	height: 9em;
 	position: relative;
-	z-index: -1;
+	z-index: -2;
+	position: relative;
+	top: -1em;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+#Kitchen-floor{
+	width: 7em;
+	height: 9em;
+	background:url(imges/Kitchen-floor.png);
+	background-size:2em;
+	
 }
 #bj-floor-1{
-	width: 10em;
+	width: 11em;
 	height: 9em;
 	background:url(imges/floor-1.png);
 	background-size:2em;
-	margin: auto;
-	top: -1em;
-	position: relative;
-	z-index: -2;
+	
+}
+#bj-floor-2{
+	width: 2em;
+	height: 9em;
+	background:url(imges/floor-1.png);
+	background-size:2em;
+}
+#bj-floor-3{
+	width: 9em;
+	height: 9em;
+	background:url(imges/floor-1.png);
+	background-size:2em;
 }
 .home-1-not{
 	pointer-events: none;
@@ -221,7 +303,81 @@ body{
 	width: 12em !important;
 	height: 2em !important;
 }
+.home-2-bj-x{
+	position: absolute;
+	z-index: 10;
+	pointer-events: none;
+	width: 30em !important;
+	height: 2em !important;
+}
 #bed-1{
 	width: 2em;
 	height: 3em;
+}
+#bed-not{
+	pointer-events: none;
+}
+#wall-bj-btn{
+
+}
+#home-btn{
+	width: 30em;
+	height: 12em;
+	/*background:red;*/
+	background-size:30em;
+	margin: auto;
+	position: absolute;
+	/*overflow:hidden*/	
+	z-index: 20;
+	/*pointer-events: none;*/
+	display: none;
+}
+#wall-bj-btn{
+	width: 30em;
+	height: 3em;
+	position: relative;
+	margin-top: 1em;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+#bj-wall-1-btn{
+	width: 18em;
+	height: 3em;
+}
+#bj-wall-2-btn{
+	width: 2em;
+	height: 3em;
+	margin-top: 4em;
+}
+#bj-wall-3-btn{
+	width: 9em;
+	height: 3em;
+}
+#floor-bj-btn{
+	width: 30em;
+	height: 9em;
+	position: relative;
+	top: -1em;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+#Kitchen-floor-btn{
+	width: 7em;
+	height: 9em;	
+}
+#bj-floor-1-btn{
+	width: 11em;
+	height: 9em;	
+}
+#bj-floor-2-btn{
+	width: 2em;
+	height: 9em;	
+}
+#bj-floor-3-btn{
+	width: 9em;
+	height: 9em;	
 }

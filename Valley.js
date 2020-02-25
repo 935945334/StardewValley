@@ -1,8 +1,29 @@
 var camera = document.getElementById("camera");
 var canvas = document.getElementById("canvas");
-var canvasNum = canvas.querySelectorAll("img");
+var homeNum = 360;
+
+for(var i = 0; i < homeNum; i++){
+	createHtml();
+}
+function createHtml(){
+var div = document.createElement("div");
+var Img = document.createElement("img");
+Img.src = "imges/y.png";
+div.appendChild(Img);
+canvas.appendChild(div);
+}
+
+
+
+
+
+
 var hide = 0;  //隐藏UI功能标记
 var IMG = "imges/y.png"
+var ImgWallBj = "imges/wall-1.png";
+var ImgFloorBj = "imges/floor-1.png";
+var ImgWallBjBtn = "";
+var ImgFloorBjBtn = "";
 var IMGW = 0;
 var IMGH = 0;
 var imgw = "1em";
@@ -10,7 +31,6 @@ var imgh = "1em";
 var zoomNum = 4;
 var catalog = document.getElementById('catalog');
 var zoom = document.getElementById('zoom');
-var arrNot = document.getElementsByClassName("home-1-not");
 var Label = 0;  //标记标签状态
 var PageNumber = 0; //初始化页码（活动）
 var PageNumber0 = 0;//初始化页码0
@@ -29,12 +49,46 @@ var NumImg0 = document.getElementById("Num-img-0");
 var NumImg1 = document.getElementById("Num-img-1");
 var NumImg2 = document.getElementById("Num-img-2");
 var mouseImg = document.getElementById("mouse-img");
-function bigImg(x){
-	alert(1)
+
+
+
+var canvasNum = canvas.querySelectorAll("img");
+// window.onload = function () {console.log(canvasNum); }
+// console.log(canvasNum);
+
+//定位div位置---------------------------------------------------------
+for (var i = 0; i < canvasNum.length; i++) {
+        canvasNum[i].index = i + 1;
+        canvasNum[81].src = "imges/DoubleBed.png";
+        canvasNum[81].style.pointerEvents = "none";
+        canvasNum[81].style.width = "3em";
+        canvasNum[81].style.height = "4em";
+        canvasNum[300].src = "imges/home-2-bj-x.png";
+        canvasNum[300].classList.add("home-2-bj-x");
+        // console.log(canvasNum[i].index);
 }
-function normalImg(x){
-	alert(1)
-}
+canvas.addEventListener('click',function(e){
+        console.log(e.target.index);
+        console.log(e.target.nodeName);
+        e.target.src = IMG;
+        e.target.style.width = imgw;
+        e.target.style.height = imgh;
+
+        
+        // alert(e.target.index);
+})
+//定位div位置----------------------------------------------------------
+
+// for (var i = 31; i < 48 ; i++){
+// 	canvasNum[i].style.background = "red";
+// }
+// for (var i = 50; i < 59 ; i++){
+// 	canvasNum[i].style.background = "red";
+// }
+
+
+
+
 // var can11 = document.getElementsByTagName("body")[0]
 // var can11Num = can11.querySelectorAll("canvas");
 // console.log(can11Num);
@@ -180,12 +234,12 @@ function NTurn(){
 		var NewPageNumber = 0;
 		LabelNumber[PageNumber].style.display = "none";
 		console.log("NewPageNumber: " + NewPageNumber);
-		LabelNumber[NewPageNumber].style.display = "block";
+		LabelNumber[NewPageNumber].style.display = "flex";
 		window.PageNumber = NewPageNumber;
 	}else{
 		NewPageNumber = PageNumber + 1;
 		LabelNumber[PageNumber].style.display = "none";
-		LabelNumber[NewPageNumber].style.display = "block";
+		LabelNumber[NewPageNumber].style.display = "flex";
 		window.PageNumber = PageNumber + 1;
 	}
 	SPageNumber();
@@ -196,12 +250,12 @@ function PTurn(){
 		var NewPageNumber = LabelLen - 1;
 		LabelNumber[PageNumber].style.display = "none";
 		console.log("NewPageNumber: " + NewPageNumber);
-		LabelNumber[NewPageNumber].style.display = "block";
+		LabelNumber[NewPageNumber].style.display = "flex";
 		window.PageNumber = NewPageNumber;
 	}else{
 		NewPageNumber = PageNumber - 1;
 		LabelNumber[PageNumber].style.display = "none";
-		LabelNumber[NewPageNumber].style.display = "block";
+		LabelNumber[NewPageNumber].style.display = "flex";
 		window.PageNumber = PageNumber - 1;
 	}
 	SPageNumber();
@@ -249,6 +303,7 @@ furnitureImg.addEventListener('click',function(e){
 	NumImg2.style.display = "none";
 	window.Label = 0;
 	console.log(Label);
+	homeBtn.style.display = "none";
 })
 productionImg.addEventListener('click',function(e){
     furniture.style.display = "none";
@@ -262,6 +317,7 @@ productionImg.addEventListener('click',function(e){
 	NumImg2.style.display = "none";
 	window.Label = 1;
 	console.log(Label);
+	homeBtn.style.display = "none";
 })
 WallImg.addEventListener('click',function(e){
     furniture.style.display = "none";
@@ -275,8 +331,98 @@ WallImg.addEventListener('click',function(e){
 	NumImg2.style.display = "block";
 	window.Label = 2;
 	console.log(Label);
+	homeBtn.style.display = "block";
 })
 //目录标签切换---------------------------------------------------------
+var bjWall1 = document.getElementById("bj-wall-1");
+var bjWall2 = document.getElementById("bj-wall-2");
+var bjWall3 = document.getElementById("bj-wall-3");
+var bjWall1Btn = document.getElementById("bj-wall-1-btn");
+var bjWall2Btn = document.getElementById("bj-wall-2-btn");
+var bjWall3Btn = document.getElementById("bj-wall-3-btn");
+var wallBj = document.getElementById("wall-bj");
+var wallBjBtn = document.getElementById("wall-bj-btn");
+var KitchenFloor = document.getElementById("Kitchen-floor");
+var bjFloor1 = document.getElementById("bj-floor-1");
+var bjFloor2 = document.getElementById("bj-floor-2");
+var bjFloor3 = document.getElementById("bj-floor-3");
+var KitchenFloorBtn = document.getElementById("Kitchen-floor-btn");
+var bjFloor1Btn = document.getElementById("bj-floor-1-btn");
+var bjFloor2Btn = document.getElementById("bj-floor-2-btn");
+var bjFloor3Btn = document.getElementById("bj-floor-3-btn");
+var floorBj = document.getElementById("floor-bj");
+var floorBjBtn = document.getElementById("floor-bj-btn");
+var homeBtn = document.getElementById("home-btn");
+bjWall1Btn.addEventListener('click',function(e){
+        console.log(e.target);
+        bjWall1.style.background = "url(" + ImgWallBj + ")";
+        bjWall1.style.backgroundSize = "1em";
+})
+bjWall2Btn.addEventListener('click',function(e){
+        console.log(e.target);
+        bjWall2.style.background = "url(" + ImgWallBj + ")";
+        bjWall2.style.backgroundSize = "1em";
+})
+bjWall3Btn.addEventListener('click',function(e){
+        console.log(e.target);
+        bjWall3.style.background = "url(" + ImgWallBj + ")";
+        bjWall3.style.backgroundSize = "1em";
+})
+KitchenFloorBtn.addEventListener('click',function(e){
+        console.log(e.target);
+        KitchenFloor.style.background = "url(" + ImgFloorBj + ")";
+        KitchenFloor.style.backgroundSize = "2em";
+})
+bjFloor1Btn.addEventListener('click',function(e){
+        console.log(e.target);
+        bjFloor1.style.background = "url(" + ImgFloorBj + ")";
+        bjFloor1.style.backgroundSize = "2em";
+})
+bjFloor2Btn.addEventListener('click',function(e){
+        console.log(e.target);
+        bjFloor2.style.background = "url(" + ImgFloorBj + ")";
+        bjFloor2.style.backgroundSize = "2em";
+})
+bjFloor3Btn.addEventListener('click',function(e){
+        console.log(e.target);
+        bjFloor3.style.background = "url(" + ImgFloorBj + ")";
+        bjFloor3.style.backgroundSize = "2em";
+})
+
+
+function wall(){
+	window.ImgWallBj = "imges/wall-2.png";
+	window.ImgWallBjBtn = "imges/wall-2-btn.png";
+	wallBtn()
+}
+function floor(){
+	window.ImgFloorBj = "imges/floor-2.png";
+	window.ImgFloorBjBtn = "imges/floor-2-btn.png";
+	floorBtn()
+}
+function wallBtn(){
+	wallBjBtn.style.pointerEvents = "";
+	floorBjBtn.style.pointerEvents = "none";
+	mouse.firstElementChild.src = ImgWallBjBtn;
+	mouseImg.style.width = "1em";
+	mouseImg.style.height = "1em";
+}
+function floorBtn(){
+	floorBjBtn.style.pointerEvents = "";
+	wallBjBtn.style.pointerEvents = "none";
+	mouse.firstElementChild.src = ImgFloorBjBtn;
+	mouseImg.style.width = "1em";
+	mouseImg.style.height = "1em";
+}
+
+
+
+
+
+
+
+
+
 
 //跟随鼠标模块---------------------------------------------------------
 var mouse=document.getElementById('mouse');
@@ -289,21 +435,7 @@ document.onmousemove=function(ev){
 }
 
 
-//定位div位置---------------------------------------------------------
-for (var i = 0; i < canvasNum.length; i++) {
-        canvasNum[i].index = i + 1;
-}
-canvas.addEventListener('click',function(e){
-        console.log(e.target.index);
-        // console.log(e.target.nodeName);
-        	e.target.src = IMG;
-        	e.target.style.width = imgw;
-        	e.target.style.height = imgh;
 
-        
-        // alert(e.target.index);
-})
-//定位div位置----------------------------------------------------------
 
 
 //拖拽功能--------------------------------------------------------------
@@ -600,10 +732,10 @@ function huanchong(){
  //判断浏览器类型
 function myBrowser() {
 	var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
-	var isOpera = userAgent.indexOf("Opera") > -1;
-	if(isOpera) {
-    	return "Opera"
-	}; //判断是否Opera浏览器
+	var isdivera = userAgent.indexOf("divera") > -1;
+	if(isdivera) {
+    	return "divera"
+	}; //判断是否divera浏览器
 	if(userAgent.indexOf("Firefox") > -1) {
     	return "FF";
 	} //判断是否Firefox浏览器
@@ -613,7 +745,7 @@ function myBrowser() {
 	if(userAgent.indexOf("Safari") > -1) {
     	return "Safari";
 	} //判断是否Safari浏览器
-	if(userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera) {
+	if(userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isdivera) {
     	return "IE";
 	}; //判断是否IE浏览器
 	if(userAgent.indexOf("Trident") > -1) {
@@ -623,12 +755,12 @@ function myBrowser() {
 myBrowser();
 //IE浏览器图片保存本地
 function SaveAs5(imgURL) {
-    var oPop = window.open(imgURL, "", "width=1, height=1, top=5000, left=5000");
-    for(; oPop.document.readyState != "complete";) {
-        if(oPop.document.readyState == "complete") break;
+    var divdiv = window.diven(imgURL, "", "width=1, height=1, top=5000, left=5000");
+    for(; divdiv.document.readyState != "complete";) {
+        if(divdiv.document.readyState == "complete") break;
     }
-    oPop.document.execCommand("SaveAs");
-    oPop.close();
+    divdiv.document.execCommand("SaveAs");
+    divdiv.close();
 }
 function download(strDataURI1) {
     var link = document.getElementById("IsA");
@@ -654,24 +786,24 @@ function downLoadFn(url) {
 function hide1(){
 	if (hide == 0) {
 		setTimeout(function(){ 
-			catalog.style.opacity = "1";
-			zoom.style.opacity = "1"; 
+			catalog.style.divacity = "1";
+			zoom.style.divacity = "1"; 
 		}, 40);
 		setTimeout(function(){ 
-			catalog.style.opacity = "0.8";
-			zoom.style.opacity = "0.8"; 
+			catalog.style.divacity = "0.8";
+			zoom.style.divacity = "0.8"; 
 		}, 80);
 		setTimeout(function(){ 
-			catalog.style.opacity = "0.6";
-			zoom.style.opacity = "0.6"; 
+			catalog.style.divacity = "0.6";
+			zoom.style.divacity = "0.6"; 
 		}, 120);
 		setTimeout(function(){ 
-			catalog.style.opacity = "0.4";
-			zoom.style.opacity = "0.4"; 
+			catalog.style.divacity = "0.4";
+			zoom.style.divacity = "0.4"; 
 		}, 160);
 		setTimeout(function(){ 
-			catalog.style.opacity = "0.2";
-			zoom.style.opacity = "0.2"; 
+			catalog.style.divacity = "0.2";
+			zoom.style.divacity = "0.2"; 
 		}, 200);
 		setTimeout(function(){ 
 			catalog.style.display = "none";
@@ -684,20 +816,20 @@ function hide1(){
 		zoom.style.display = "flex";
 		}, 40);
 		setTimeout(function(){ 
-			catalog.style.opacity = "0.4";
-			zoom.style.opacity = "0.4"; 
+			catalog.style.divacity = "0.4";
+			zoom.style.divacity = "0.4"; 
 		}, 80);
 		setTimeout(function(){ 
-			catalog.style.opacity = "0.6";
-			zoom.style.opacity = "0.6"; 
+			catalog.style.divacity = "0.6";
+			zoom.style.divacity = "0.6"; 
 		}, 120);
 		setTimeout(function(){ 
-			catalog.style.opacity = "0.8";
-			zoom.style.opacity = "0.8"; 
+			catalog.style.divacity = "0.8";
+			zoom.style.divacity = "0.8"; 
 		}, 160);
 		setTimeout(function(){ 
-			catalog.style.opacity = "1";
-			zoom.style.opacity = "1"; 
+			catalog.style.divacity = "1";
+			zoom.style.divacity = "1"; 
 		}, 200);
 		window.hide = 0;
 	}
