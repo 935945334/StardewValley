@@ -1,17 +1,7 @@
 var camera = document.getElementById("camera");
 var canvas = document.getElementById("canvas");
-var homeNum = 360;
 
-for(var i = 0; i < homeNum; i++){
-	createHtml();
-}
-function createHtml(){
-var div = document.createElement("div");
-var Img = document.createElement("img");
-Img.src = "imges/y.png";
-div.appendChild(Img);
-canvas.appendChild(div);
-}
+
 
 
 
@@ -52,21 +42,44 @@ var mouseImg = document.getElementById("mouse-img");
 
 
 
-var canvasNum = canvas.querySelectorAll("img");
+
 // window.onload = function () {console.log(canvasNum); }
 // console.log(canvasNum);
 
-//定位div位置---------------------------------------------------------
-for (var i = 0; i < canvasNum.length; i++) {
-        canvasNum[i].index = i + 1;
-        canvasNum[81].src = "imges/DoubleBed.png";
-        canvasNum[81].style.pointerEvents = "none";
-        canvasNum[81].style.width = "3em";
-        canvasNum[81].style.height = "4em";
-        canvasNum[300].src = "imges/home-2-bj-x.png";
-        canvasNum[300].classList.add("home-2-bj-x");
-        // console.log(canvasNum[i].index);
-}
+// //生成div及定位---------------------------------------------------------
+// for (var i = 0; i < canvasNum.length; i++) {
+//         canvasNum[i].index = i + 1;
+//         canvasNum[81].src = "imges/DoubleBed.png";
+//         canvasNum[81].style.pointerEvents = "none";
+//         canvasNum[81].style.width = "3em";
+//         canvasNum[81].style.height = "4em";
+//         canvasNum[300].src = "imges/home-2-bj-x.png";
+//         canvasNum[300].classList.add("home-2-bj-x");
+//         // console.log(canvasNum[i].index);
+// }
+// canvas.addEventListener('click',function(e){
+//         console.log(e.target.index);
+//         console.log(e.target.nodeName);
+//         e.target.src = IMG;
+//         e.target.style.width = imgw;
+//         e.target.style.height = imgh;
+
+        
+//         // alert(e.target.index);
+// })
+// //生成div及定位----------------------------------------------------------
+
+
+//生成div及定位---------------------------------------------------------
+// for (var i = 0; i < canvasNum.length; i++) {
+//         canvasNum[i].index = i;
+        
+//         // canvasNum[300].src = "imges/home-2-bj-x.png";
+//         // canvasNum[300].classList.add("home-2-bj-x");
+//         // console.log(canvasNum[i].index);
+// }
+
+
 canvas.addEventListener('click',function(e){
         console.log(e.target.index);
         console.log(e.target.nodeName);
@@ -77,7 +90,21 @@ canvas.addEventListener('click',function(e){
         
         // alert(e.target.index);
 })
-//定位div位置----------------------------------------------------------
+//生成div及定位----------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // for (var i = 31; i < 48 ; i++){
 // 	canvasNum[i].style.background = "red";
@@ -334,22 +361,41 @@ WallImg.addEventListener('click',function(e){
 	homeBtn.style.display = "block";
 })
 //目录标签切换---------------------------------------------------------
+
+
+
+
+//地板墙纸替换---------------------------------------------------------------
 var bjWall1 = document.getElementById("bj-wall-1");
-var bjWall2 = document.getElementById("bj-wall-2");
-var bjWall3 = document.getElementById("bj-wall-3");
 var bjWall1Btn = document.getElementById("bj-wall-1-btn");
+var bjWall2 = document.getElementById("bj-wall-2");
 var bjWall2Btn = document.getElementById("bj-wall-2-btn");
+var bjWall3 = document.getElementById("bj-wall-3");
 var bjWall3Btn = document.getElementById("bj-wall-3-btn");
+var bjWall4 = document.getElementById("bj-wall-4");
+var bjWall4Btn = document.getElementById("bj-wall-4-btn");
+var bjWall5 = document.getElementById("bj-wall-5");
+var bjWall5Btn = document.getElementById("bj-wall-5-btn");
+var bjWall6 = document.getElementById("bj-wall-6");
+var bjWall6Btn = document.getElementById("bj-wall-6-btn");
+var bjWall7 = document.getElementById("bj-wall-7");
+var bjWall7Btn = document.getElementById("bj-wall-7-btn");
 var wallBj = document.getElementById("wall-bj");
 var wallBjBtn = document.getElementById("wall-bj-btn");
-var KitchenFloor = document.getElementById("Kitchen-floor");
 var bjFloor1 = document.getElementById("bj-floor-1");
-var bjFloor2 = document.getElementById("bj-floor-2");
-var bjFloor3 = document.getElementById("bj-floor-3");
-var KitchenFloorBtn = document.getElementById("Kitchen-floor-btn");
 var bjFloor1Btn = document.getElementById("bj-floor-1-btn");
+var bjFloor2 = document.getElementById("bj-floor-2");
 var bjFloor2Btn = document.getElementById("bj-floor-2-btn");
+var bjFloor3 = document.getElementById("bj-floor-3");
 var bjFloor3Btn = document.getElementById("bj-floor-3-btn");
+var bjFloor4 = document.getElementById("bj-floor-4");
+var bjFloor4Btn = document.getElementById("bj-floor-4-btn");
+var bjFloor5 = document.getElementById("bj-floor-5");
+var bjFloor5Btn = document.getElementById("bj-floor-5-btn");
+var bjFloor6 = document.getElementById("bj-floor-6");
+var bjFloor6Btn = document.getElementById("bj-floor-6-btn");
+var bjFloor7 = document.getElementById("bj-floor-7");
+var bjFloor7Btn = document.getElementById("bj-floor-7-btn");
 var floorBj = document.getElementById("floor-bj");
 var floorBjBtn = document.getElementById("floor-bj-btn");
 var homeBtn = document.getElementById("home-btn");
@@ -368,10 +414,25 @@ bjWall3Btn.addEventListener('click',function(e){
         bjWall3.style.background = "url(" + ImgWallBj + ")";
         bjWall3.style.backgroundSize = "1em";
 })
-KitchenFloorBtn.addEventListener('click',function(e){
+bjWall4Btn.addEventListener('click',function(e){
         console.log(e.target);
-        KitchenFloor.style.background = "url(" + ImgFloorBj + ")";
-        KitchenFloor.style.backgroundSize = "2em";
+        bjWall4.style.background = "url(" + ImgWallBj + ")";
+        bjWall4.style.backgroundSize = "1em";
+})
+bjWall5Btn.addEventListener('click',function(e){
+        console.log(e.target);
+        bjWall5.style.background = "url(" + ImgWallBj + ")";
+        bjWall5.style.backgroundSize = "1em";
+})
+bjWall6Btn.addEventListener('click',function(e){
+        console.log(e.target);
+        bjWall6.style.background = "url(" + ImgWallBj + ")";
+        bjWall6.style.backgroundSize = "1em";
+})
+bjWall7Btn.addEventListener('click',function(e){
+        console.log(e.target);
+        bjWall7.style.background = "url(" + ImgWallBj + ")";
+        bjWall7.style.backgroundSize = "1em";
 })
 bjFloor1Btn.addEventListener('click',function(e){
         console.log(e.target);
@@ -388,8 +449,26 @@ bjFloor3Btn.addEventListener('click',function(e){
         bjFloor3.style.background = "url(" + ImgFloorBj + ")";
         bjFloor3.style.backgroundSize = "2em";
 })
-
-
+bjFloor4Btn.addEventListener('click',function(e){
+        console.log(e.target);
+        bjFloor4.style.background = "url(" + ImgFloorBj + ")";
+        bjFloor4.style.backgroundSize = "2em";
+})
+bjFloor5Btn.addEventListener('click',function(e){
+        console.log(e.target);
+        bjFloor5.style.background = "url(" + ImgFloorBj + ")";
+        bjFloor5.style.backgroundSize = "2em";
+})
+bjFloor6Btn.addEventListener('click',function(e){
+        console.log(e.target);
+        bjFloor6.style.background = "url(" + ImgFloorBj + ")";
+        bjFloor6.style.backgroundSize = "2em";
+})
+bjFloor7Btn.addEventListener('click',function(e){
+        console.log(e.target);
+        bjFloor7.style.background = "url(" + ImgFloorBj + ")";
+        bjFloor7.style.backgroundSize = "2em";
+})
 function wall(){
 	window.ImgWallBj = "imges/wall-2.png";
 	window.ImgWallBjBtn = "imges/wall-2-btn.png";
@@ -414,7 +493,7 @@ function floorBtn(){
 	mouseImg.style.width = "1em";
 	mouseImg.style.height = "1em";
 }
-
+//地板墙纸替换---------------------------------------------------------------
 
 
 
@@ -435,105 +514,6 @@ document.onmousemove=function(ev){
 }
 
 
-
-
-
-//拖拽功能--------------------------------------------------------------
-// var x = 0;
-// var y = 0;
-// var l = 0;
-// var t = 0;
-// var isDown = false;
-//鼠标按下catalog
-// catalog.onmousedown = function(e) {
-//     //获取x坐标和y坐标
-//     x = e.clientX;
-//     y = e.clientY;
-//     //获取左部和顶部的偏移量
-//     l = catalog.offsetLeft;
-//     t = catalog.offsetTop;
-//     //开关打开
-//     isDown = true;
-//     //设置样式  
-//     catalog.style.cursor = 'move';
-//     window.isDIV = 1;
-// }
-// //鼠标抬起catalog
-// catalog.onmouseup = function() {
-//     //开关关闭
-//     isDown = false;
-//     catalog.style.cursor = 'default';
-//     window.isDIV = 0;
-// }
-// //鼠标按下zoom
-// zoom.onmousedown = function(e) {
-//     //获取x坐标和y坐标
-//     x = e.clientX;
-//     y = e.clientY;
-
-//     //获取左部和顶部的偏移量
-//     l = zoom.offsetLeft;
-//     t = zoom.offsetTop;
-//     //开关打开
-//     isDown = true;
-//     //设置样式  
-//     zoom.style.cursor = 'move';
-//     window.isDIV = 2;
-// }
-// //鼠标抬起zoom
-// zoom.onmouseup = function() {
-//     //开关关闭
-//     isDown = false;
-//     zoom.style.cursor = 'default';
-//     window.isDIV = 0;
-// }
-// // 鼠标按下camera
-// camera.onmousedown = function(e) {
-//     //获取x坐标和y坐标
-//     x = e.clientX;
-//     y = e.clientY;
-//     //获取左部和顶部的偏移量
-//     l = camera.offsetLeft;
-//     t = camera.offsetTop;
-//     //开关打开
-//     isDown = true;
-//     //设置样式  
-//     camera.style.cursor = 'move';
-//     window.isDIV = 3;
-// }
-// //鼠标抬起camera
-// camera.onmouseup = function() {
-//     //开关关闭
-//     isDown = false;
-//     camera.style.cursor = 'default';
-//     canvas.style.width = "12em";
-//     canvas.style.height = "12em";
-//     window.isDIV = 0;
-// }
-// //鼠标移动
-// window.onmousemove = function(e) {
-//     if (isDown == false) {
-//         return;
-//     }
-//     //获取x和y
-//     var nx = e.clientX;
-//     var ny = e.clientY;
-//     //计算移动后的左偏移量和顶部的偏移量
-//     var nl = nx - (x - l);
-//     var nt = ny - (y - t);
-//     if (isDIV == 1) {
-//     	catalog.style.left = nl + 'px';
-//     	catalog.style.top = nt + 'px';
-//     }else if (isDIV == 2){
-//     	zoom.style.left = nl + 'px';
-//     	zoom.style.top = nt + 'px';
-//     }else if (isDIV == 3){
-//     	camera.style.left = nl + 'px';
-//     	camera.style.top = nt + 'px';
-//     }
-    
-// }
-//拖拽功能---------------------------------------------------------
 
 
 //缩放功能---------------------------------------------------------
@@ -835,3 +815,50 @@ function hide1(){
 	}
 }
 //隐藏UI----------------------------------------------------
+
+
+
+
+var Choice = document.getElementById("Choice");
+Choice.style.width = screen.width + "px";
+Choice.style.height = screen.height + "px";
+function LV1(){
+
+}
+function LV2(){
+
+}
+function LV3(){
+
+}
+function LV4(){
+	Choice.style.display = "none";
+	var homeNum = 875;
+	for(var i = 0; i < homeNum; i++){
+		createHtml();
+	}
+	var canvasNum = canvas.querySelectorAll("img");
+	console.log(canvasNum);
+	canvasNum[412].classList.add("DoubleBed");
+	canvasNum[412].parentNode.style.pointerEvents = "none";
+	canvasNum[127].classList.add("bed");
+	canvasNum[127].parentNode.style.pointerEvents = "none";
+	canvasNum[131].classList.add("bed");
+	canvasNum[131].parentNode.style.pointerEvents = "none";
+	canvasNum[85].classList.add("BabyDed");
+	canvasNum[85].parentNode.style.pointerEvents = "none";
+	canvasNum[389].classList.add("kitchen-R");
+	canvasNum[389].parentNode.style.pointerEvents = "none";
+	canvasNum[386].classList.add("kitchen-L");
+	canvasNum[386].parentNode.style.pointerEvents = "none";
+	canvasNum[210].src = "imges/home-L-2-bj-x.png";
+	canvasNum[210].parentNode.style.pointerEvents = "none";
+	canvasNum[210].classList.add("home-L-2-bj-x");
+}
+function createHtml(){
+	var div = document.createElement("div");
+	var Img = document.createElement("img");
+	Img.src = "imges/y.png";
+	div.appendChild(Img);
+	canvas.appendChild(div);
+}
