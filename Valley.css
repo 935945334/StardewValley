@@ -156,20 +156,15 @@ body{
 }
 #camera{
 	background: #050304;
-	width: 30em;
-	height: 12em;
 	position: absolute;
 	z-index: -3;
 	top: 1em;
 }
-#camera-1{
-	background: #050304;
-	width: 30em;
-	height: 12em;
-	position: absolute;
-	z-index: -3;
-	top: 1em;
+.camera-L{
+	width: 35em;
+	height: 25em;
 }
+
 
 #canvas{
 	position: absolute;
