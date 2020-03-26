@@ -25,15 +25,10 @@ body{
     justify-content: center;
 }
 #save{
-	/*display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-flex-direction: column;
-    flex-direction: column;
-    position: absolute;
-    left: 10em;
-    top: 5em;*/
+	display: none;
+}
+#cancel{
+	display: none;
 }
 #IsA{
 	pointer-events: none;

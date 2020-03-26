@@ -545,7 +545,9 @@ function download(strDataURI1) {
     link.addEventListener('click', function(ev) {
     link.href = strDataURI1;
     }, false);
-    link.style.pointerEvents = "auto";
+    document.getElementById("load").style.display = "none";
+    document.getElementById("save").style.display = "block";
+    document.getElementById("cancel").style.display = "block";
     // document.body.appendChild(link);
 };
 function downLoadFn(url) {
@@ -780,7 +782,7 @@ function LV1(){
 	}
 	canvasNum[120].src = "imges/home-1-bj-x.png";
 	canvasNum[120].classList.add("home-S-bj-x");
-	canvasNum[105].src = "imges/Bed.png";
+	canvasNum[105].src = "imges/bed.png";
 	canvasNum[105].classList.add("bed");
 	var signD = [48,60,72,84,96,108,120,59,71,83,95,107,119,131,105,106,117,118,129,130];
 	for (var i = 0; i < signD.length; i++) {
