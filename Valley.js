@@ -398,16 +398,6 @@ bjFloor7Btn.addEventListener('click',function(e){
         bjFloor7.style.background = "url(" + ImgFloorBj + ")";
         bjFloor7.style.backgroundSize = "2em";
 })
-function wall(){
-	window.ImgWallBj = "imges/wall-2.png";
-	window.ImgWallBjBtn = "imges/wall-2-btn.png";
-	wallBtn()
-}
-function floor(){
-	window.ImgFloorBj = "imges/floor-2.png";
-	window.ImgFloorBjBtn = "imges/floor-2-btn.png";
-	floorBtn()
-}
 function wallBtn(){
 	wallBjBtn.style.pointerEvents = "";
 	floorBjBtn.style.pointerEvents = "none";
@@ -506,12 +496,10 @@ function screenshot(){
 }
 function huanchong(){
 	html2canvas(camera).then(function(canvas) {
-    preview1.appendChild(canvas);
+    preview.appendChild(canvas);
     var oCavans = document.getElementsByTagName('canvas')[0];
-
     var strDataURI1 = oCavans.toDataURL();
     downLoadFn(strDataURI1);
-    
 	});
 };
 
@@ -555,7 +543,6 @@ function download(strDataURI1) {
     // link.innerHTML = 'download_canvas_image';
     link.download = 'mypainting.png';
     link.addEventListener('click', function(ev) {
-    	TTT()
     link.href = strDataURI1;
     }, false);
     // document.body.appendChild(link);
@@ -568,10 +555,6 @@ function downLoadFn(url) {
         download(url);
     }
 }
- function TTT(){
-    document.getElementsByTagName('canvas')[0].style.width = screen.width +" !important";
-    document.getElementsByTagName('canvas')[0].style.height = screen.height + " !important";
-            };
 
 
 

@@ -216,11 +216,11 @@ body{
 	height: 12em;
 }
 .camera-M{
-	width: 30em;
+	width: 37em;
 	height: 12em;
 }
 .camera-L{
-	width: 35em;
+	width: 42em;
 	height: 25em;
 }
 
@@ -366,7 +366,7 @@ body{
 	height: 3em;
 }
 #bj-wall-4{
-	background:url(imges/wall-2.png);
+	background:url(imges/Wall/0.png);
 	background-size:1em;
 }
 .bj-wall-4-S{
