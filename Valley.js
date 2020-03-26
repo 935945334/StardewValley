@@ -1,15 +1,22 @@
 var camera = document.getElementById("camera");
 var canvas = document.getElementById("canvas");
-
-
-
-
-
-
-
+var canvasGrid = document.getElementById("canvas-grid");
+var EM = 64;
+var IMGHsign = 1;
+var IMGWsign = 1;
+var sssr ="imges/y.png";
+var home = document.getElementById("home");
+var RoommateSign = 0;
+var RoommateSign1 = 0;
+var roommate = document.getElementById("roommate");
+var IMGD = 0;
+var LV = 0;
+var roommateBtn = document.getElementById("roommateBtn");
+var IMGWidth = "";
+var IMGHeight = "";
 
 var hide = 0;  //隐藏UI功能标记
-var IMG = "imges/y.png"
+var IMG = "imges/y.png";
 var ImgWallBj = "imges/wall-1.png";
 var ImgFloorBj = "imges/floor-1.png";
 var ImgWallBjBtn = "";
@@ -27,101 +34,21 @@ var PageNumber0 = 0;//初始化页码0
 var PageNumber1 = 0;//初始化页码1
 var PageNumber2 = 0;//初始化页码2
 var furnitureImg = document.getElementById("furniture-img");
-var productionImg = document.getElementById("production-img");
+var PhotoImg = document.getElementById("Photo-img");
 var WallImg = document.getElementById("Wall-img");
 var furniture = document.getElementById("furniture");
-var production = document.getElementById("production");
+var Photo = document.getElementById("Photo");
+var furnitureIcon = furniture.getElementsByClassName("furniture-icon");
+var PhotoIcon = Photo.getElementsByClassName("Photo-icon");
 var Wall = document.getElementById("Wall");
 var furnitureNum = furniture.querySelectorAll("div");
-var productionNum = production.querySelectorAll("div");
+var PhotoNum = Photo.querySelectorAll("div");
 var WallNum = Wall.querySelectorAll("div");
 var NumImg0 = document.getElementById("Num-img-0");
 var NumImg1 = document.getElementById("Num-img-1");
 var NumImg2 = document.getElementById("Num-img-2");
+var mouse = document.getElementById("mouse");
 var mouseImg = document.getElementById("mouse-img");
-
-
-
-
-// window.onload = function () {console.log(canvasNum); }
-// console.log(canvasNum);
-
-// //生成div及定位---------------------------------------------------------
-// for (var i = 0; i < canvasNum.length; i++) {
-//         canvasNum[i].index = i + 1;
-//         canvasNum[81].src = "imges/DoubleBed.png";
-//         canvasNum[81].style.pointerEvents = "none";
-//         canvasNum[81].style.width = "3em";
-//         canvasNum[81].style.height = "4em";
-//         canvasNum[300].src = "imges/home-2-bj-x.png";
-//         canvasNum[300].classList.add("home-2-bj-x");
-//         // console.log(canvasNum[i].index);
-// }
-// canvas.addEventListener('click',function(e){
-//         console.log(e.target.index);
-//         console.log(e.target.nodeName);
-//         e.target.src = IMG;
-//         e.target.style.width = imgw;
-//         e.target.style.height = imgh;
-
-        
-//         // alert(e.target.index);
-// })
-// //生成div及定位----------------------------------------------------------
-
-
-//生成div及定位---------------------------------------------------------
-// for (var i = 0; i < canvasNum.length; i++) {
-//         canvasNum[i].index = i;
-        
-//         // canvasNum[300].src = "imges/home-2-bj-x.png";
-//         // canvasNum[300].classList.add("home-2-bj-x");
-//         // console.log(canvasNum[i].index);
-// }
-
-
-canvas.addEventListener('click',function(e){
-        console.log(e.target.index);
-        console.log(e.target.nodeName);
-        e.target.src = IMG;
-        e.target.style.width = imgw;
-        e.target.style.height = imgh;
-
-        
-        // alert(e.target.index);
-})
-//生成div及定位----------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// for (var i = 31; i < 48 ; i++){
-// 	canvasNum[i].style.background = "red";
-// }
-// for (var i = 50; i < 59 ; i++){
-// 	canvasNum[i].style.background = "red";
-// }
-
-
-
-
-// var can11 = document.getElementsByTagName("body")[0]
-// var can11Num = can11.querySelectorAll("canvas");
-// console.log(can11Num);
-// can11Num[0].parentNode.removeChild(can11Num[0]);
-// can11Num[1].parentNode.removeChild(can11Num[1]);
-// can11Num[2].parentNode.removeChild(can11Num[2]);
 var flag = false;
 var cur = {
 	x:0,
@@ -198,7 +125,7 @@ window.addEventListener("mousemove",function(){
 window.addEventListener("touchmove",function(){
 	move();
 },false)
-document.body.addEventListener("mouseup",function(){
+window.addEventListener("mouseup",function(){
 	end();
 },false);
 window.addEventListener("touchend",function(){
@@ -220,10 +147,10 @@ for (var i = 0; i < furnitureNum.length; i++) {
 		furnitureNum[i].style.display = "none";
 	}
 }
-for (var i = 0; i < productionNum.length; i++) {
+for (var i = 0; i < PhotoNum.length; i++) {
 	if (i > 0) {
-		productionNum[i].index = i;
-		productionNum[i].style.display = "none";
+		PhotoNum[i].index = i;
+		PhotoNum[i].style.display = "none";
 	}
 }
 for (var i = 0; i < WallNum.length; i++) {
@@ -248,8 +175,8 @@ function judge(){
 		window.LabelLen = furnitureNum.length;
 		window.LabelNumber = furnitureNum;
 	}else if(Label == 1){
-		window.LabelLen = productionNum.length;
-		window.LabelNumber = productionNum;
+		window.LabelLen = PhotoNum.length;
+		window.LabelNumber = PhotoNum;
 	}else if(Label == 2){
 		window.LabelLen = WallNum.length;
 		window.LabelNumber = WallNum;
@@ -307,8 +234,8 @@ function SPageNumber(){
 		console.log("imges/PageNumber/furniture-" + PageNumber0 + ".png")
 	}else if(Label == 1){
 		window.PageNumber1 = PageNumber;
-		NumImg1.src = "imges/PageNumber/production-" + PageNumber1 + ".png";
-		console.log("imges/PageNumber/production-" + PageNumber1 + ".png")
+		NumImg1.src = "imges/PageNumber/Photo-" + PageNumber1 + ".png";
+		console.log("imges/PageNumber/Photo-" + PageNumber1 + ".png")
 	}else if(Label == 2){
 		window.PageNumber2 = PageNumber;
 		NumImg2.src = "imges/PageNumber/Wall-" + PageNumber2 + ".png";
@@ -320,10 +247,10 @@ function SPageNumber(){
 //目录标签切换---------------------------------------------------------
 furnitureImg.addEventListener('click',function(e){
     furniture.style.display = "block";
-	production.style.display = "none";
+	Photo.style.display = "none";
 	Wall.style.display = "none";
 	furnitureImg.src = "imges/menu-furniture-2.png";
-	productionImg.src = "imges/menu-production-1.png";
+	PhotoImg.src = "imges/menu-Photo-1.png";
 	WallImg.src = "imges/menu-Wall-1.png";
 	NumImg0.style.display = "block";
 	NumImg1.style.display = "none";
@@ -332,12 +259,12 @@ furnitureImg.addEventListener('click',function(e){
 	console.log(Label);
 	homeBtn.style.display = "none";
 })
-productionImg.addEventListener('click',function(e){
+PhotoImg.addEventListener('click',function(e){
     furniture.style.display = "none";
-	production.style.display = "block";
+	Photo.style.display = "block";
 	Wall.style.display = "none";
 	furnitureImg.src = "imges/menu-furniture-1.png";
-	productionImg.src = "imges/menu-production-2.png";
+	PhotoImg.src = "imges/menu-Photo-2.png";
 	WallImg.src = "imges/menu-Wall-1.png";
 	NumImg0.style.display = "none";
 	NumImg1.style.display = "block";
@@ -345,13 +272,15 @@ productionImg.addEventListener('click',function(e){
 	window.Label = 1;
 	console.log(Label);
 	homeBtn.style.display = "none";
+	del();
+	zhaopianSign();
 })
 WallImg.addEventListener('click',function(e){
     furniture.style.display = "none";
-	production.style.display = "none";
+	Photo.style.display = "none";
 	Wall.style.display = "block";
 	furnitureImg.src = "imges/menu-furniture-1.png";
-	productionImg.src = "imges/menu-production-1.png";
+	PhotoImg.src = "imges/menu-Photo-1.png";
 	WallImg.src = "imges/menu-Wall-2.png";
 	NumImg0.style.display = "none";
 	NumImg1.style.display = "none";
@@ -493,6 +422,18 @@ function floorBtn(){
 	mouseImg.style.width = "1em";
 	mouseImg.style.height = "1em";
 }
+Wall.addEventListener('click',function(e){
+	console.log(e.target.index);
+	if (e.target.index < 112) {
+		window.ImgWallBj = "imges/Wall/" + e.target.index + ".png";
+		window.ImgWallBjBtn = "imges/icon/Wall/" + e.target.index + ".png";
+		wallBtn()
+	}else{
+		window.ImgFloorBj = "imges/Wall/" + e.target.index + ".png";
+		window.ImgFloorBjBtn = "imges/icon/Wall/" + e.target.index + ".png";
+		floorBtn()
+	}
+})
 //地板墙纸替换---------------------------------------------------------------
 
 
@@ -552,158 +493,25 @@ function enlarge(){
 //缩放功能---------------------------------------------------------
 
 
-function painting1(){
-	window.IMGW = 1;
-	window.IMGH = 99;
-	window.imgw = "1em";
-	window.imgh = "2em";
-	window.IMG = "imges/painting-1.png";
-	mouse.firstElementChild.src = IMG;
-	hNot();
-	wNot();
-}
-function television1(){
-	window.IMGW = 2;
-	window.IMGH = 3;
-	window.imgw = "2em";
-	window.imgh = "3em";
-	window.IMG = "imges/television-1.png";
-	mouse.firstElementChild.src = IMG;
-	hNot();
-	wNot();
-}
-function hNot(){
-	var arr1 = document.getElementsByClassName("home-1-h-1");
-	var arr2 = document.getElementsByClassName("home-1-h-2");
-	var arr3 = document.getElementsByClassName("home-1-h-3");
-	var arr4 = document.getElementsByClassName("home-1-h-4");
-	var arr5 = document.getElementsByClassName("home-1-h-wall");
-	mouseImg.style.width = imgw;
-	mouseImg.style.height = imgh;
-	console.log(arr1.length);
-	if (IMGH != 99){
-		for (var i = 0; i < arr5.length; i++) {
-        	arr5[i].classList.remove("home-1-not");
-		}
-	}else{
-		window.arrH = arr1.length;
-	}
-	if (IMGH == 5) {
-		for (var i = 0; i < arr1.length; i++) {
-			arr5[i].classList.remove("home-1-not");
-        	arr1[i].classList.add("home-1-not");
-        	arr2[i].classList.add("home-1-not");
-        	arr3[i].classList.add("home-1-not");
-        	arr4[i].classList.add("home-1-not");
-        	window.arrH = arr1.length - 3;
-		}
-	}else if(IMGH == 4){
-		for (var i = 0; i < arr1.length; i++) {
-			arr5[i].classList.remove("home-1-not");
-        	arr1[i].classList.add("home-1-not");
-        	arr2[i].classList.add("home-1-not");
-        	arr3[i].classList.add("home-1-not");
-        	arr4[i].classList.remove("home-1-not");
-        	window.arrH = arr1.length - 2;
-		}
-	}else if(IMGH == 3){
-		for (var i = 0; i < arr1.length; i++) {
-			arr5[i].classList.remove("home-1-not");
-        	arr1[i].classList.add("home-1-not");
-        	arr2[i].classList.add("home-1-not");
-        	arr4[i].classList.remove("home-1-not");
-        	arr3[i].classList.remove("home-1-not");
-        	window.arrH = arr1.length - 1;
-		}
-	}else if(IMGH == 2){
-		for (var i = 0; i < arr1.length; i++) {
-			arr5[i].classList.remove("home-1-not");
-        	arr1[i].classList.add("home-1-not");
-        	arr4[i].classList.remove("home-1-not");
-        	arr3[i].classList.remove("home-1-not");
-        	arr2[i].classList.remove("home-1-not");
-        	window.arrH = arr1.length;
-        	
-		}
-	}else if(IMGH == 1){
-		for (var i = 0; i < arr1.length; i++) {
-			arr5[i].classList.remove("home-1-not");
-        	arr4[i].classList.remove("home-1-not");
-        	arr3[i].classList.remove("home-1-not");
-        	arr2[i].classList.remove("home-1-not");
-        	arr1[i].classList.remove("home-1-not");
-        	window.arrH = arr1.length;
-		}
-	}
-}
-function wNot(){
-	// alert(IMGW);
-	var arr1 = document.getElementsByClassName("home-1-w-1");
-	var arr2 = document.getElementsByClassName("home-1-w-2");
-	var arr3 = document.getElementsByClassName("home-1-w-3");
-	var arr4 = document.getElementsByClassName("home-1-w-4");
-	var arr5 = document.getElementsByClassName("home-1-h-wall");
-	if (IMGW == 5) {
-		for (var i = 0; i < arrH; i++) {
-        	arr1[i].classList.add("home-1-not");
-        	arr2[i].classList.add("home-1-not");
-        	arr3[i].classList.add("home-1-not");
-        	arr4[i].classList.add("home-1-not");
-		}
-	}else if(IMGW == 4){
-		for (var i = 0; i < arrH; i++) {
-        	arr1[i].classList.add("home-1-not");
-        	arr2[i].classList.add("home-1-not");
-        	arr3[i].classList.add("home-1-not");
-        	arr4[i].classList.remove("home-1-not");
-		}
-	}else if(IMGW == 3){
-		for (var i = 0; i < arrH; i++) {
-        	arr1[i].classList.add("home-1-not");
-        	arr2[i].classList.add("home-1-not");
-        	arr4[i].classList.remove("home-1-not");
-        	arr3[i].classList.remove("home-1-not");
-		}
-	}else if(IMGW == 2){
-		for (var i = 0; i < arrH; i++) {
-        	arr1[i].classList.add("home-1-not");
-        	arr4[i].classList.remove("home-1-not");
-        	arr3[i].classList.remove("home-1-not");
-        	arr2[i].classList.remove("home-1-not");
-		}
-	}else if(IMGW == 1){
-		for (var i = 0; i < arrH; i++) {
-        	arr4[i].classList.remove("home-1-not");
-        	arr3[i].classList.remove("home-1-not");
-        	arr2[i].classList.remove("home-1-not");
-        	arr1[i].classList.remove("home-1-not");
-		}
-	}
-	if (IMGH == 99){
-		for (var i = 0; i < arr5.length; i++) {
-        	arr5[i].classList.add("home-1-not");
-		}
-	}
-}
+
+
+
+
 var preview = document.getElementById('preview');
 var preview1 = document.getElementById('preview1');
 function screenshot(){
 	var screenshot = document.getElementById('screenshot');
 	preview.style.display = "flex";
-	preview.style.width = screen.width + "px";
-	preview.style.height = screen.height + "px";
 	huanchong();
 }
-// window.onload = function(){
-// 	huanchong();
-// 	alert(1);
-// }
 function huanchong(){
 	html2canvas(camera).then(function(canvas) {
     preview1.appendChild(canvas);
     var oCavans = document.getElementsByTagName('canvas')[0];
+
     var strDataURI1 = oCavans.toDataURL();
     downLoadFn(strDataURI1);
+    
 	});
 };
 
@@ -747,18 +555,23 @@ function download(strDataURI1) {
     // link.innerHTML = 'download_canvas_image';
     link.download = 'mypainting.png';
     link.addEventListener('click', function(ev) {
+    	TTT()
     link.href = strDataURI1;
     }, false);
     // document.body.appendChild(link);
 };
 function downLoadFn(url) {
+
     if(myBrowser() === "IE" || myBrowser() === "Edge") {
         SaveAs5(url);
     } else {
         download(url);
     }
 }
-
+ function TTT(){
+    document.getElementsByTagName('canvas')[0].style.width = screen.width +" !important";
+    document.getElementsByTagName('canvas')[0].style.height = screen.height + " !important";
+            };
 
 
 
@@ -819,42 +632,364 @@ function hide1(){
 
 
 
+Photo.addEventListener('click',function(e){
+	console.log(e.target.index);
+	var e = e.target.index;
+    window.IMGD = 1;
+    window.IMG = "imges/Photo/" + e + "-1.png";
+    window.IMGH = "0";
+    window.IMGHsign = 1;
+    window.IMGWsign = PhotoWsignArr[e];
+    window.IMGWidth = PhotoWidthArr[e];
+	window.IMGHeight = "2em";
+	window.IMGNum1 = PhotoNumArr[e];
+	window.IMGNum = e;
+	window.o = 1;
+	window.ImgesUrl = "imges/Photo/";
+	zhaopianSign();
+	PhotoSignX();
+	mouseImg.src = IMG;
+	mouseImg.style.top = IMGH;
+	mouseImg.style.width = IMGWidth;
+	mouseImg.style.height = IMGHeight;
+	ziliao();
+})
+function ziliao() {
+	if (kongzhitai1 == 1) {
+		document.getElementById("zoom").style.display = "block";
+		document.getElementById("text-2").innerHTML ="IMG: " + IMG;
+		document.getElementById("text-3").innerHTML ="IMGH: " + IMGH;
+		document.getElementById("text-4").innerHTML ="IMGHsign: " + IMGHsign;
+		document.getElementById("text-5").innerHTML ="IMGWsign: " + IMGWsign;
+		document.getElementById("text-6").innerHTML ="IMGWidth: " + IMGWidth;
+		document.getElementById("text-7").innerHTML ="IMGHeight: " + IMGHeight;
+		document.getElementById("text-8").innerHTML ="IMGNum1: " + IMGNum1;
+		document.getElementById("text-9").innerHTML ="IMGNum: " + IMGNum;
+		document.getElementById("text-10").innerHTML ="ImgesUrl: " + ImgesUrl;
+	}
+}
+var kongzhitai1 = 0;
+function kongzhitai() {
+	if (kongzhitai1 == 0) {
+		document.getElementById("dddiv").style.display = "block";
+		window.kongzhitai1 = 1;
+	}else if (kongzhitai1 == 1) {
+		document.getElementById("dddiv").style.display = "none";
+		window.kongzhitai1 = 0;
+	}
+	
+}
+function zhaopianSign(){
+		for (var i = 0; i < PhotoArr.length; i++) {
+			if (PhotoArr[i] == 0) {
+				// canvasNum[i].parentNode.style.background = "#000";
+				// canvasNum[i].parentNode.style.opacity =  "0.5";
+				canvasNum[i].parentNode.style.pointerEvents = "none";
+			}else if (PhotoArr[i] == 1) {
+				canvasNum[i].parentNode.style.background = "";
+				canvasNum[i].parentNode.style.pointerEvents = "auto";
+				// canvasNum[i].parentNode.style.background = "blue";
+				// canvasNum[i].parentNode.style.opacity =  "0.5";
+			}
+		}
+		for (var i = 0; i < PhotoWarr.length; i++) {
+			if (PhotoWarr[i] != 0) {
+				console.log(PhotoWarr[i]);
+				for (var n = 0; n < PhotoWarr[i]; n++) {
+					console.log(i+n);
+					canvasNum[i+n].parentNode.style.pointerEvents = "none";
+					// canvasNum[i+n].parentNode.style.background = "#fff";
+					// canvasNum[i+n].parentNode.style.opacity =  "0.5";
+				}
+					
+			}
+		}
+	}
+function PhotoSignX() {
+	for (var i = 1; i < PhotoSign.length; i++) {
+		if (PhotoSign[i] == 1 || PhotoArr[i] == 0) {	
+			if (i-(IMGWsign-1) > 0 && IMGWsign-1 > 0) {
+				canvasNum[i-(IMGWsign-1)].parentNode.style.pointerEvents = "none";
+				// canvasNum[i-(IMGWsign-1)].parentNode.style.background = "red";
+				// canvasNum[i-(IMGWsign-1)].parentNode.style.opacity =  "0.5";
+			}
+			if (i-(IMGWsign-2) > 0 && IMGWsign-2 > 0) {
+				canvasNum[i-(IMGWsign-2)].parentNode.style.pointerEvents = "none";
+				// canvasNum[i-(IMGWsign-2)].parentNode.style.background = "red";
+				// canvasNum[i-(IMGWsign-2)].parentNode.style.opacity =  "0.5";
+			}
+		}
+	}
+}
+
+
+
+
+
+furniture.addEventListener('click',function(e){
+	if (e.target.nodeName == "IMG") {
+		console.log(e.target.index);
+		var e = e.target.index;
+		window.IMGD = 1;
+		window.IMG = "imges/furniture/" + e + "-1.png";
+		window.IMGH = IMGHArr[e];
+		window.IMGHsign = IMGHsignArr[e];
+		window.IMGWsign = IMGWsignArr[e];
+		window.IMGWidth = IMGWidthArr[e];
+		window.IMGHeight = IMGHeightArr[e];
+		window.IMGNum1 = IMGNumArr[e];
+		window.IMGNum = e;
+		window.o = 1;
+		window.ImgesUrl = "imges/furniture/";
+		signZ();
+		signX1();
+		signY1();
+		ziliao();
+		mouseImg.src = IMG;
+		mouseImg.style.top = IMGH;
+		console.log(IMGWidth);
+		mouseImg.style.width = IMGWidth;
+		console.log(IMGHeight);
+		mouseImg.style.height = IMGHeight;
+	}
+	
+})
+
+
+
+var signHarr = [];
+var signWarr = [];
+var signXarr = [];
+var sign = [];
+var PhotoArr = [];
+var PhotoHarr = [];
+var PhotoWarr = [];
+var PhotoSign = [];
 var Choice = document.getElementById("Choice");
 Choice.style.width = screen.width + "px";
 Choice.style.height = screen.height + "px";
+console.log(PhotoIcon);
 function LV1(){
-
+	div0.style.left = "";
+	window.homeNum = 144;
+	window.z = 12;
+	Choice.style.display = "none";
+	SignArray();
+	window.canvasNum = canvas.querySelectorAll("img");
+	window.ssr = canvasNum[0].src;
+	home.className = "home-S";
+	canvas.className = "canvas-S";
+	canvasGrid.className = "canvas-S";
+	camera.className = "camera-S";
+	for (var i = 0; i < canvasNum.length; i++) {
+        canvasNum[i].index = i;
+	}
+	var Nwall = [bjWall1,bjWall2,bjWall3,bjWall4,bjWall5,bjWall6,bjWall7];
+	var NwallBtn = [bjWall1Btn,bjWall2Btn,bjWall3Btn,bjWall4Btn,bjWall5Btn,bjWall6Btn,bjWall7Btn];
+	var Nfloor = [bjFloor1,bjFloor2,bjFloor3,bjFloor4,bjFloor5,bjFloor6,bjFloor7];
+	var NfloorBtn = [bjFloor1Btn,bjFloor2Btn,bjFloor3Btn,bjFloor4Btn,bjFloor5Btn,bjFloor6Btn,bjFloor7Btn];
+	for(var i = 0; i < 7; i++){
+		Nwall[i].className = "bj-wall-" + (i + 1) +"-S";
+		NwallBtn[i].className = "bj-wall-" + (i + 1) +"-S";
+		Nfloor[i].className = "bj-floor-" + (i + 1) +"-S";
+		NfloorBtn[i].className = "bj-floor-" + (i + 1) +"-S";
+	}
+	canvasNum[120].src = "imges/home-1-bj-x.png";
+	canvasNum[120].classList.add("home-S-bj-x");
+	canvasNum[105].src = "imges/Bed.png";
+	canvasNum[105].classList.add("bed");
+	var signD = [48,60,72,84,96,108,120,59,71,83,95,107,119,131,105,106,117,118,129,130];
+	for (var i = 0; i < signD.length; i++) {
+		signXarr.splice(signD[i],1,1);
+	}
+	for (var i = 0; i < 48; i++) {
+		signXarr.splice(i,1,1);
+	}
+	for (var i = 132; i < 144; i++) {
+		signXarr.splice(i,1,1);
+	}
+	for (var i = 13; i < 23; i++) {
+		PhotoArr.splice(i,1,1);
+	}
+	console.log(PhotoSign);
+	Roommate1()
+	signZ()
+	roommateBtn.style.display = "none";
+	document.getElementById("roommate1").style.opacity = "0.2";
+	document.getElementById("roommate1").style.pointerEvents = "auto";
 }
 function LV2(){
-
+	window.homeNum = 360;
+	window.z = 30;
+	Choice.style.display = "none";
+	SignArray();
+	window.canvasNum = canvas.querySelectorAll("img");
+	window.ssr = canvasNum[0].src;
+	home.className = "home-M";
+	canvas.className = "canvas-M";
+	canvasGrid.className = "canvas-M";
+	camera.className = "camera-M";
+	var Nwall = [bjWall1,bjWall2,bjWall3,bjWall4,bjWall5,bjWall6,bjWall7];
+	var NwallBtn = [bjWall1Btn,bjWall2Btn,bjWall3Btn,bjWall4Btn,bjWall5Btn,bjWall6Btn,bjWall7Btn];
+	var Nfloor = [bjFloor1,bjFloor2,bjFloor3,bjFloor4,bjFloor5,bjFloor6,bjFloor7];
+	var NfloorBtn = [bjFloor1Btn,bjFloor2Btn,bjFloor3Btn,bjFloor4Btn,bjFloor5Btn,bjFloor6Btn,bjFloor7Btn];
+	for(var i = 0; i < 7; i++){
+		Nwall[i].className = "bj-wall-" + (i + 1) +"-M";
+		NwallBtn[i].className = "bj-wall-" + (i + 1) +"-M";
+		Nfloor[i].className = "bj-floor-" + (i + 1) +"-M";
+		NfloorBtn[i].className = "bj-floor-" + (i + 1) +"-M";
+	}
+	Nwall[1].style.background = "url(imges/wall-1.png)";
+	Nwall[1].style.backgroundSize = "1em";
+	Nwall[2].style.background = "url(imges/wall-1.png)";
+	Nwall[2].style.backgroundSize = "1em";
+	Nfloor[0].style.background = "url(imges/Kitchen-floor.png)";
+	Nfloor[0].style.backgroundSize = "2em";
+	Nfloor[3].style.background = "url(imges/floor-1.png)";
+	Nfloor[3].style.backgroundSize = "2em";
+	for (var i = 0; i < canvasNum.length; i++) {
+        canvasNum[i].index = i;
+	}
+	var canvasN = [62,61,81,300];
+	var canvasSrc = ["imges/kitchen-R-M.png","imges/kitchen-L-M.png","imges/DoubleBed.png","imges/home-2-bj-x.png"];
+	var canvasClass = ["kitchen-R-M","kitchen-L-M","DoubleBed","home-M-bj-x"];
+	for (var i = 0; i < canvasN.length; i++){
+		canvasNum[canvasN[i]].src = canvasSrc[i];
+		canvasNum[canvasN[i]].classList.add(canvasClass[i]);
+	}
+	var signD = [120,121,122,123,124,125,126,150,151,180,181,210,211,240,241,270,300,149,179,209,239,269,299,329,141,142,143,171,172,173,138,139,168,169,198,199,228,229,258,259,318,319];
+	for (var i = 0; i < signD.length; i++) {
+		signXarr.splice(signD[i],1,1);
+	}
+	for (var i = 0; i < 30; i++) {
+		signXarr.splice(i,1,1);
+		signXarr.splice(i+z,1,1);
+		signXarr.splice(i+z*2,1,1);
+		signXarr.splice(i+z*3,1,1);
+	}
+	for (var i = 330; i < 360; i++) {
+		signXarr.splice(i,1,1);
+	}
+	for (var i = 31; i < 48; i++) {
+		PhotoArr.splice(i,1,1);
+	}
+	for (var i = 50; i < 59; i++) {
+		PhotoArr.splice(i,1,1);
+	}
+	window.roommateImg = "url(imges/home-2-2-bj.png)";
+	window.roommateImgX = "imges/home-2-bj-x.png";
+	window.roommateImg1 = "url(imges/home-2-1-bj.png)";
+	window.roommateImgX1 = "imges/home-2-bj-x.png";
+	window.roommateN = canvasNum[300];
+	roommate.className = "roommate-M";
+	window.roommateSize = "30em"
+	Roommate1();
+	signZ()
+	roommateBtn.style.display = "none";
 }
 function LV3(){
-
+	LV4();
+	home.style.background = "url(imges/home-3-1-bj.png)";
+	canvasNum[210].src = "imges/home-3-1-x-bj.png";
+	window.roommateImg = "url(imges/home-3-2-bj.png)";
+	window.roommateImgX = "imges/home-3-2-x-bj.png";
+	window.roommateImg1 = "url(imges/home-3-1-bj.png)";
+	window.roommateImgX1 = "imges/home-3-1-x-bj.png";
+	window.roommateN = canvasNum[210];
+	home.style.backgroundSize = "35em";
+	window.roommateSize = "35em"
 }
 function LV4(){
+	home.className = "home-L";
+	window.z = 35;
 	Choice.style.display = "none";
-	var homeNum = 875;
+	window.homeNum = 875;
+	SignArray();
+	window.canvasNum = canvas.querySelectorAll("img");
+	window.ssr = canvasNum[0].src;
+	var canvasN = [412,127,131,85,389,386,210];
+	var canvasSrc = ["imges/DoubleBed.png","imges/bed.png","imges/bed.png","imges/BabyDed.png","imges/kitchen-R.png","imges/kitchen-L.png","imges/home-4-1-x-bj.png"];
+	var canvasClass = ["DoubleBed","bed","bed","BabyDed","kitchen-R","kitchen-L","home-L-2-bj-x"];
+	for (var i = 0; i < canvasN.length; i++){
+		canvasNum[canvasN[i]].src = canvasSrc[i];
+		canvasNum[canvasN[i]].classList.add(canvasClass[i]);
+	}
+	for (var i = 0; i < canvasNum.length; i++) {
+        canvasNum[i].index = i;
+	}
+	var signD = [153,154,188,189,168,203,238,273,308,281,282,283,284,285,286,287,288,289,290,316,317,318,319,320,321,322,323,324,325,258,259,293,294,476,477,511,512,546,547,581,582,616,617,686,687,197,198,232,233,201,202,236,237,482,483,484,517,518,519,162,163,166,167,157,156,155,190,191,192];
+	for (var i = 0; i < signD.length; i++) {
+		signXarr.splice(signD[i],1,1);
+	}
+	var arr1 = [0,328,169,204,239,274,309,351,387,422,459,363,398,433,710,806,780,745];
+	var arr2 = [140,350,175,210,245,280,315,361,396,431,465,385,420,455,723,840,793,758];
+	for (var i = 0; i < arr1.length; i++) {
+
+		for (var x = arr1[i]; x < arr2[i]; x++) {
+			signXarr.splice(x,1,1);
+		}        
+	}
+	for (var i = 0; i < 21; i++) {
+		var x = 140 + (35*i);
+		signXarr.splice(x,1,1);
+	}
+	for (var i = 0; i < 9; i++) {
+		var x = 386 + (35*i);
+		signXarr.splice(x,1,1);
+	}
+	for (var i = 0; i < 10; i++) {
+		var x = 489 + (35*i);
+		signXarr.splice(x,1,1);
+	}
+	for (var i = 36; i < 48; i++) {
+		PhotoArr.splice(i,1,1);
+	}
+	for (var i = 50; i < 62; i++) {
+		PhotoArr.splice(i,1,1);
+	}
+	for (var i = 351; i < 360; i++) {
+		PhotoArr.splice(i,1,1);
+	}
+	for (var i = 364; i < 371; i++) {
+		PhotoArr.splice(i,1,1);
+	}
+	for (var i = 373; i < 384; i++) {
+		PhotoArr.splice(i,1,1);
+	}
+	for (var i = 457; i < 489; i++) {
+		canvasNum[i].style.zIndex="31"
+	}
+	signX1();
+	signY1();
+	signZ();
+	window.roommateImg = "url(imges/home-4-2-bj.png)";
+	window.roommateImgX = "imges/home-4-2-x-bj.png";
+	window.roommateImg1 = "url(imges/home-4-1-bj.png)";
+	window.roommateImgX1 = "imges/home-4-1-x-bj.png";
+	home.style.background = "url(imges/home-4-1-bj.png)";
+	home.style.backgroundSize = "35em";
+	window.roommateSize = "35em"
+	window.roommateN = canvasNum[210];
+	roommate.className = "roommate-L";
+	window.LV = 4;
+	Roommate1()
+	roommateBtn.style.display = "none";
+}
+function SignArray(){
 	for(var i = 0; i < homeNum; i++){
 		createHtml();
+		createHtml1()
+		signHarr.push(0);
+		signWarr.push(0);
+		signXarr.push(0);
+		sign.push(0);
+		PhotoSign.push(0);
+		PhotoArr.push(0);
+		PhotoHarr.push(0);
+		PhotoWarr.push(0);
 	}
-	var canvasNum = canvas.querySelectorAll("img");
-	console.log(canvasNum);
-	canvasNum[412].classList.add("DoubleBed");
-	canvasNum[412].parentNode.style.pointerEvents = "none";
-	canvasNum[127].classList.add("bed");
-	canvasNum[127].parentNode.style.pointerEvents = "none";
-	canvasNum[131].classList.add("bed");
-	canvasNum[131].parentNode.style.pointerEvents = "none";
-	canvasNum[85].classList.add("BabyDed");
-	canvasNum[85].parentNode.style.pointerEvents = "none";
-	canvasNum[389].classList.add("kitchen-R");
-	canvasNum[389].parentNode.style.pointerEvents = "none";
-	canvasNum[386].classList.add("kitchen-L");
-	canvasNum[386].parentNode.style.pointerEvents = "none";
-	canvasNum[210].src = "imges/home-L-2-bj-x.png";
-	canvasNum[210].parentNode.style.pointerEvents = "none";
-	canvasNum[210].classList.add("home-L-2-bj-x");
 }
+var canvasGridNnm = 0;
 function createHtml(){
 	var div = document.createElement("div");
 	var Img = document.createElement("img");
@@ -862,3 +997,331 @@ function createHtml(){
 	div.appendChild(Img);
 	canvas.appendChild(div);
 }
+function createHtml1(){
+	var div = document.createElement("div");
+	var Img = document.createElement("img");
+	Img.src = "imges/t.png";
+	div.appendChild(Img);
+	canvasGrid.appendChild(div);
+}
+function Grid(){
+	if (canvasGridNnm == 0) {
+		canvasGrid.style.display = "flex";
+		window.canvasGridNnm = 1;
+	}else if (canvasGridNnm == 1) {
+		canvasGrid.style.display = "none";
+		window.canvasGridNnm = 0;
+	}
+	
+}
+function Roommate1(){
+	window.roommateBtnImg = roommateBtn.querySelectorAll("img");
+	for (var i = 0; i < roommateBtnImg.length; i++) {
+        roommateBtnImg[i].index = i;
+	}
+}
+canvas.addEventListener('click',function(e){
+	if (e.target.nodeName == "DIV") {
+			e.target.firstChild.src = IMG;
+			e.target.firstChild.style.width = IMGWidth;
+			e.target.firstChild.style.height = IMGHeight;
+			console.log(e.target.firstChild.index);
+			var H = e.target.firstChild.index;
+			e.target.firstChild.style.top = IMGH;
+			window.sssr = IMG;
+			if (IMGD == 1 && Label == 0) {
+				signHarr.splice(H,1,IMGHsign);
+				signWarr.splice(H,1,IMGWsign);
+				sign.splice(H,1,1);
+				console.log(signHarr[H]);
+				console.log(signWarr[H]);
+			}else if (IMGD == 1 && Label == 1) {
+				PhotoHarr.splice(H,1,IMGHsign);
+				PhotoWarr.splice(H,1,IMGWsign);
+				PhotoSign.splice(H,1,1);
+				console.log(PhotoHarr);
+				console.log(PhotoWarr);
+			}
+		}
+		if (IMGD == 1) {
+			var r = e.target.firstChild.index;
+			for (var i = 0; i < IMGWsign; i++){
+				for (var n = 0; n < IMGHsign; n++){
+					canvasNum[r-(z*n)].parentNode.style.pointerEvents = "none";
+					// canvasNum[r-(z*n)].parentNode.style.background = "red";
+					// canvasNum[r-(z*n)].parentNode.style.opacity =  "0.5";
+					signXarr.splice(r-(z*n),1,1);
+				}
+				// console.log(signXarr[r]);
+				var r = r + 1;
+			}
+			console.log(canvasNum[e.target.firstChild.index]);
+			// console.log(signXarr);
+			if (Label == 0) {
+				signX1();
+				signY1();
+			}else if (Label == 1) {
+				PhotoSignX()
+			}
+			
+		}else if (IMGD == 0) {
+			console.log(signHarr[H]);
+			console.log(signWarr[H]);
+			var r = e.target.firstChild.index;
+			for (var i = 0 ; i < signWarr[H]; i++) {
+				for (var n = 0 ; n < signHarr[H]; n++) {
+					canvasNum[r-(z*n)].parentNode.style.background = "";
+					canvasNum[r-(z*n)].parentNode.style.pointerEvents = "auto";
+					signXarr.splice(r-(z*n),1,0);
+				}
+				var r = r + 1;
+			}
+			signHarr.splice(H,1,0);
+			signWarr.splice(H,1,0);
+			// console.log(signXarr);
+		}	
+})
+function signZ(){
+	for (var i = 0; i < signXarr.length; i++) {
+		if (signXarr[i] == 0) {
+			canvasNum[i].parentNode.style.background = "";
+			// canvasNum[i].parentNode.style.background = "green";
+			// canvasNum[i].parentNode.style.opacity =  "0.5";
+			canvasNum[i].parentNode.style.pointerEvents = "auto";
+		}else if (signXarr[i] == 1) {
+			// canvasNum[i].parentNode.style.background = "red";
+			// canvasNum[i].parentNode.style.opacity =  "0.5";
+			canvasNum[i].parentNode.style.pointerEvents = "none";
+		}
+	}
+	for (var i = 1; i < signXarr.length; i++) {
+		if (sign[i] == 1) {
+			canvasNum[i].parentNode.style.background = "";
+			canvasNum[i].parentNode.style.pointerEvents = "auto";
+		}
+	}
+	for (var i = 1; i < PhotoSign.length; i++) {
+		if (PhotoSign[i] == 1) {
+			canvasNum[i].parentNode.style.background = "";
+			canvasNum[i].parentNode.style.pointerEvents = "auto";
+		}
+	}
+}
+
+function signX1(){
+	for (var i = 1; i < signXarr.length; i++) {
+		if (signXarr[i] == 1) {
+			if (i-(IMGWsign-1) > 0) {
+				canvasNum[i-(IMGWsign-1)].parentNode.style.pointerEvents = "none";
+				// canvasNum[i-(IMGWsign-1)].parentNode.style.background = "red";
+				// canvasNum[i-(IMGWsign-1)].parentNode.style.opacity =  "0.5";
+				if (IMGHsign == 2 || IMGHsign == 3) {
+					if (canvasNum[i-(IMGWsign-1)+(z*(IMGHsign-1))] != undefined) {
+						canvasNum[i-(IMGWsign-1)+(z*(IMGHsign-1))].parentNode.style.pointerEvents = "none";
+						// canvasNum[i-(IMGWsign-1)+(z*(IMGHsign-1))].parentNode.style.background = "#eee";
+						// canvasNum[i-(IMGWsign-1)+(z*(IMGHsign-1))].parentNode.style.opacity =  "0.5";
+					}
+				}
+				if (canvasNum[i-(IMGWsign-2)] != undefined && IMGWsign-2 > 0) {
+					canvasNum[i-(IMGWsign-2)].parentNode.style.pointerEvents = "none";
+					// canvasNum[i-(IMGWsign-2)].parentNode.style.background = "red";
+					// canvasNum[i-(IMGWsign-2)].parentNode.style.opacity =  "0.5";
+				}
+				if (canvasNum[i-(IMGWsign-3)] != undefined && IMGWsign-3 > 0) {
+					canvasNum[i-(IMGWsign-3)].parentNode.style.pointerEvents = "none";
+					// canvasNum[i-(IMGWsign-3)].parentNode.style.background = "green";
+					// canvasNum[i-(IMGWsign-3)].parentNode.style.opacity =  "0.5";
+				}
+				if (canvasNum[i-(IMGWsign-3)+z] != undefined && IMGWsign-3 > 0) {
+					canvasNum[i-(IMGWsign-3)+z].parentNode.style.pointerEvents = "none"
+					// canvasNum[i-(IMGWsign-3)+z].parentNode.style.background = "green";
+					// canvasNum[i-(IMGWsign-3)+z].parentNode.style.opacity =  "0.5";
+				};	
+			}	
+		}	
+	}
+}
+
+function signY1(){
+	for (var i = 1; i < signXarr.length; i++) {
+		if (signXarr[i] == 1) {
+			// if (canvasNum[i+z*(IMGHsign-1)-1] != undefined && IMGHsign-1 > 0) {
+			// 	canvasNum[i+z*(IMGHsign-1)-1].parentNode.style.pointerEvents = "none";
+			// 	canvasNum[i+z*(IMGHsign-1)-1].parentNode.style.background = "blue";
+				// canvasNum[i+z*(IMGHsign-1)-1].parentNode.style.opacity =  "0.5";
+			// }
+			if (canvasNum[i+z*(IMGHsign-1)] != undefined) {
+				canvasNum[i+z*(IMGHsign-1)].parentNode.style.pointerEvents = "none";
+				// canvasNum[i+z*(IMGHsign-1)].parentNode.style.background = "#000";
+				// canvasNum[i+z*(IMGHsign-1)].parentNode.style.opacity =  "0.5";
+			}
+			if (LV == 4) {
+				var a = [222,221,220,219]
+				var b = [650,649,648,647]
+				for (var c = 0; c < IMGWsign - 1; c++) {
+					if (canvasNum[a[c]] != undefined) {
+						canvasNum[a[c]].parentNode.style.pointerEvents = "none";
+						// canvasNum[a[c]].parentNode.style.background = "#000";
+						// canvasNum[a[c]].parentNode.style.opacity =  "0.5";
+					}
+					if (canvasNum[b[c]] != undefined) {
+						canvasNum[b[c]].parentNode.style.pointerEvents = "none";
+						// canvasNum[b[c]].parentNode.style.background = "#000";
+						// canvasNum[b[c]].parentNode.style.opacity =  "0.5";
+					}
+				}
+			}	
+		}	
+	}
+}
+
+function television1(){
+	window.IMGD = 1;
+	window.IMG = "imges/television-1.png";
+	window.IMGH = "-2em";
+	window.IMGHsign = 2;
+	window.IMGWsign = 2;
+	window.IMGWidth = "2em";
+	window.IMGHeight = "3em";
+	signZ();
+	signX1();
+	signY1();
+}
+function del(){
+	window.IMGD = 0;
+	window.IMG = "imges/y.png";
+	window.IMGH = "0";
+	window.IMGHsign = "0";
+	window.IMGWsign = "0";
+	mouseImg.src = IMG;
+	mouseImg.style.top = IMGH;
+	mouseImg.style.width = IMGWidth;
+	mouseImg.style.height = IMGHeight;
+	signZ()
+	console.log(IMG);
+}
+canvas.onmouseover = function(e){
+	if (e.target.nodeName == "DIV" && IMGD != 0) {
+		window.sssr = e.target.firstChild.src;
+		if (e.target.firstChild.src == ssr) {
+			// e.target.style.background = "#00ff00";
+			// e.target.style.opacity =  "0.7";
+			e.target.firstChild.src = IMG;
+			e.target.firstChild.style.top = IMGH;
+			mouseImg.src = "";
+			e.target.firstChild.style.width = IMGWidth;
+			e.target.firstChild.style.height = IMGHeight;
+		}else{
+			mouse.style.background = "red";
+			mouseImg.src = IMG;
+			mouseImg.style.top = IMGH;
+			mouseImg.style.width = IMGWidth;
+			mouseImg.style.height = IMGHeight;
+		}
+	}else if (e.target.nodeName == "DIV" && IMGD == 0 && e.target.id != "canvas") {
+		if (e.target.firstChild.src != ssr) {
+			// e.target.style.background = "#00ff00";
+			// e.target.style.opacity =  "0.7";
+		}
+	}
+}
+canvas.onmouseout = function(e){
+	if (e.target.nodeName == "DIV" && IMGD != 0) {
+			e.target.style.background = "";
+			e.target.style.opacity =  "1";
+			e.target.firstChild.src = sssr;
+			mouse.style.background = "";
+	}else if (e.target.nodeName == "DIV" && IMGD == 0 && e.target.id != "canvas") {
+		if (e.target.firstChild.src != ssr) {
+			e.target.style.background = "";
+			e.target.style.opacity =  "1";
+		}
+	}else{
+		mouse.style.background = "";
+	}
+}
+
+function Roommate(){
+		home.style.background = roommateImg;
+		home.style.backgroundSize = roommateSize;
+		roommate.style.display = "block";
+		roommateN.src = roommateImgX;
+		roommateBtn.style.display = "block";
+}
+roommateBtn.addEventListener('click',function(e){
+	if (e.target.index == 16) {
+		home.style.background = roommateImg1;
+		home.style.backgroundSize = roommateSize;
+		roommate.style.display = "none";
+		roommateN.src = roommateImgX1;
+		window.RoommateSign1 = 0;
+		roommateBtn.style.display = "none";
+		window.RoommateSign = 0;
+	}else if (e.target.index == 17) {
+		roommateBtn.style.display = "none";
+	}else if (e.target.index != undefined) {
+		document.getElementById("roommate123").src = "imges/roommate/" + e.target.index + ".png";
+		document.getElementById("roommate1").src = "imges/roommate/roommate-" + e.target.index + ".png";
+		console.log(e.target.index != undefined);
+	}
+})
+
+
+
+
+var menu = document.getElementById("menu");
+var menuNum = menu.getElementsByClassName("menuNum");
+var menuNumWall = Wall.getElementsByClassName("menuNum");
+var WallIcon = Wall.getElementsByClassName("Wall-icon");
+var menuNumPhoto = Photo.getElementsByClassName("menuNum");
+
+// console.log(menuNum.length);
+for (var i = 0 ; i < 14; i++) {
+	var N = menuNum[i];
+	for (var x = 0 ; x < 18; x++) {
+		var Img = document.createElement("img");
+		Img.src = "imges/icon/furniture/" + (x+i*18) + ".png";
+		if (x+i*18 > 236) {
+			Img.src = "imges/y.png";
+			Img.style.pointerEvents = "none";
+		}
+		N.appendChild(Img).className = "furniture-icon";
+	}
+}
+
+for (var i = 0 ; i < 10; i++) {
+	var N = menuNumWall[i];
+	for (var x = 0 ; x < 18; x++) {
+		var Img = document.createElement("img");
+		Img.src = "imges/icon/wall/" + (x+i*18) + ".png";
+		if (x+i*18 > 167) {
+			Img.src = "imges/y.png";
+			Img.style.pointerEvents = "none";
+		}
+		N.appendChild(Img).className = "Wall-icon";
+	}
+}
+for (var i = 0 ; i < 3; i++) {
+	var N = menuNumPhoto[i];
+	for (var x = 0 ; x < 18; x++) {
+		var Img = document.createElement("img");
+		Img.src = "imges/icon/Photo/" + (x+i*18) + ".png";
+		if (x+i*18 > 48) {
+			Img.src = "imges/y.png";
+			Img.style.pointerEvents = "none";
+		}
+		N.appendChild(Img).className = "Photo-icon";
+	}
+}
+for (var i = 0; i < furnitureIcon.length; i++) {
+        furnitureIcon[i].index = i;
+	}
+for (var i = 0; i < PhotoIcon.length; i++) {
+        PhotoIcon[i].index = i;
+	}
+for (var i = 0; i < WallIcon.length; i++) {
+        WallIcon[i].index = i;
+	}
+
+
+

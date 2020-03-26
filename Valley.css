@@ -1,6 +1,20 @@
 img{
 	display: block;
 }
+#canvas div{
+	width: 1em !important;
+	height: 1em !important;
+}
+
+#canvas-grid img{
+	width: 1em !important;
+	height: 1em !important;
+}
+#canvas img{
+	position: relative;
+	z-index: 15;
+	pointer-events: none;
+}
 body{
 	margin: 0;
 	background: #050304;
@@ -11,34 +25,51 @@ body{
     justify-content: center;
 }
 #save{
-	display: -webkit-flex;
+	/*display: -webkit-flex;
     display: flex;
     -webkit-justify-content: center;
     justify-content: center;
     -webkit-flex-direction: column;
     flex-direction: column;
+    position: absolute;
+    left: 10em;
+    top: 5em;*/
 }
 #IsA{
-	width: 192px;
+	/*width: 192px;
 	height: 192px;
 	display: block;
 	background: url(imges/download.png);
-	float: right;
+	float: right;*/
 }
 #preview{
-	display: none;
-	top: 1em;
-	/*display: flex;*/
+	top: 40%;
+	margin: 0 auto;
     -webkit-justify-content: space-between;
     justify-content: center;
+	width: 192px;
+	height: 192px;
+	position: absolute;
+	z-index: 100;
+	display: -webkit-flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    display: none;
+}
+#preview1{
+	position: absolute;
+	top: -400%;
 }
 #mouse{
-	width: 1em;
-	height: 1em;
+	width: 1em !important;
+	height: 1em !important;
 	position: absolute;
 	pointer-events: none;
 	z-index: 99;
 	opacity: 0.7;
+}
+#mouse img{
+	position: relative;
 }
 #Eliminate{
 	position: absolute;
@@ -53,10 +84,35 @@ body{
 	position: absolute;
 	right: 1em;
 	bottom: 0em;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
 }
 #screenshot img{
 	float: left;
 	margin-left: 20px;
+}
+#roommateBtn{
+	height: 3em;
+	position: absolute;
+	right: 2em;
+	margin-right: 20px;
+	top: 50%;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-around;
+    justify-content: space-around;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+#roommateBtn div{
+	display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
 }
 #body-1{
 	font-size: 16px;
@@ -79,11 +135,6 @@ body{
 	z-index: 20;
 	top: 2em;
 	left: 0.2em;
-}
-#preview{
-	position: absolute;
-	z-index: 100;
-	background: #050304;
 }
 #catalogBtn{
 	width: 320px;
@@ -127,11 +178,11 @@ body{
     /*margin-top: 12px;*/
 }
 .menuNum img{
-	width: 72px;
-	height: 72px;
+	width: 64px;
+	height: 64px;
 	/*margin: 10px 12px 0 12px;*/
 }
-#production{
+#Photo{
 	width: 320px;
 	height: 504px;
 	display: none;
@@ -160,12 +211,30 @@ body{
 	z-index: -3;
 	top: 1em;
 }
+.camera-S{
+	width: 12em;
+	height: 12em;
+}
+.camera-M{
+	width: 30em;
+	height: 12em;
+}
 .camera-L{
 	width: 35em;
 	height: 25em;
 }
 
-
+#canvas-grid{
+	position: absolute;
+	z-index: 6;
+	top: 0;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    display: none;
+    pointer-events: none;
+}
 #canvas{
 	position: absolute;
 	z-index: 5;
@@ -183,7 +252,7 @@ body{
 	width: 30em !important;
 	height: 12em !important;
 }
-.canvas-XL{
+.canvas-L{
 	width: 35em !important;
 	height: 25em !important;
 }
@@ -207,10 +276,28 @@ body{
 	position: absolute;
 	/*overflow:hidden*/	
 }
+.home-S{
+	width: 12em;
+	height: 12em;
+	background:url(imges/home-1-bj.png);
+	background-size:12em;
+}
+.home-M{
+	width: 30em;
+	height: 12em;
+	background:url(imges/home-2-1-bj.png);
+	background-size:30em;
+}
 .home-L{
 	width: 35em;
 	height: 25em;
-	background:url(imges/home-4-bj.png);
+	background:url(imges/home-3-1-bj.png);
+	background-size:35em;
+}
+.home-XL{
+	width: 35em;
+	height: 25em;
+	background:url(imges/home-4-1-bj.png);
 	background-size:35em;
 }
 #wall-bj{
@@ -234,6 +321,14 @@ body{
 	background:url(imges/wall-1.png);
 	background-size:1em;
 }
+.bj-wall-1-S{
+	width: 12em;
+	height: 3em;
+}
+.bj-wall-1-M{
+	width: 18em;
+	height: 3em;
+}
 .bj-wall-1-L{
 	width: 13em;
 	height: 3em;
@@ -241,6 +336,14 @@ body{
 #bj-wall-2{
 	background:url(imges/wall-62.png);
 	background-size:1em;
+}
+.bj-wall-2-S{
+	display: none;
+}
+.bj-wall-2-M{
+	width: 2em;
+	height: 3em;
+	margin-top: 5em;
 }
 .bj-wall-2-L{
 	width: 2em;
@@ -251,6 +354,13 @@ body{
 	background:url(imges/wall-62.png);
 	background-size:1em;
 }
+.bj-wall-3-S{
+	display: none;
+}
+.bj-wall-3-M{
+	width: 9em;
+	height: 3em;
+}
 .bj-wall-3-L{
 	width: 13em;
 	height: 3em;
@@ -258,6 +368,12 @@ body{
 #bj-wall-4{
 	background:url(imges/wall-2.png);
 	background-size:1em;
+}
+.bj-wall-4-S{
+	display: none;
+}
+.bj-wall-4-M{
+	display: none;
 }
 .bj-wall-4-L{
 	width: 10em;
@@ -267,6 +383,12 @@ body{
 #bj-wall-5{
 	background:url(imges/wall-1.png);
 	background-size:1em;
+}
+.bj-wall-5-S{
+	display: none;
+}
+.bj-wall-5-M{
+	display: none;
 }
 .bj-wall-5-L{
 	width: 7em;
@@ -278,6 +400,12 @@ body{
 	background:url(imges/wall-1.png);
 	background-size:1em;
 }
+.bj-wall-6-S{
+	display: none;
+}
+.bj-wall-6-M{
+	display: none;
+}
 .bj-wall-6-L{
 	width: 2em;
 	height: 3em;
@@ -286,6 +414,12 @@ body{
 #bj-wall-7{
 	background:url(imges/wall-1.png);
 	background-size:1em;
+}
+.bj-wall-7-S{
+	display: none;
+}
+.bj-wall-7-M{
+	display: none;
 }
 .bj-wall-7-L{
 	width: 11em;
@@ -316,6 +450,14 @@ body{
 	background-size:2em;
 	
 }
+.bj-floor-1-M{
+	width: 7em;
+	height: 9em;
+}
+.bj-floor-1-S{
+	width: 12em;
+	height: 9em;
+}
 .bj-floor-1-L{
 	width: 13em;
 	height: 6em;
@@ -323,6 +465,13 @@ body{
 #bj-floor-2{
 	background:url(imges/floor-1.png);
 	background-size:2em;
+}
+.bj-floor-2-S{
+	display: none;
+}
+.bj-floor-2-M{
+	width: 11em;
+	height: 9em;
 }
 .bj-floor-2-L{
 	width: 2em;
@@ -332,12 +481,28 @@ body{
 	background:url(imges/floor-1.png);
 	background-size:2em;
 }
+.bj-floor-3-S{
+	display: none;
+}
+.bj-floor-3-M{
+	width: 2em;
+	height: 9em;
+}
 .bj-floor-3-L{
 	width: 13em;
 	height: 6em;
 }
 #bj-floor-4{
 	background:url(imges/Kitchen-floor.png);
+	background-size:2em;
+}
+.bj-floor-4-S{
+	display: none;
+}
+.bj-floor-4-M{
+	width: 10em;
+	height: 9em;
+	ackground:url(imges/floor-1.png);
 	background-size:2em;
 }
 .bj-floor-4-L{
@@ -349,6 +514,12 @@ body{
 	background:url(imges/floor-1.png);
 	background-size:2em;
 }
+.bj-floor-5-S{
+	display: none;
+}
+.bj-floor-5-M{
+	display: none;
+}
 .bj-floor-5-L{
 	width: 11em;
 	height: 9em;
@@ -357,6 +528,12 @@ body{
 #bj-floor-6{
 	background:url(imges/floor-1.png);
 	background-size:2em;
+}
+.bj-floor-6-S{
+	display: none;
+}
+.bj-floor-6-M{
+	display: none;
 }
 .bj-floor-6-L{
 	width: 2em;
@@ -367,8 +544,14 @@ body{
 	background:url(imges/floor-1.png);
 	background-size:2em;
 }
+.bj-floor-7-S{
+	display: none;
+}
+.bj-floor-7-M{
+	display: none;
+}
 .bj-floor-7-L{
-	width: 11em;
+	width: 12em;
 	height: 11em;
 	margin-top: 3em;
 }
@@ -417,67 +600,69 @@ body{
 }
 
 .home-S-bj-x{
-	position: absolute;
-	z-index: 10;
+	position: relative;
+	z-index: 30 !important;
 	pointer-events: none;
-	width: 30em !important;
+	width: 12em !important;
 	height: 2em !important;
 }
 .home-M-bj-x{
 	position: absolute;
-	z-index: 10;
+	z-index: 30 !important;
 	pointer-events: none;
 	width: 30em !important;
 	height: 2em !important;
 }
 .home-L-1-bj-x{
 	position: absolute;
-	z-index: 10;
+	z-index: 30 !important;
 	pointer-events: none;
 	width: 35em !important;
 	height: 19em !important;
 }
 .home-L-2-bj-x{
-	position: absolute;
-	z-index: 10;
+	position: relative;
+	z-index: 30 !important;
 	pointer-events: none;
-	width: 35em !important;
-	height: 19em !important;
+	width: 35em;
+	height: 19em;
 }
 .DoubleBed{
-	pointerEvents: none;
+	pointer-events: none;
 	width: 3em;
 	height: 4em;
-	background:url(imges/DoubleBed.png);
-	background-size:3em;
 }
 .bed{
-	pointerEvents: none;
+	pointer-events: none;
 	width: 2em;
 	height: 4em;
-	background:url(imges/bed.png);
-	background-size:2em;
+	position: relative;
+	bottom: 1em;
 }
 .BabyDed{
-	pointerEvents: none;
-	width: 3em;
-	height: 4em;
-	background:url(imges/BabyDed.png);
-	background-size:3em;
+	pointer-events: none;
+	width: 3em !important;
+	height: 4em !important;
 }
 .kitchen-L{
-	pointerEvents: none;
+	pointer-events: none;
 	width: 1em;
 	height: 9em;
-	background:url(imges/kitchen-L.png);
-	background-size:1em;
+}
+.kitchen-L-M{
+	pointer-events: none;
+	width: 1em;
+	height: 7em;
 }
 .kitchen-R{
-	pointerEvents: none;
+	pointer-events: none;
 	width: 6em;
 	height: 3em;
-	background:url(imges/kitchen-R.png);
-	background-size:6em;
+}
+.kitchen-R-M{
+	pointer-events: none;
+	width: 5em;
+	height: 3em;
 }
 #Choice{
 	background: #050304;
@@ -506,4 +691,35 @@ body{
 }
 #Choice-L{
 	
+}
+#roommate{
+	width: 7em;
+	height: 10em;
+	position: absolute;
+	display: none;
+}
+#roommate img{
+	width: 7em;
+	height: 10em;
+}
+.roommate-M{
+	top: 0em;
+	left: 30em;
+}
+.roommate-L{
+	top: 9em;
+	left: 35em;
+}
+#dddiv{
+	width: 300px;
+	height: 400px;
+	background: #fff;
+	position: absolute;
+	right: 150px;
+	top: 200px;
+	font-size: 16px;
+	display: none;
+}
+.none-icon{
+	pointer-events: none;
 }
