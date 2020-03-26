@@ -36,11 +36,7 @@ body{
     top: 5em;*/
 }
 #IsA{
-	/*width: 192px;
-	height: 192px;
-	display: block;
-	background: url(imges/download.png);
-	float: right;*/
+	pointer-events: none;
 }
 #preview{
 	top: 40%;

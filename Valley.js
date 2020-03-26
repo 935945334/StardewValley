@@ -545,7 +545,7 @@ function download(strDataURI1) {
     link.addEventListener('click', function(ev) {
     link.href = strDataURI1;
     }, false);
-    alert(1);
+    link.style.pointerEvents = "auto";
     // document.body.appendChild(link);
 };
 function downLoadFn(url) {
