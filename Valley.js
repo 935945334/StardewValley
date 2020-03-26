@@ -496,7 +496,7 @@ function screenshot(){
 }
 function huanchong(){
 	html2canvas(camera).then(function(canvas) {
-    preview.appendChild(canvas);
+    preview1.appendChild(canvas);
     var oCavans = document.getElementsByTagName('canvas')[0];
     var strDataURI1 = oCavans.toDataURL();
     downLoadFn(strDataURI1);
