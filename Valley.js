@@ -1312,6 +1312,7 @@ for (var i = 0; i < WallIcon.length; i++) {
 
 
 function cancel() {
+	var oCavans = document.getElementsByTagName('canvas')[0];
 	preview1.removeChild(oCavans);
 	// var Dcanvas = document.body.querySelectorAll("canvas");
 	// console.log(Dcanvas);
