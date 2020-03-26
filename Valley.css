@@ -318,7 +318,7 @@ body{
 	height: 25em;
 }
 #bj-wall-1{
-	background:url(imges/wall-1.png);
+	background:url(imges/Wall/0.png);
 	background-size:1em;
 }
 .bj-wall-1-S{
@@ -334,7 +334,7 @@ body{
 	height: 3em;
 }
 #bj-wall-2{
-	background:url(imges/wall-62.png);
+	background:url(imges/Wall/0.png);
 	background-size:1em;
 }
 .bj-wall-2-S{
@@ -351,7 +351,7 @@ body{
 	margin-top: 2em;
 }
 #bj-wall-3{
-	background:url(imges/wall-62.png);
+	background:url(imges/Wall/0.png);
 	background-size:1em;
 }
 .bj-wall-3-S{
@@ -381,7 +381,7 @@ body{
 	margin-top: 4em;
 }
 #bj-wall-5{
-	background:url(imges/wall-1.png);
+	background:url(imges/Wall/0.png);
 	background-size:1em;
 }
 .bj-wall-5-S{
@@ -397,7 +397,7 @@ body{
 	margin-left: 4em;
 }
 #bj-wall-6{
-	background:url(imges/wall-1.png);
+	background:url(imges/Wall/0.png);
 	background-size:1em;
 }
 .bj-wall-6-S{
@@ -412,7 +412,7 @@ body{
 	margin-top: 9em;
 }
 #bj-wall-7{
-	background:url(imges/wall-1.png);
+	background:url(imges/Wall/0.png);
 	background-size:1em;
 }
 .bj-wall-7-S{

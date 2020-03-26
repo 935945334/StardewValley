@@ -17,7 +17,7 @@ var IMGHeight = "";
 
 var hide = 0;  //隐藏UI功能标记
 var IMG = "imges/y.png";
-var ImgWallBj = "imges/wall-1.png";
+var ImgWallBj = "imges/Wall/0.png";
 var ImgFloorBj = "imges/floor-1.png";
 var ImgWallBjBtn = "";
 var ImgFloorBjBtn = "";
@@ -839,9 +839,9 @@ function LV2(){
 		Nfloor[i].className = "bj-floor-" + (i + 1) +"-M";
 		NfloorBtn[i].className = "bj-floor-" + (i + 1) +"-M";
 	}
-	Nwall[1].style.background = "url(imges/wall-1.png)";
+	Nwall[1].style.background = "url(imges/Wall/0.png)";
 	Nwall[1].style.backgroundSize = "1em";
-	Nwall[2].style.background = "url(imges/wall-1.png)";
+	Nwall[2].style.background = "url(imges/Wall/0.png)";
 	Nwall[2].style.backgroundSize = "1em";
 	Nfloor[0].style.background = "url(imges/Kitchen-floor.png)";
 	Nfloor[0].style.backgroundSize = "2em";
