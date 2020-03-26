@@ -1311,3 +1311,7 @@ for (var i = 0; i < WallIcon.length; i++) {
 
 
 
+function cancel() {
+	var Dcanvas = getElementsByTagName("canvas")
+	console.log(Dcanvas);
+}
