@@ -16,6 +16,7 @@ img{
 	pointer-events: none;
 }
 body{
+	cursor:url(imges/Pointer.ico),auto;
 	margin: 0;
 	background: #050304;
 	overflow-x: hidden;
