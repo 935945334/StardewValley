@@ -95,7 +95,8 @@ canvas.oncontextmenu = function(e) {
 }
 
 
-// var rotate = document.getElementById("rotate");
-// rotate.addEventListener('click',function(e){
-	
-// })
+
+if (window.screen.height < 1000) {
+	var TitleImg = document.getElementById("Title-img");
+	TitleImg.src = "imges/TitleX2.png";
+}

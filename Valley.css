@@ -659,20 +659,50 @@ body{
 	background: #050304;
 	position: absolute;
 	z-index: 999;
+	background: url(imges/Title-bj.png);
+}
+#Choice-1{
+	width: 19em;
+	margin: 1em auto;
+	position: relative;
+	z-index: 1000;
+}
+#Choice-1 img{
+	margin: 0 auto;
+}
+#Title-2{
+	margin-top: 1em;
 	display: -webkit-flex;
     display: flex;
-    -webkit-align-content: center;
-    align-content: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    align-items: center;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
 }
-#Choice div{
-	width: 200px;
-	height: 240px;
-	margin-left: 1em;
-	margin-right: 1em;
+#Title-2 img{
+	/*width: 90%;*/
+}
+#cloud{
+	position: absolute;
+	top: 50px;
+}
+#cloud-1{
+	position: absolute;
+	top: 50px;
+	left: 10px;
+}
+#cloud-2{
+	position: absolute;
+	top: 100px;
+	left: 1200px;
+}
+#cloud-3{
+	position: absolute;
+	top: 200px;
+	left: 100px;
+}
+#cloud-4{
+	position: absolute;
+	top: 400px;
+	left: 500px;
 }
 #Choice-S{
 	

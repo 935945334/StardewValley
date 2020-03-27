@@ -756,6 +756,7 @@ Choice.style.width = screen.width + "px";
 Choice.style.height = screen.height + "px";
 console.log(PhotoIcon);
 function LV1(){
+	NOanimation()
 	div0.style.left = "";
 	window.homeNum = 144;
 	window.z = 12;
@@ -805,6 +806,7 @@ function LV1(){
 	document.getElementById("roommate1").style.pointerEvents = "auto";
 }
 function LV2(){
+	NOanimation()
 	window.homeNum = 360;
 	window.z = 30;
 	Choice.style.display = "none";
@@ -886,6 +888,7 @@ function LV3(){
 	window.roommateSize = "35em"
 }
 function LV4(){
+	NOanimation()
 	home.className = "home-L";
 	window.z = 35;
 	Choice.style.display = "none";
@@ -1317,3 +1320,35 @@ function cancel() {
 	preview.style.display = "none";
 
 }
+
+
+var time = 0;
+	var timeX = 0
+	var cloudY = document.getElementById("cloud");
+	var cloudN = cloudY.querySelectorAll("div");
+	var cloudX1 = cloudN[0].offsetLeft;
+	var cloudX2 = cloudN[1].offsetLeft;
+	var cloudX3 = cloudN[2].offsetLeft;
+	var cloudX4 = cloudN[3].offsetLeft;
+	var animation = setInterval("cloud()",50)
+	function cloud() {
+		if (timeX == 0) {
+			window.time = time + 1;
+
+			if (time == 300) {
+				window.timeX = 1
+			}
+		}else if (timeX == 1) {
+			window.time = time - 1;
+			if (time == 1) {
+				window.timeX = 0
+			}
+		}
+		cloudN[0].style.left = cloudX1 + time +"px";
+		cloudN[1].style.left = cloudX2 - time +"px";
+		cloudN[2].style.left = cloudX4 - time*2 +"px";
+		cloudN[3].style.left = cloudX3 + time*2 +"px";
+	}
+function NOanimation() {
+		clearInterval(animation);
+	}
