@@ -1652,4 +1652,7 @@ function cancel() {//关闭下载弹窗并删除图片预览
     document.getElementById("save").style.display = "none";
     document.getElementById("cancel").style.display = "none";
 }
-
+if (/(iPhone|iPod|iOS|Android)/i.test(navigator.userAgent)) {
+	document.getElementById("warning").style.display = "block"
+	document.getElementById("Choice-1").style.display = "none"
+}
