@@ -782,7 +782,7 @@ House.addEventListener("click",function(e){
 				case 4:
 				console.log(n);
 				if (n.getAttribute("class").indexOf("wall") > - 1) {
-					n.style.background = "url(imges/wall/" + otherSign + ".png)";
+					n.style.background = "url(imges/Wall/" + otherSign + ".png)";
 					n.style.backgroundSize = "1em";
 				}
 				break;
@@ -1624,8 +1624,7 @@ function SaveAs5(imgURL) {
 function download(strDataURI1) {
     var link = document.getElementById("IsA");
     // link.innerHTML = "download_canvas_image";
-    var name = document.getElementById("name-tenx").value;
-    link.download = name + "农场";
+    link.download = "我的房子";
     link.addEventListener("click", function(ev) {
     link.href = strDataURI1;
     }, false);

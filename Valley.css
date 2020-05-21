@@ -90,7 +90,7 @@ img{
 #wall-1{
 	position: absolute;
 	z-index: 10;
-	background: url(imges/wall/0.png);
+	background: url(imges/Wall/0.png);
 	background-size: 1em;
 }
 .wall-1-4{
@@ -115,7 +115,7 @@ img{
 	
 	position: absolute;
 	z-index: 10;
-	background: url(imges/wall/0.png);
+	background: url(imges/Wall/0.png);
 	background-size: 1em;
 }
 .wall-2-4{
@@ -140,7 +140,7 @@ img{
 	height: 3em;
 	left: 15em;
 	top: 1em;
-	background: url(imges/wall/61.png);
+	background: url(imges/Wall/61.png);
 	background-size: 1em;
 }
 .wall-3-2{
@@ -148,14 +148,14 @@ img{
 	height: 3em;
 	left: 20em;
 	top: 1em;
-	background: url(imges/wall/0.png);
+	background: url(imges/Wall/0.png);
 	background-size: 1em;
 }
 #wall-4{
 	
 	position: absolute;
 	z-index: 10;
-	background: url(imges/wall/0.png);
+	background: url(imges/Wall/0.png);
 	background-size: 1em;
 	
 }
@@ -172,7 +172,7 @@ img{
 	
 	position: absolute;
 	z-index: 10;
-	background: url(imges/wall/0.png);
+	background: url(imges/Wall/0.png);
 	background-size: 1em;
 	
 }
@@ -189,7 +189,7 @@ img{
 	
 	position: absolute;
 	z-index: 10;
-	background: url(imges/wall/0.png);
+	background: url(imges/Wall/0.png);
 	background-size: 1em;
 	
 }
@@ -205,7 +205,7 @@ img{
 #wall-7{
 	position: absolute;
 	z-index: 10;
-	background: url(imges/wall/0.png);
+	background: url(imges/Wall/0.png);
 	background-size: 1em;
 }
 .wall-7-4{
