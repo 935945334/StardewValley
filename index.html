@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>星露谷布局模拟器</title>
+	<title>星露谷物语装修模拟器</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 	<link rel="stylesheet" href="Valley.css">
 	<link rel="icon" href="favicon.ico" type="image/x-icon"/>
@@ -11,218 +11,166 @@
 	<div id="Choice">
 		<div id="Choice-1">
 			<div id="Title-1">
-				<img src="imges/TitleX3.png" alt="" id="Title-img">
+				<img src="imges/Choice/TitleX3.png" alt="" id="Title-img" class="Title-img-3">
 			</div>
-			<div id="Title-2">
-				<div id="Choice-S">
-					<img src="imges/home-S.png" alt="" onclick="LV1();">
-				</div>
-				<div id="Choice-M">
-					<img src="imges/home-M.png" alt="" onclick="LV2();">
-				</div>
-				<div id="Choice-L">
-					<img src="imges/home-L.png" alt="" onclick="LV3();">
-				</div>
-				<div id="Choice-XL">
-					<img src="imges/home-XL.png" alt="" onclick="LV4();">
-				</div>
+			<div id="Title-2" class="Title-2-3">
+				<div></div>
+				<img src="imges/Choice/1.png" alt="" onclick="LV_1();">
+				<img src="imges/Choice/2.png" alt="" onclick="LV_2();">
+				<img src="imges/Choice/3.png" alt="" onclick="LV_3();">
+				<img src="imges/Choice/4.png" alt="" onclick="LV_4();">
+				<div></div>
 			</div>
 		</div>
 		<div id="cloud">
 			<div id="cloud-1">
-				<img src="imges/cloud.png" alt="">
+				<img src="imges/Choice/cloud.png" alt="">
 			</div>
 			<div id="cloud-2">
-				<img src="imges/cloud.png" alt="">
+				<img src="imges/Choice/cloud.png" alt="">
 			</div>
 			<div id="cloud-3">
-				<img src="imges/cloud.png" alt="">
+				<img src="imges/Choice/cloud.png" alt="">
 			</div>
 			<div id="cloud-4">
-				<img src="imges/cloud.png" alt="">
+				<img src="imges/Choice/cloud.png" alt="">
 			</div>
 		</div>
 	</div>
-	<div id="mouse">
-		<img src="imges/y.png" alt="" id="mouse-img">
+	<div id="House" class="lv4_1">
+		<div id="House-Top" class="House"></div>
+		<div id="House-Middle" class="House"></div>
+		<div id="House-bottom" class="House"></div>
+		<img src="imges/bj/home-4-1-bj.png" alt="" id="House-bj" class="House-bj">
+		<img src="imges/roommate/0.png" alt="" id="roommate" class="roommate-4">
+		<div id="wall">
+			<div id="wall-1" class="wall wall-1-4"></div>
+			<div id="wall-2" class="wall wall-2-4"></div>
+			<div id="wall-3" class="wall wall-3-4"></div>
+			<div id="wall-4" class="wall wall-4-4"></div>
+			<div id="wall-5" class="wall wall-5-4"></div>
+			<div id="wall-6" class="wall wall-6-4"></div>
+			<div id="wall-7" class="wall wall-7-4"></div>
+		</div>
+		<div id="floor">
+			<div id="floor-1" class="floor floor-1-4"></div>
+			<div id="floor-2" class="floor floor-2-4"></div>
+			<div id="floor-3" class="floor floor-3-4"></div>
+			<div id="floor-4" class="floor floor-4-4"></div>
+			<div id="floor-5" class="floor floor-5-4"></div>
+			<div id="floor-6" class="floor floor-6-4"></div>
+			<div id="floor-7" class="floor floor-7-4"></div>
+		</div>
+	</div>
+	<div id="menu">
+		<div id="menu-body">
+			<div id="menu-body-btn">
+				<img src="imges/menu-bjt.png" alt="" id="body-btn-top">
+				<img src="imges/btn.png" alt="" id="body-btn">
+				<img src="imges/menu-bjb.png" alt="" id="body-btn-bottom">
+			</div>
+			<div id="menu-body-0">
+				<div class="menu-body" id="menu-body-1"></div>
+				<div class="menu-body" id="menu-body-2"></div>
+				<div class="menu-body" id="menu-body-3"></div>
+				<div class="menu-body" id="menu-body-4"></div>
+				<div class="menu-body" id="menu-body-5"></div>
+				<div class="menu-body" id="menu-body-6"></div>
+				<div class="menu-body" id="menu-body-7"></div>
+				<div class="menu-body" id="menu-body-8"></div>
+			</div>
+		</div>
+		<div id="menu-btn">
+			<img src="imges/button/furniture.png" alt="">
+			<img src="imges/button/painting.png" alt="">
+			<img src="imges/button/tool.png" alt="">
+			<img src="imges/button/Carpet.png" alt="">
+			<img src="imges/button/wall.png" alt="">
+			<img src="imges/button/floor.png" alt="">
+			<img src="imges/button/npc.png" alt="">
+			<img src="imges/button/menu.png" alt="">
+			<img src="imges/button/arrow-2.png" alt="" onclick="MenuSwitch();">
+		</div>
+		<div id="name-text">
+			<div id="name-text-1">基础农舍</div>
+			<div id="name-text-2">基础农舍</div>
+		</div>
+		<div id="describe">
+			<div id="describe-1">想脱单就升个级吧。</div>
+			<div id="describe-2">想脱单就升个级吧。</div>
+		</div>
+		<div id="menu-b"></div>
+		<div id="menu-t"></div>
+	</div>
+	<div id="Btn">
+		<img src="imges/Explain-1.png" alt="" onclick="Explain();" id="Explain">
+		<img src="imges/Grid-1.png" alt="" onclick="Grid();" id="Grid">
+		<img src="imges/Pickaxe-1.png" alt="" onclick="Pickaxe();" id="Pickaxe">
+		<img src="imges/Statistics-btn.png" alt="" onclick="Statistics();" id="Range">
+		<img src="imges/Farm.png" alt="" onclick="Farm();" id="Range">
+		<img src="imges/author.png" alt="" onclick="author();" id="Range">
+		<img src="imges/camera.png" alt="" onclick="Farm_name();">
+	</div>
+	<div id="Statistics">
+		<img src="imges/Explain/X.png" alt="" class="Course_content_X" onclick="Statistics_X();">
+		<img src="imges/Explain/prev.png" alt="" class="Course_content_prev" onclick="Statistics_prev();" id="Statistics-prev">
+		<img src="imges/Explain/next.png" alt="" class="Course_content_next" onclick="Statistics_next();" id="Statistics-next">
+		<div id="Statistics_table">
+			<id id="Statistics_table-1" class="Statistics_table">
+				<img src="imges/1_2.png" alt="" id="Statistics_table-1-img">
+			</id>
+			<id id="Statistics_table-2" class="Statistics_table">
+				<img src="imges/2_2.png" alt="">
+			</id>
+		</div>
+	</div>
+	<div id="author">
+		<img src="imges/Explain/X.png" alt="" class="Course_content_X" onclick="author_X();">
+		<img src="imges/Explain/author.png" alt="">
+	</div>
+	<div id="Course_content">
+		<img src="imges/Explain/X.png" alt="" class="Course_content_X" onclick="Course_X();">
+		<img src="imges/Explain/prev.png" alt="" class="Course_content_prev" onclick="Course_prev();">
+		<img src="imges/Explain/next.png" alt="" class="Course_content_next" onclick="Course_next();">
+		<div id="Course_content_1" class="Course_content">
+			<img src="imges/Explain/Explain-1.png" alt="">
+		</div>
+		<div id="Course_content_2" class="Course_content">
+			<img src="imges/Explain/Explain-2.png" alt="">
+		</div>
+		<div id="Course_content_3" class="Course_content">
+			<img src="imges/Explain/Explain-3.png" alt="">
+		</div>
+	</div>
+	<img src="imges/rotate.png" alt="" id="rotate">
+	<img src="imges/Discoloration.png" alt="" id="Discoloration">
+	<img src="imges/del.png" alt="" id="del">
+	<div id="Course">
+		<div onclick="Course_yes();"></div>
+		<div onclick="Course_no();"></div>
 	</div>
 	<div id="preview">
 		<div><img src="imges/Popup.png" alt=""></div>
-		<div id="load"><img src="imges/load.gif" alt=""></div>
+		<div id="load">
+			<img src="imges/load.gif" alt="">
+		</div>
 		<div id="save">
-			<a href="" id="IsA"><img src="imges/download.png" alt=""></a>
+			<a href="" id="IsA"></a>
 		</div>
-		<div id="cancel"><img src="imges/cancel.png" alt="" onclick="cancel();" ></div>
-	</div>
-
-	<div id="screenshot">
-		<img src="imges/roommate/roommate-0.png" alt="" onclick="Roommate();" id="roommate1">
-		<img src="imges/delete.png" alt="" onclick="del();">
-		<img src="imges/Grid.png" alt="" onclick="Grid();">
-		<img src="imges/hide.png" alt="" onclick="hide1();">
-		<!-- <img src="imges/rotate.png" alt="" id="rotate"> -->
-		<!-- <img src="imges/Save.png" alt="" onclick="kongzhitai();"> -->
-		<img src="imges/screenshot.png" alt="" onclick="screenshot();">
-	</div>
-	<div id="roommateBtn">
-		<div>
-			<img src="imges/roommate/Head-Abigail.png" alt="">
-			<img src="imges/roommate/Head-Emily.png" alt="">
-			<img src="imges/roommate/Head-Haley.png" alt="">
-			<img src="imges/roommate/Head-Leah.png" alt="">
-			<img src="imges/roommate/Head-Maru.png" alt="">
-			<img src="imges/roommate/Head-Penny.png" alt="">
-		</div>
-		<div>
-			<img src="imges/roommate/Head-Alex.png" alt="">
-			<img src="imges/roommate/Head-Elliott.png" alt="">
-			<img src="imges/roommate/Head-Harvey.png" alt="">
-			<img src="imges/roommate/Head-Sam.png" alt="">
-			<img src="imges/roommate/Head-Sebastian.png" alt="">
-			<img src="imges/roommate/Head-Shane.png" alt="">
-		</div>
-		<div>
-			<img src="imges/roommate/Head-Krobus.png" alt="">
-			<img src="imges/y.png" alt="" style="pointer-events: none;">
-			<img src="imges/y.png" alt="" style="pointer-events: none;">
-			<img src="imges/y.png" alt="" style="pointer-events: none;">
-			<img src="imges/roommate/X.png" alt="">
-			<img src="imges/roommate/f.png" alt="">
+		<div id="cancel">
+			<img src="imges/cancel.png" alt="" onclick="cancel();" >
 		</div>
 	</div>
-	<div id="catalog">
-		<div id="catalogBtn">
-			<div class="catalogBtn">
-				<img src="imges/menu-furniture-2.png" alt="" id="furniture-img">
-			</div>
-			<div class="catalogBtn">
-				<img src="imges/menu-Photo-1.png" alt="" id="Photo-img">
-			</div>
-			<div class="catalogBtn">
-				<img src="imges/menu-Wall-1.png" alt="" id="Wall-img">
-			</div>
-		</div>
-		<div id="menu">
-			<div id="furniture">
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-			</div>
-			<div id="Photo">
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-			</div>
-			<div id="Wall">
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-				<div class="menuNum"></div>
-			</div>
-		</div>
-		<div id="menu-num">
-			<div id="prev">
-				<img src="imges/prev.png" alt="" onclick="prev();">
-			</div>
-			<div id="Num-0">
-				<img src="imges/PageNumber/furniture-0.png" alt="" id="Num-img-0">
-			</div>
-			<div id="Num-1">
-				<img src="imges/PageNumber/Photo-0.png" alt="" id="Num-img-1" style="display: none;">
-			</div>
-			<div id="Num-2">
-				<img src="imges/PageNumber/Wall-0.png" alt="" id="Num-img-2" style="display: none;">
-			</div>
-			<div id="next">
-				<img src="imges/next.png" alt="" onclick="next();">
-			</div>
+	<div id="name-box">
+		<input type="text" id="name-tenx" placeholder="请为你的农场命名" maxlength="8">
+		<div id="name-btn">
+			<div id="name-btn-1" onclick="Farm_name_OK();">确定</div>
+			<div id="name-btn-2" onclick="Farm_name_skip();">跳过</div>
+			<div id="name-btn-3" onclick="Farm_name_cancel();">取消</div>
 		</div>
 	</div>
-	<div id="zoom">
-		<div id="zoom-narrow">
-			<img src="imges/zoom-narrow.png" alt="" onclick="narrow();">
-		</div>
-		<div id="zoom-enlarge">
-			<img src="imges/zoom-enlarge.png" alt="" onclick="enlarge();">
-		</div>
-	</div>
-	<div id="camera" class="camera-L">
-		<div id="home-btn" class="home-L-btn">
-			<div id="wall-bj-btn" class="wall-bj-L">
-				<div id="bj-wall-1-btn" class="bj-wall-1-L"></div>
-				<div id="bj-wall-2-btn" class="bj-wall-2-L"></div>
-				<div id="bj-wall-3-btn" class="bj-wall-3-L"></div>
-				<div id="bj-wall-4-btn" class="bj-wall-4-L"></div>
-				<div id="bj-wall-5-btn" class="bj-wall-5-L"></div>
-				<div id="bj-wall-6-btn" class="bj-wall-6-L"></div>
-				<div id="bj-wall-7-btn" class="bj-wall-7-L"></div>
-			</div>
-			<div id="floor-bj-btn" class="floor-bj-L">
-				<div id="bj-floor-1-btn" class="bj-floor-1-L"></div>
-				<div id="bj-floor-2-btn" class="bj-floor-2-L"></div>
-				<div id="bj-floor-3-btn" class="bj-floor-3-L"></div>
-				<div id="bj-floor-4-btn" class="bj-floor-4-L"></div>
-				<div id="bj-floor-5-btn" class="bj-floor-5-L"></div>
-				<div id="bj-floor-6-btn" class="bj-floor-6-L"></div>
-				<div id="bj-floor-7-btn" class="bj-floor-7-L"></div>
-			</div>
-
-		</div>
-		<div id="home">
-			<div id="wall-bj" class="wall-bj-L">
-				<div id="bj-wall-1" class="bj-wall-1-L"></div>
-				<div id="bj-wall-2" class="bj-wall-2-L"></div>
-				<div id="bj-wall-3" class="bj-wall-3-L"></div>
-				<div id="bj-wall-4" class="bj-wall-4-L"></div>
-				<div id="bj-wall-5" class="bj-wall-5-L"></div>
-				<div id="bj-wall-6" class="bj-wall-6-L"></div>
-				<div id="bj-wall-7" class="bj-wall-7-L"></div>
-			</div>
-			<div id="floor-bj" class="floor-bj-L">
-				<div id="bj-floor-1" class="bj-floor-1-L"></div>
-				<div id="bj-floor-2" class="bj-floor-2-L"></div>
-				<div id="bj-floor-3" class="bj-floor-3-L"></div>
-				<div id="bj-floor-4" class="bj-floor-4-L"></div>
-				<div id="bj-floor-5" class="bj-floor-5-L"></div>
-				<div id="bj-floor-6" class="bj-floor-6-L"></div>
-				<div id="bj-floor-7" class="bj-floor-7-L"></div>
-			</div>
-			<div id="canvas-grid" class="canvas-L"></div>
-			<div id="canvas" class="canvas-L"></div>
-			<div id="roommate" class="roommate-M">
-				<img src="imges/roommate/0.png" alt="" id="roommate123">
-			</div>
-		</div>
-	</div>
-	<div id="dddiv">
-		<div id="text-2"></div>
-		<div id="text-3"></div>
-		<div id="text-4"></div>
-		<div id="text-5"></div>
-		<div id="text-6"></div>
-		<div id="text-7"></div>
-		<div id="text-8"></div>
-		<div id="text-9"></div>
-		<div id="text-10"></div>
-	</div>
-<div id="preview1"></div>
+	
+	<div id="preview1"></div>
 </body>
 <script src="html2canvas.js"></script>
 <script src="data.js"></script>

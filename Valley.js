@@ -1,510 +1,1593 @@
-var camera = document.getElementById("camera");
-var canvas = document.getElementById("canvas");
-var canvasGrid = document.getElementById("canvas-grid");
-var EM = 64;
-var IMGHsign = 1;
-var IMGWsign = 1;
-var sssr ="imges/y.png";
-var home = document.getElementById("home");
-var RoommateSign = 0;
-var RoommateSign1 = 0;
-var roommate = document.getElementById("roommate");
-var IMGD = 0;
-var LV = 0;
-var roommateBtn = document.getElementById("roommateBtn");
-var IMGWidth = "";
-var IMGHeight = "";
-
-var hide = 0;  //隐藏UI功能标记
-var IMG = "imges/y.png";
-var ImgWallBj = "imges/Wall/0.png";
-var ImgFloorBj = "imges/floor-1.png";
-var ImgWallBjBtn = "";
-var ImgFloorBjBtn = "";
-var IMGW = 0;
-var IMGH = 0;
-var imgw = "1em";
-var imgh = "1em";
-var zoomNum = 4;
-var catalog = document.getElementById('catalog');
-var zoom = document.getElementById('zoom');
-var Label = 0;  //标记标签状态
-var PageNumber = 0; //初始化页码（活动）
-var PageNumber0 = 0;//初始化页码0
-var PageNumber1 = 0;//初始化页码1
-var PageNumber2 = 0;//初始化页码2
-var furnitureImg = document.getElementById("furniture-img");
-var PhotoImg = document.getElementById("Photo-img");
-var WallImg = document.getElementById("Wall-img");
-var furniture = document.getElementById("furniture");
-var Photo = document.getElementById("Photo");
-var furnitureIcon = furniture.getElementsByClassName("furniture-icon");
-var PhotoIcon = Photo.getElementsByClassName("Photo-icon");
-var Wall = document.getElementById("Wall");
-var furnitureNum = furniture.querySelectorAll("div");
-var PhotoNum = Photo.querySelectorAll("div");
-var WallNum = Wall.querySelectorAll("div");
-var NumImg0 = document.getElementById("Num-img-0");
-var NumImg1 = document.getElementById("Num-img-1");
-var NumImg2 = document.getElementById("Num-img-2");
-var mouse = document.getElementById("mouse");
-var mouseImg = document.getElementById("mouse-img");
-var flag = false;
-var cur = {
-	x:0,
-	y:0
+var House = document.getElementById("House");//房屋主体
+var HouseTop = document.getElementById("House-Top");
+var HouseMiddle = document.getElementById("House-Middle");
+var HouseBottom = document.getElementById("House-bottom");
+var menuBodySign = 0;
+var IMG = "imges/0.png";//鼠标指针移入图片
+var Timg = "imges/0.png";//鼠标指针移除图片
+var IMG_T = "-1em";//获取物品向上偏移量
+var IMG_L = 0;//获取物品向左偏移量
+var IMG_W = "1em";//获取物品宽度
+var IMG_H = "2em";//获取物品高度
+var state = "common";
+House.style.left = "400px";
+var isHouse = false;//房屋移动标记
+var isDown = false;//标记菜单滚动条是否启用
+var isBtnY = false;//标记缩放滚动条是否启用
+var isMenu = false;//标记菜单滑动是否启用
+var Menu_status = false;//标记菜单状态,防止误触
+var Is_state = 0;
+var IsE;
+var menuBodyBtn = document.getElementById("menu-body-btn");//获取菜单滚动条按钮
+var bodyBtn = document.getElementById("body-btn");//获取菜单滚动条按钮
+var bodyBtnY = document.getElementById("body-btn-y");//获取缩放滚动条
+var Grid_status = false;
+var MapWidth;
+var Map_Num;
+var Grade;
+var HouseNumT
+var HouseNumM
+var HouseNumB
+var wall_sign_Arr
+var GoodsNumber
+var screen_H = screen.height;
+if (screen_H < 800) {
+	var Title_img = document.getElementById("Title-img");
+	var Title_2 = document.getElementById("Title-2");
+	Title_img.src = "imges/Choice/TitleX2.png";
+	Title_img.className = "Title-img-2";
+	Title_2.className = "Title-2-2";
 }
-var div0 = document.getElementById("camera");
-var nx,ny,dx,dy,x,y ;
-function down(){
-    flag = true;
-    var touch ;
-    if(event.touches){
-        touch = event.touches[0];
-    }else {
-        touch = event;
+function LV_1() {
+	Grade = 1;
+	var Is_map = [lv1_sign,lv1_furniture_sign,lv1_wall_sign]
+	wall_sign_Arr = lv1_wall_sign;
+	MapWidth = 12;
+	Map_Num = 144;
+	establish()
+	House.className = "lv1_1";
+	var House_bj = document.getElementById("House-bj");
+	House_bj.src = "imges/bj/home-1-bj.png";
+	HouseTop.className = "House_1"
+	HouseMiddle.className = "House_1"
+	HouseBottom.className = "House_1"
+	House_bj.className = "House-bj_1"
+	document.getElementById("wall-1").className = "wall wall-1-1"
+	document.getElementById("wall-2").style.display = "none";
+	document.getElementById("wall-3").style.display = "none";
+	document.getElementById("wall-4").style.display = "none";
+	document.getElementById("wall-5").style.display = "none";
+	document.getElementById("wall-6").style.display = "none";
+	document.getElementById("wall-7").style.display = "none";
+	document.getElementById("floor-1").className = "floor floor-1-1";
+	document.getElementById("floor-2").style.display = "none";
+	document.getElementById("floor-3").style.display = "none";
+	document.getElementById("floor-4").style.display = "none";
+	document.getElementById("floor-5").style.display = "none";
+	document.getElementById("floor-6").style.display = "none";
+	document.getElementById("floor-7").style.display = "none";
+	HouseNumM[105].firstChild.className = "bed";
+	HouseNumM[105].firstChild.src = "imges/bj/bed.png";
+	HouseNumM[132].firstChild.src = "imges/bj/home-1-bj-x.png";
+	HouseNumM[132].firstChild.className = "home-1-bj-x";
+	for (var i = 0 ; i < Is_map.length; i++) {
+		for (var x = 0 ; x < Is_map[i].length; x++) {
+			var e = (Is_map[i])[x];
+			// HouseNumT[e].firstChild.src = "imges/no.png";
+			HouseNumB[e].style.pointerEvents = "none";
+		}
+	}
+	for (var y = 0 ; y < HouseNumB.length; y++) {
+		if (HouseNumB[y].style.pointerEvents == "none") {
+			sign_X.push(1);
+			sign_Y.push(1);
+			carpet_X.push(1);
+			carpet_Y.push(1);
+		}else{
+			sign_X.push(0);
+			sign_Y.push(0);
+			carpet_X.push(0);
+			carpet_Y.push(0);
+		}
+	}
+	document.getElementById("name-text-1").innerHTML = "初级农舍";//写入名称栏
+	document.getElementById("name-text-2").innerHTML = "初级农舍";//写入名称栏
+	document.getElementById("describe-1").innerHTML = "想脱单就升个级吧。 ";//写入内容栏
+	document.getElementById("describe-2").innerHTML = "想脱单就升个级吧。 ";//写入内容
+	document.getElementById("Choice").style.display = "none";
+}
+function LV_2() {
+	Grade = 2;
+	var Is_map = [lv2_sign,lv2_furniture_sign,lv2_wall_sign]
+	wall_sign_Arr = lv2_wall_sign;
+	MapWidth = 30;
+	Map_Num = 360;
+	establish()
+	House.className = "lv2_1";
+	var House_bj = document.getElementById("House-bj");
+	House_bj.src = "imges/bj/home-2-1-bj.png";
+	HouseTop.className = "House_2"
+	HouseMiddle.className = "House_2"
+	HouseBottom.className = "House_2"
+	House_bj.className = "House-bj_2"
+	document.getElementById("wall-1").className = "wall wall-1-2"
+	document.getElementById("wall-2").className = "wall wall-2-2"
+	document.getElementById("wall-3").className = "wall wall-3-2"
+	document.getElementById("wall-4").className = "wall wall-4-2";
+	document.getElementById("wall-5").className = "wall wall-5-2";
+	document.getElementById("wall-6").className = "wall wall-6-2";
+	document.getElementById("wall-7").className = "wall wall-7-2";
+	document.getElementById("floor-1").className = "floor floor-1-2";
+	document.getElementById("floor-2").className = "floor floor-2-2";
+	document.getElementById("floor-3").className = "floor floor-3-2";
+	document.getElementById("floor-4").className = "floor floor-4-2";
+	document.getElementById("floor-5").className = "floor floor-5-2";
+	document.getElementById("floor-6").className = "floor floor-6-2";
+	document.getElementById("floor-7").className = "floor floor-7-2";
+	document.getElementById("roommate").className = "roommate-2";
+	HouseNumM[121].firstChild.src = "imges/bj/kitchen-L-M.png";
+	HouseNumM[121].firstChild.className = "kitchen-L-M";
+	HouseNumM[122].firstChild.src = "imges/bj/kitchen-R-M.png";
+	HouseNumM[122].firstChild.className = "kitchen-R-M";
+	HouseNumM[141].firstChild.src = "imges/bj/DoubleBed.png";
+	HouseNumM[141].firstChild.className = "DoubleBed";
+	HouseNumM[330].firstChild.src = "imges/bj/home-2-bj-x.png";
+	HouseNumM[330].firstChild.className = "home-2-bj-x";
+	for (var i = 0 ; i < Is_map.length; i++) {
+		for (var x = 0 ; x < Is_map[i].length; x++) {
+			var e = (Is_map[i])[x];
+			// HouseNumT[e].firstChild.src = "imges/no.png";
+			HouseNumB[e].style.pointerEvents = "none";
+		}
+	}
+	for (var y = 0 ; y < HouseNumB.length; y++) {
+		if (HouseNumB[y].style.pointerEvents == "none") {
+			sign_X.push(1);
+			sign_Y.push(1);
+			carpet_X.push(1);
+			carpet_Y.push(1);
+		}else{
+			sign_X.push(0);
+			sign_Y.push(0);
+			carpet_X.push(0);
+			carpet_Y.push(0);
+		}
+	}
+	document.getElementById("name-text-1").innerHTML = "中级农舍";//写入名称栏
+	document.getElementById("name-text-2").innerHTML = "中级农舍";//写入名称栏
+	document.getElementById("describe-1").innerHTML = "增加了一个厨房一个卧室，床从单人的升级为双人的，可以结婚。";//写入内容栏
+	document.getElementById("describe-2").innerHTML = "增加了一个厨房一个卧室，床从单人的升级为双人的，可以结婚。";//写入内容
+	document.getElementById("Choice").style.display = "none";
+	document.getElementById("Choice").style.display = "none";
+}
+function LV_3() {
+	LV_4()
+	HouseNumM[840].firstChild.src = "imges/bj/home-3-b-bj.png";
+	document.getElementById("name-text-1").innerHTML = "高级农舍";//写入名称栏
+	document.getElementById("name-text-2").innerHTML = "高级农舍";//写入名称栏
+	document.getElementById("describe-1").innerHTML = "增加了两个新房间，一个是空着的，还有一个有一张婴儿床以及两个单人床。  ";//写入内容栏
+	document.getElementById("describe-2").innerHTML = "增加了两个新房间，一个是空着的，还有一个有一张婴儿床以及两个单人床。  ";//写入内容
+	document.getElementById("Choice").style.display = "none";
+}
+function LV_4() {
+	Grade = 4;
+	MapWidth = 35;
+	Map_Num = 875;
+	var Is_map = [lv4_sign,lv4_furniture_sign,lv4_wall_sign]
+	wall_sign_Arr = lv4_wall_sign;
+	establish();
+	HouseNumM[155].firstChild.src = "imges/bj/BabyDed.png";
+	HouseNumM[155].firstChild.className = "BabyDed";
+	HouseNumM[162].firstChild.src = "imges/bj/bed.png";
+	HouseNumM[162].firstChild.className = "bed";
+	HouseNumM[166].firstChild.src = "imges/bj/bed.png";
+	HouseNumM[166].firstChild.className = "bed";
+	HouseNumM[456].firstChild.src = "imges/bj/kitchen-L.png";
+	HouseNumM[456].firstChild.className = "kitchen-L";
+	HouseNumM[459].firstChild.src = "imges/bj/kitchen-R.png";
+	HouseNumM[459].firstChild.className = "kitchen-R";
+	HouseNumM[482].firstChild.src = "imges/bj/DoubleBed.png";
+	HouseNumM[482].firstChild.className = "DoubleBed";
+	HouseNumM[315].firstChild.src = "imges/bj/home-4-t-bj.png";
+	HouseNumM[315].firstChild.className = "home-4-2-t-bj";
+	HouseNumM[840].firstChild.src = "imges/bj/home-4-b-bj.png";
+	HouseNumM[840].firstChild.className = "home-4-2-b-bj";
+	for (var i = 0 ; i < Is_map.length; i++) {
+		for (var x = 0 ; x < Is_map[i].length; x++) {
+			var e = (Is_map[i])[x];
+			// HouseNumT[e].firstChild.src = "imges/no.png";
+			HouseNumB[e].style.pointerEvents = "none";
+		}
+	}
+	for (var y = 0 ; y < HouseNumB.length; y++) {
+		if (HouseNumB[y].style.pointerEvents == "none") {
+			sign_X.push(1);
+			sign_Y.push(1);
+			carpet_X.push(1);
+			carpet_Y.push(1);
+		}else{
+			sign_X.push(0);
+			sign_Y.push(0);
+			carpet_X.push(0);
+			carpet_Y.push(0);
+		}
+	}
+	document.getElementById("name-text-1").innerHTML = "顶级农舍";//写入名称栏
+	document.getElementById("name-text-2").innerHTML = "顶级农舍";//写入名称栏
+	document.getElementById("describe-1").innerHTML = "增加了地窖，入口设在厨房。玩家可以用地窖中的酒桶陈酿酒和奶酪，使之价值更高。 ";//写入内容栏
+	document.getElementById("describe-2").innerHTML = "增加了地窖，入口设在厨房。玩家可以用地窖中的酒桶陈酿酒和奶酪，使之价值更高。 ";//写入内容
+	document.getElementById("Choice").style.display = "none";
+}
+
+function establish() {
+	for(var i = 0; i < Map_Num; i++){
+		createHtml_T();//创建网格层
+		createHtml_M();//创建物品层
+		createHtml_B();//创建地板层	
+	}
+	HouseNumT = House.getElementsByClassName("House-T");//获取网格层集合
+	HouseNumM = House.getElementsByClassName("House-M");//获取物品层集合
+	HouseNumB = House.getElementsByClassName("House-B");//获取地板层集合
+	for(var i = 0; i < Map_Num; i++){
+		HouseNumB[i].index = i;//给地块编号
+	}
+	for (var i = 0; i < HouseNumB.length; i++) {
+		sign_wall_X.push(1)
+	}
+	for (var i = 0; i < wall_sign_Arr.length; i++) {
+		var e = wall_sign_Arr[i]
+		sign_wall_X.splice(e,1,0)
+	}
+	console.log(HouseNumT.length);
+}
+
+var y = 0;
+var t = 0;
+var x = 0;
+var l = 0;
+var nl = 20;
+var HouseX = 0;
+var HouseY = 0;
+var HouseT = 0;
+var HouseL = 0;
+var HouseNl = 0;
+var HouseNt = 0;
+var BtnYNum = 4;
+var menuBody = document.getElementById("menu-body");//物品栏
+
+	
+
+
+
+
+function createHtml_T(){//创建网格层
+	var div = document.createElement("div");
+	var Img = document.createElement("img");
+	Img.src = "imges/0.png";
+	div.appendChild(Img);
+	HouseTop.appendChild(div).className = "House-T";
+}
+function createHtml_M(){//创建物品层
+	var div = document.createElement("div");
+	var Img = document.createElement("img");
+	Img.src = "imges/0.png";
+	div.appendChild(Img);
+	HouseMiddle.appendChild(div).className = "House-M";
+}
+function createHtml_B(){//创建地板层
+	var div = document.createElement("div");
+	var Img = document.createElement("img");
+	Img.src = "imges/0.png";
+	div.appendChild(Img);
+	HouseBottom.appendChild(div).className = "House-B";
+}
+House.onmousedown = function(e) {//鼠标移入农场时开启农场移动状态
+    //获取坐标
+    HouseX = e.clientX;
+    HouseY = e.clientY;
+    //获取偏移量
+    HouseT = House.offsetTop;
+    HouseL = House.offsetLeft;
+    //开关打开
+    isHouse = true;
+    //设置样式  
+}
+bodyBtn.onmousedown = function(e) {//鼠标移入菜单滚动条时开启农场移动状态
+    if (e.target.nodeName == "IMG") {
+		y = e.clientY;//获取y坐标
+		t = bodyBtn.offsetTop;//获取顶部的偏移量
+		isDown = true;//开关打开
+	}
+}
+menuBody.onmousedown = function(e) {
+	if (e.target.id != "body-btn") {
+		y = e.clientY;//获取y坐标
+		t = myMenu.offsetTop;//获取顶部的偏移量
+		isMenu = true;//开关打开
+	}
+}
+window.onmousemove = function(e) {//移动功能函数
+    if (isDown == true) {//菜单滚动条
+        var ny = e.clientY;
+		//计算移动后的左偏移量和顶部的偏移量
+		var nt = ny - (y - t);
+		if (nt < 0) {
+			var nt = 0;
+		}else if (nt > bodyBtnNum){
+			var nt = bodyBtnNum;
+		}
+		if (menuBody.offsetHeight > myMenu.offsetHeight) {
+			var nt = 0;
+		}
+		bodyBtn.style.top = nt + "px";
+		myMenu.style.bottom = nt/q3 + "px";
+    }else if (isBtnY == true) {//缩放滚动条
+        var nx = e.clientX;
+		nl = nx - (x - l);
+	    bodyBtnY.style.left = nl + "px";
+	    if (nl > 20 && nl < 70) {
+			document.body.id = "body-1";
+			House.style.left = (document.body.clientWidth - 320)/2 - House.offsetWidth/2 + 320 + "px";
+			House.style.top = window.screen.height/2 - House.offsetHeight/2 + "px";
+		}else if (nl > 70 && nl < 140) {
+			document.body.id = "body-2";
+			House.style.left = (document.body.clientWidth - 320)/2 - House.offsetWidth/2 + 320 + "px";
+			House.style.top = window.screen.height/2 - House.offsetHeight/2 + "px";
+		}else if (nl > 140 && nl < 215){
+			document.body.id = "body-3";
+			House.style.left = (document.body.clientWidth - 320)/2 - House.offsetWidth/2 + 320 + "px";
+			House.style.top = window.screen.height/2 - House.offsetHeight/2 + "px";
+		}
+		else if (nl > 215 && nl < 236){
+			document.body.id = "body-4";
+			House.style.left = (document.body.clientWidth - 320)/2 - House.offsetWidth/2 + 320 + "px";
+			House.style.top = window.screen.height/2 - House.offsetHeight/2 + "px";
+		}
+		else if (nl > 236){
+			bodyBtnY.style.left = "236px";
+		}else if (nl < 20){
+			bodyBtnY.style.left = "20px";
+		}
+    }else if (isHouse == true) {//移动房屋
+    	var HouseNx = e.clientX;
+        var HouseNy = e.clientY;
+        HouseNl = HouseNx - (HouseX - HouseL);
+        HouseNt = HouseNy - (HouseY - HouseT);
+        House.style.left = HouseNl + "px";
+        House.style.top = HouseNt + "px";
+    }else if (isMenu == true) {
+    	var ny = e.clientY;
+		//计算移动后的左偏移量和顶部的偏移量
+		var nt = ny - (y - t + 20);
+		if (nt > 0) {
+			var nt = 0;
+		}else if (nt < -q1){
+			var nt = -q1;
+		}
+		if (menuBody.offsetHeight > myMenu.offsetHeight) {
+			var nt = 0;
+		}
+		myMenu.style.bottom = -nt + "px";
+		bodyBtn.style.top = -(nt*q3) + "px";
     }
-    cur.x = touch.clientX;
-    cur.y = touch.clientY;
-    dx = div0.offsetLeft;
-    dy = div0.offsetTop;
 }
-function move(){
-    if(flag){
-        var touch ;
-        if(event.touches){
-            touch = event.touches[0];
-        }else {
-        touch = event;
-        }
-        nx = touch.clientX - cur.x;
-        ny = touch.clientY - cur.y;
-        x = dx+nx;
-        y = dy+ny;
-        div0.style.left = x+"px";
-        div0.style.top = y +"px";    
-    }
-}
-//鼠标释放时候的函数
-function end(){
-    flag = false;
-}
-camera.addEventListener("touchstart", function(){
-	window.div0 = document.getElementById("camera");
-	console.log(div0);
-});
-catalog.addEventListener("touchstart", function(){
-	window.div0 = document.getElementById("catalog");
-	console.log(div0);
-});
-zoom.addEventListener("touchstart", function(){
-	window.div0 = document.getElementById("zoom");
-	console.log(div0);
-});
-camera.addEventListener("mousedown", function(){
-	window.div0 = document.getElementById("camera");
-	console.log(div0);
-});
-catalog.addEventListener("mousedown", function(){
-	window.div0 = document.getElementById("catalog");
-	console.log(div0);
-});
-zoom.addEventListener("mousedown", function(){
-	window.div0 = document.getElementById("zoom");
-	console.log(div0);
-});
-window.addEventListener("mousedown",function(){
-	down();
-},false);
-window.addEventListener("touchstart",function(){
-	down();
-},false)
-window.addEventListener("mousemove",function(){
-	move();
-},false);
-window.addEventListener("touchmove",function(){
-	move();
-},false)
-window.addEventListener("mouseup",function(){
-	end();
-},false);
-window.addEventListener("touchend",function(){
-	end();
-},false);
-
-
-
-
-
-
-
-
-
-//初始化目录子页面状态
-for (var i = 0; i < furnitureNum.length; i++) {
-	if (i > 0) {
-		furnitureNum[i].index = i;
-		furnitureNum[i].style.display = "none";
+window.onmouseup = function() {//结束移动函数
+	//开关关闭
+	if (isDown == true) {
+		isDown = false;
+	}else if (isBtnY == true) {
+		isBtnY = false;
+		if (nl > 20 && nl < 70) {//判断拖动结束时滚动条对应位置以及比例
+			bodyBtnY.style.left = "20px";
+		}else if (nl > 70 && nl < 140) {
+			bodyBtnY.style.left = "86px";
+		}else if (nl > 140 && nl < 215){
+			bodyBtnY.style.left = "157px";
+		}
+		else if (nl > 215 && nl < 236){
+			bodyBtnY.style.left = "236px";
+		}
+		else if (nl > 236){
+			bodyBtnY.style.left = "236px";
+		}else if (nl < 20){
+			bodyBtnY.style.left = "20px";
+		}
+    }else if (isHouse == true) {
+    	isHouse = false;
+	}else if (isMenu == true) {
+		isMenu = false;
 	}
 }
-for (var i = 0; i < PhotoNum.length; i++) {
-	if (i > 0) {
-		PhotoNum[i].index = i;
-		PhotoNum[i].style.display = "none";
-	}
-}
-for (var i = 0; i < WallNum.length; i++) {
-	if (i > 0) {
-		WallNum[i].index = i;
-		WallNum[i].style.display = "none";
-	}
-}
-//初始化目录子页面状态--------------------------------------------------
-//目录翻页-------------------------------------------------------------
-function next(){
-	judge();
-	NTurn();
-}
-function prev(){
-	judge();
-	PTurn();
-}
 
-function judge(){
-	if(Label == 0){
-		window.LabelLen = furnitureNum.length;
-		window.LabelNumber = furnitureNum;
-	}else if(Label == 1){
-		window.LabelLen = PhotoNum.length;
-		window.LabelNumber = PhotoNum;
-	}else if(Label == 2){
-		window.LabelLen = WallNum.length;
-		window.LabelNumber = WallNum;
+var menuBtn = document.getElementById("menu-btn");//菜单按钮
+var menuNum = menuBtn.querySelectorAll("img");//菜单按钮集合
+var menuBody = document.getElementById("menu-body");//物品栏
+var menuBody1 = document.getElementById("menu-body-1");//物品栏第一页
+var menuBodyNum = menuBody.getElementsByClassName("menu-body");//物品栏集合
+for(var i = 0; i < menuNum.length; i++){
+	menuNum[i].index = i;//给菜单按钮编号
+}
+for(var i = 0; i < menuBodyNum.length; i++){
+	menuBodyNum[i].index = i;//物品栏编号
+	if (i != 0) {
+		menuBodyNum[i].style.display = "none";//关闭其他物品栏页面
 	}
 }
-function NTurn(){
-	LPageNumber();
-	if (PageNumber == LabelLen - 1){
-		var NewPageNumber = 0;
-		LabelNumber[PageNumber].style.display = "none";
-		console.log("NewPageNumber: " + NewPageNumber);
-		LabelNumber[NewPageNumber].style.display = "flex";
-		window.PageNumber = NewPageNumber;
+var myMenu = menuBodyNum[0];//创建"当前菜单"
+var MenuArr = document.getElementById("menu-body-0").getElementsByClassName("menu-body");
+var menuH = menu.offsetHeight;//获取菜单栏高度
+menuBody.style.height = menuH - 288 + "px";//设置菜单也显示区高度
+menuBodyBtn.style.height = menuH - 300 + "px";//设置菜单滚动条高度
+var bodyBtnNum = menuH - 340;//滚动条长度
+var q1 = myMenu.offsetHeight - menuBody.offsetHeight;
+var q2 = menuBodyBtn.offsetHeight - bodyBtn.offsetHeight;
+var q3 = q2/q1;
+var signX = 1;//当前物品占地宽度
+var signY = 1;//当前物品占地高度
+menuNum[0].style.left = "-8px";//校准一个菜单按钮位置
+///////////////////////////////////点击菜单按钮功能/////////////////////////////////////
+menuBtn.addEventListener("click",function(e){
+	state = "common";//将状态设置为"通常"
+	document.getElementById("Pickaxe").src = "imges/Pickaxe-1.png";
+	Menu_status = false;//进入菜单模式
+	IMG = "imges/0.png";//初始化鼠标指针图片
+	if (e.target.index != 8) {//菜单按钮切换函数
+		menuBodySign = e.target.index;//标记当前菜单序号
+		console.log(e.target.index);//显示当前菜单序号
+		for(var i = 0; i < 8; i++){//设置菜单页面状态
+			menuNum[i].style.left = "0";
+			menuBodyNum[i].style.display = "none";
+			menuBodyNum[i].style.bottom = 0;
+			if (menu.style.left == "-320px" || menu.style.left == 0) {//初始化菜单位置
+				menu.style.left = "0";
+				menuNum[8].src = "imges/button/arrow-2.png";
+			}
+		}
+		menuBodyNum[e.target.index].style.display = "flex";//显示被点击的菜单
+		var myMenu = menuBodyNum[e.target.index];//获取当前菜单
+		if (menuBody.offsetHeight > myMenu.offsetHeight) {
+			menuBodyBtn.style.display = "none";
+			myMenu.style.left = "22px";
+		}else{
+			menuBodyBtn.style.display = "block";
+		}
+		window.q1 = myMenu.offsetHeight - menuBody.offsetHeight;//获取菜单页面高度信息
+		window.q2 = menuBodyBtn.offsetHeight - bodyBtn.offsetHeight;//获取滚动条高度信息
+		window.q3 = q2/q1;//页面和滚动条映射关系
+		e.target.style.left = "-8px";//校准菜单位置
+		window.myMenu = menuBodyNum[e.target.index];//定义"当前菜单"
+		bodyBtn.style.top = 0;//初始化滚动条位置c
+	}
+	var name_text = document.getElementById("name-text");
+	if (e.target.index == 4 || e.target.index == 5 || e.target.index == 6) {
+		for (var i = 0 ; i < HouseNumT.length; i++) {
+			HouseNumT[i].firstChild.src = "imges/0.png";
+		}
+	}
+	if (e.target.index == 7) {
+		var name_text_1 = document.getElementById("name-text-1");
+		var name_text_2 = document.getElementById("name-text-2");
+		var describe_1 = document.getElementById("describe-1");
+		var describe_2 = document.getElementById("describe-2");
+		name_text_1.innerHTML = "缩放等级";//写入名称栏
+		name_text_2.innerHTML = "缩放等级";//写入名称栏
+		describe_1.innerHTML = "调整当前画面显示倍率<br>（当前倍率：4）";//写入内容栏
+		describe_2.innerHTML = "调整当前画面显示倍率<br>（当前倍率：4）";//写入内容栏
+	}
+	document.getElementById("rotate").style.display = "none";
+	document.getElementById("Discoloration").style.display = "none";
+	document.getElementById("del").style.display = "none";
+})
+
+
+
+
+function MenuSwitch() {//显示/隐藏菜单功能
+	if (menu.style.left == "0px" || menu.style.left == 0) {
+		menu.style.left = "-320px";
+		menuNum[8].src = "imges/button/arrow-1.png";
 	}else{
-		NewPageNumber = PageNumber + 1;
-		LabelNumber[PageNumber].style.display = "none";
-		LabelNumber[NewPageNumber].style.display = "flex";
-		window.PageNumber = PageNumber + 1;
+		menu.style.left = "0";
+		menuNum[8].src = "imges/button/arrow-2.png";
 	}
-	SPageNumber();
 }
-function PTurn(){
-	LPageNumber();
-	if (PageNumber == 0){
-		var NewPageNumber = LabelLen - 1;
-		LabelNumber[PageNumber].style.display = "none";
-		console.log("NewPageNumber: " + NewPageNumber);
-		LabelNumber[NewPageNumber].style.display = "flex";
-		window.PageNumber = NewPageNumber;
+
+
+
+
+// var menuBody0Num = [51,17,26,8,38,19,5];//菜单页内按钮行数
+// var menuBody0Num1 = [150,48,77,25,111,55,12];//菜单页内按钮数量
+// var menuBody0Class = ["other-icon","other-icon","other-icon","other-icon","other-icon","other-icon"];//菜单页内按钮class
+// for (var i = 0 ; i < menuBodyNum.length; i++) {//生成按钮
+// 	var N = menuBodyNum[i];
+// 	var M = menuBody0Num1[i];
+// 	for (var x = 0 ; x < menuBody0Num[i]*3; x++) {
+// 		var Img = document.createElement("img");
+// 		Img.src = "imges/icon/" + i + "/" + x + ".png";
+// 		Img.index = x;
+// 		if (x > M) {//空按钮,填充空位
+// 			Img.src = "imges/0.png";
+// 			Img.style.pointerEvents = "none";
+// 		}
+// 		N.appendChild(Img).className = menuBody0Class[i];
+// 	}
+// }
+
+
+
+var menuBody0Num = [55,21,27,8,19,19,5,2];//菜单页内按钮行数
+var menuBody0Num1 = [164,61,78,23,56,55,13,4];//菜单页内按钮数量
+var menuBody0Class = "other-icon";//菜单页内按钮class
+for (var i = 0 ; i < menuBodyNum.length; i++) {//生成按钮
+	var N = menuBodyNum[i];
+	var M = menuBody0Num1[i];
+	for (var x = 0 ; x < menuBody0Num[i]; x++) {
+		for (var y = 0 ; y < 3; y++) {
+			var div = document.createElement("div");
+			div.style.background = "url(imges/icon/" + i + ".png)";
+			div.index = y + (x*3);
+			div.style.backgroundPosition = y*-64 + "px" + " " + x*-64 + "px";
+			// div.innerHTML = y + (x*3);
+			N.appendChild(div).className = menuBody0Class;
+			if (y + (x*3) > M) {//空按钮,填充空位
+				div.src = "imges/0.png";
+				div.style.pointerEvents = "none";
+			}
+		}
+		
+		
+		
+	}
+}
+
+
+
+
+
+House.onmouseover = function(e){//鼠标移入地块
+	switch (state){
+	case "common":
+	if (e.target.index != undefined) {
+		if (menuBodySign== 3) {
+			var Z = HouseNumB;
+		}else{
+			var Z = HouseNumM;
+		}
+		Timg = Z[e.target.index].firstChild.src;
+		Z[e.target.index].firstChild.src = IMG;
+		Z[e.target.index].firstChild.style.top = IMG_T;
+		Z[e.target.index].firstChild.style.width = IMG_W;
+		Z[e.target.index].firstChild.style.height = IMG_H;
+	}
+	break;
+	}
+}
+House.onmouseout = function(e){//鼠标移出地块
+	switch (state){
+	case "common":
+	if (e.target.index != undefined) {
+		if (menuBodySign== 3) {
+			HouseNumB[e.target.index].firstChild.src = Timg;
+		}else{
+			HouseNumM[e.target.index].firstChild.src = Timg;
+		}
+	}
+	break;
+	}
+}
+
+
+menuBody.addEventListener("click",function(e){
+	if (e.target.className == "other-icon") {//判断被点击目标的是否为img
+		Menu_status = true;//标记菜单状态
+		otherSign = e.target.index;//获取物品序号
+		console.log(otherSign);
+		Is_state = 0;
+		switch (menuBodySign){
+		case 0:
+		if (e.target.id != "body-btn") {
+			if (otherSign != undefined) {//当前有选中的物品
+				IMG = "imges/" + menuBodySign + "/" + otherSign + "/" + Is_state + ".png";//刷新移入时贴图
+				NAME = furniture_Arr[otherSign];
+				Write();//点击按钮非滚动条时执行写入数据	
+			}
+			HouseBottom.style.pointerEvents = "auto";
+		 	Initialization();
+		 	signMap();
+		 	signMapX();
+		}
+		break;
+		case 1:
+		if (e.target.id != "body-btn") {
+			if (otherSign != undefined) {//当前有选中的物品
+				IMG = "imges/" + menuBodySign + "/" + otherSign + ".png";//刷新移入时贴图
+			}
+			NAME = furniture_Arr[otherSign];
+			HouseBottom.style.pointerEvents = "auto";
+		 	Write();//点击按钮非滚动条时执行写入数据
+		 	wall_sign();
+		 	wall_sign_X();
+			console.log(wall_Arr[otherSign]);
+		}
+		break;
+		case 2:
+		if (otherSign != undefined) {//当前有选中的物品
+			IMG = "imges/" + menuBodySign + "/" + otherSign +  ".png";//刷新移入时贴图
+			NAME = toolNum[otherSign];
+		 	Write();//点击按钮非滚动条时执行写入数据	
+		}
+		 	Initialization();
+		 	HouseBottom.style.pointerEvents = "auto";
+		 	signMap();
+		 	signMapX();
+		
+		break;
+		case 3:
+		if (otherSign != undefined) {//当前有选中的物品
+			IMG = "imges/" + menuBodySign + "/" + otherSign + "/" + Is_state + ".png";//刷新移入时贴图
+			NAME = carpetNum[otherSign];
+		 	Write();//点击按钮非滚动条时执行写入数据
+		 	Initialization();
+		 	HouseBottom.style.pointerEvents = "auto";
+			sign_carpet();
+			sign_carpet_X();
+		}
+		break;
+		case 4:
+		Write()
+		HouseBottom.style.pointerEvents = "none";
+		for (var i = 0 ; i < HouseNumB.length; i++) {
+			HouseNumB[i].style.pointerEvents = "none";
+		}
+		break;
+		case 5:
+		Write()
+		HouseBottom.style.pointerEvents = "none";
+		for (var i = 0 ; i < HouseNumB.length; i++) {
+			HouseNumB[i].style.pointerEvents = "none";
+		}
+		break;
+		case 6:
+		var roommate = document.getElementById("roommate");
+		var House_bj = document.getElementById("House-bj");
+		if (Grade == 4) {
+			if (otherSign == 13) {
+				roommate.style.display = "none";
+				House_bj.src = "imges/bj/home-4-1-bj.png";
+				House.className = "lv4_1";
+				for (var i = 0 ; i < lv4_roommate.length; i++) {
+					var n = lv4_roommate[i];
+					sign_X.splice(n,1,1)
+					sign_Y.splice(n,1,1)
+				}
+			}else{
+				roommate.style.display = "block";
+				roommate.src = "imges/6/" + otherSign + ".png";
+				House_bj.src = "imges/bj/home-4-2-bj.png";
+				House.className = "lv4_2";
+				for (var i = 0 ; i < lv4_roommate.length; i++) {
+					var n = lv4_roommate[i];
+					sign_X.splice(n,1,0)
+					sign_Y.splice(n,1,0)
+				}
+			}
+		}else if (Grade == 2) {
+			if (otherSign == 13) {
+				roommate.style.display = "none";
+				House_bj.src = "imges/bj/home-2-1-bj.png";
+				House.className = "lv2_1";
+				for (var i = 0 ; i < lv4_roommate.length; i++) {
+					var n = lv4_roommate[i];
+					sign_X.splice(n,1,1)
+					sign_Y.splice(n,1,1)
+				}
+			}else{
+				roommate.style.display = "block";
+				roommate.src = "imges/6/" + otherSign + ".png";
+				House_bj.src = "imges/bj/home-2-2-bj.png";
+				House.className = "lv2_2";
+				for (var i = 0 ; i < lv4_roommate.length; i++) {
+					var n = lv4_roommate[i];
+					sign_X.splice(n,1,0)
+					sign_Y.splice(n,1,0)
+				}
+			}
+		}
+		
+		Write();
+		break;
+		case 7:
+		var IsBody =  document.getElementById("name-text");
+		var IsBodyArr = ["body-1","body-2","body-3","body-4"];
+		document.body.id = IsBodyArr[otherSign];
+		var describe_1 = document.getElementById("describe-1");
+		var describe_2 = document.getElementById("describe-2");
+		describe_1.innerHTML = "调整当前画面显示倍率<br>（当前倍率：" + (otherSign + 1) + "）";//写入内容栏
+		describe_2.innerHTML = "调整当前画面显示倍率<br>（当前倍率：" + (otherSign + 1) + "）";//写入内容栏
+		break;
+		}
+		document.getElementById("Pickaxe").src = "imges/Pickaxe-1.png";
+		document.getElementById("del").style.display = "none";
+		state = "common";
+		console.log(state);
+		change_Num = 0;
+	}
+})
+
+House.addEventListener("click",function(e){
+	console.log(e.target.index);//显示点击位置坐标
+	// console.log(e.target);//显示点击位置坐标
+	if (e.target.nodeName == "DIV" && Menu_status == true) {//判断被点击位置是否"div"及菜单状态是否正常
+		if (state != "Pickaxe") {
+			if ( menuBodySign == 4 || menuBodySign == 5 || e.target.index != undefined) {//判断被点击的位置是否可选
+			
+				var n = e.target;
+				IsE = e.target.index;//保存当前坐标
+				var e = e.target.index;//简化坐标变量名长度
+				switch (menuBodySign){//判断当前工具状态
+				case 0://菜单序号为建筑
+				IsAdd();
+				HouseNumM[e].firstChild.src = IMG//
+				Timg = HouseNumM[e].firstChild.src;
+				HouseNumB[e].style.pointerEvents = "none";
+				Initialization()
+			 	signMap()
+			 	signMapX()
+				break;
+				case 1:
+				HouseNumM[e].firstChild.src = IMG;//
+				wall_Position.push(IsE);//写入坐标
+				wall_X.push(signX)
+				wall_name.push(otherSign);//写入物品序号
+				HouseNumM[e].firstChild.style.width = IMG_W;//设置物品宽度
+				HouseNumM[e].firstChild.style.height = IMG_H;//设置物品高度
+				sign_X.splice(IsE,1,signX);//写入物品宽度
+				sign_Y.splice(IsE,1,signY);//写入物品高度
+				Timg = HouseNumM[e].firstChild.src;
+				HouseNumB[e].style.pointerEvents = "none";
+				wall_sign();
+			 	wall_sign_X();
+				break;
+				case 2:
+				IsAdd();
+				HouseNumM[e].firstChild.src = IMG;//
+				Timg = HouseNumM[e].firstChild.src;
+				HouseNumB[e].style.pointerEvents = "none";
+				Initialization();
+			 	signMap();
+			 	signMapX();
+				break;
+				case 3:
+				IsAdd();
+				if (otherSign == 23) {
+					HouseNumB[e].firstChild.src = "imges/" + menuBodySign + "/" + otherSign + "/" + Math.ceil(Math.random()*16) + ".png";
+				}else{
+					HouseNumB[e].firstChild.src = IMG;//
+				}
+				
+				Timg = HouseNumB[e].firstChild.src;
+				HouseNumB[e].style.pointerEvents = "none";
+				Initialization();
+				sign_carpet();
+				sign_carpet_X();
+				if (otherSign > 12) {
+					floor()
+				}
+				// console.log(carpet_Position)
+				// console.log(carpet_Catalog)
+				// console.log(carpet_name)
+				// console.log(carpet_Number)
+				// console.log(carpet_state)
+				break;
+				case 4:
+				console.log(n);
+				if (n.getAttribute("class").indexOf("wall") > - 1) {
+					n.style.background = "url(imges/wall/" + otherSign + ".png)";
+					n.style.backgroundSize = "1em";
+				}
+				break;
+				case 5:
+				console.log(n);
+				if (n.getAttribute("class").indexOf("floor") > - 1) {
+					n.style.background = "url(imges/floor/" + otherSign + ".png)";
+					n.style.backgroundSize = "2em";
+				}
+				
+				break;
+				}
+			}	
+		}
+		
+		if (state == "Pickaxe") {
+			var e = e.target.index;
+			HouseNumM[e].firstChild.src = "imges/0.png";//
+			HouseNumB[e].firstChild.src = "imges/0.png";//
+			var Del_Position = Position.indexOf(e);//获取物品坐标位置
+			var Del_wall = wall_Position.indexOf(e);//获取地板坐标位置
+			var Del_carpet = carpet_Position.indexOf(e);//获取栅栏坐标位置
+			if (Del_Position != -1) {
+				Position.splice(Del_Position,1);
+				Position_Catalog.splice(Del_Position,1);
+				Position_name.splice(Del_Position,1);
+				Position_Number.splice(Del_Position,1);
+				Position_state.splice(Del_Position,1);
+				sign_X.splice(e,1,0);//删除宽度标记
+				sign_Y.splice(e,1,0);//删除高度标记
+			}
+			if (Del_wall != -1) {
+				wall_Position.splice(Del_wall,1);
+				wall_name.splice(Del_wall,1);
+				wall_X.splice(Del_wall,1);
+				sign_wall_X.splice(e,1,0);//删除宽度标记
+			}
+			if (Del_carpet != -1) {
+				carpet_Position.splice(Del_carpet,1);
+				carpet_Catalog.splice(Del_carpet,1);
+				carpet_name.splice(Del_carpet,1);
+				carpet_Number.splice(Del_carpet,1);
+				carpet_state.splice(Del_carpet,1);
+				carpet_X.splice(e,1,0);
+				carpet_Y.splice(e,1,0);
+				floor()
+			}
+			for (var i = 0; i < HouseNumB.length; i++) {
+				HouseNumB[i].style.pointerEvents = "auto";
+				if (Grid_status == true) {
+					HouseNumT[i].firstChild.src = "imges/yes.png";
+				}	
+			}
+		}	
+	}
+})
+
+
+var Position = [];
+var Position_Catalog = [];
+var Position_name = [];
+var Position_Number = [];
+var Position_state = [];
+var sign_X = [];
+var sign_Y = [];
+
+
+var wall_Position = [];
+var wall_name = [];
+var wall_X = [];
+var sign_wall_X = [];
+
+var carpet_Position = [];
+var carpet_Catalog = [];
+var carpet_name = [];
+var carpet_Number = [];
+var carpet_state = [];
+var carpet_X = [];
+var carpet_Y = [];
+
+
+function Write() {//获取当前物品数据
+	// console.log("Write");
+	var name_text_1 = document.getElementById("name-text-1");
+	var name_text_2 = document.getElementById("name-text-2");
+	var describe_1 = document.getElementById("describe-1");
+	var describe_2 = document.getElementById("describe-2");
+	if (menuBodySign == 1) {
+		signX = wall_Arr[otherSign];//获取当前物品占地宽度
+		signY = 1;
+		IMG_W = wall_Arr[otherSign] + "em";
+		IMG_H = "2em";
+		IMG_T = "0em";
+		name_txt = wall_name_text[otherSign];
+		describe_text = "可以放进你的房子。";
+	}else if (menuBodySign == 4) {
+		name_txt = "壁纸";//
+		describe_text = "装饰一间房间的墙面。";//
+		GoodsNumber = 1;
+	}else if (menuBodySign == 5) {
+		name_txt = "铺地板";//
+		describe_text = "装饰一间房间的地板。";//
+		GoodsNumber = 1;
+	}else if (menuBodySign == 6) {
+		name_txt = roommate_name[otherSign];//
+		describe_text = roommate_text[otherSign];//
 	}else{
-		NewPageNumber = PageNumber - 1;
-		LabelNumber[PageNumber].style.display = "none";
-		LabelNumber[NewPageNumber].style.display = "flex";
-		window.PageNumber = PageNumber - 1;
+		signX = NAME[0];//获取当前物品占地宽度
+		signY = NAME[1];//获取当前物品占地高度
+		IMG_W = NAME[2];//获取当前物品宽度
+		IMG_H = NAME[3];//获取当前物品高度
+		IMG_T = NAME[4];//获取当前物品向上偏移量
+		GoodsNumber = NAME[5];//
+		name_txt = NAME[6];//
+		describe_text = NAME[7];//
+		
 	}
-	SPageNumber();
-}
-//目录翻页-------------------------------------------------------------
-//读取页码-------------------------------------------------------------
-function LPageNumber(){
-	if(Label == 0){
-		window.PageNumber = PageNumber0;
-	}else if(Label == 1){
-		window.PageNumber = PageNumber1;
-	}else if(Label == 2){
-		window.PageNumber = PageNumber2;
-	}
-}
-//读取页码-------------------------------------------------------------
-//保存页码-------------------------------------------------------------
-function SPageNumber(){
-	if(Label == 0){
-		window.PageNumber0 = PageNumber;
-		NumImg0.src = "imges/PageNumber/furniture-" + PageNumber0 + ".png";
-		console.log("imges/PageNumber/furniture-" + PageNumber0 + ".png")
-	}else if(Label == 1){
-		window.PageNumber1 = PageNumber;
-		NumImg1.src = "imges/PageNumber/Photo-" + PageNumber1 + ".png";
-		console.log("imges/PageNumber/Photo-" + PageNumber1 + ".png")
-	}else if(Label == 2){
-		window.PageNumber2 = PageNumber;
-		NumImg2.src = "imges/PageNumber/Wall-" + PageNumber2 + ".png";
-		console.log("imges/PageNumber/Wall-" + PageNumber2 + ".png");
-	}
-	// console.log("0页码：" + PageNumber0 + "   1页码：" + PageNumber1 + "   2页码：" + PageNumber2)
-}
-//保存页码-------------------------------------------------------------
-//目录标签切换---------------------------------------------------------
-furnitureImg.addEventListener('click',function(e){
-    furniture.style.display = "block";
-	Photo.style.display = "none";
-	Wall.style.display = "none";
-	furnitureImg.src = "imges/menu-furniture-2.png";
-	PhotoImg.src = "imges/menu-Photo-1.png";
-	WallImg.src = "imges/menu-Wall-1.png";
-	NumImg0.style.display = "block";
-	NumImg1.style.display = "none";
-	NumImg2.style.display = "none";
-	window.Label = 0;
-	console.log(Label);
-	homeBtn.style.display = "none";
-})
-PhotoImg.addEventListener('click',function(e){
-    furniture.style.display = "none";
-	Photo.style.display = "block";
-	Wall.style.display = "none";
-	furnitureImg.src = "imges/menu-furniture-1.png";
-	PhotoImg.src = "imges/menu-Photo-2.png";
-	WallImg.src = "imges/menu-Wall-1.png";
-	NumImg0.style.display = "none";
-	NumImg1.style.display = "block";
-	NumImg2.style.display = "none";
-	window.Label = 1;
-	console.log(Label);
-	homeBtn.style.display = "none";
-	del();
-	zhaopianSign();
-})
-WallImg.addEventListener('click',function(e){
-    furniture.style.display = "none";
-	Photo.style.display = "none";
-	Wall.style.display = "block";
-	furnitureImg.src = "imges/menu-furniture-1.png";
-	PhotoImg.src = "imges/menu-Photo-1.png";
-	WallImg.src = "imges/menu-Wall-2.png";
-	NumImg0.style.display = "none";
-	NumImg1.style.display = "none";
-	NumImg2.style.display = "block";
-	window.Label = 2;
-	console.log(Label);
-	homeBtn.style.display = "block";
-})
-//目录标签切换---------------------------------------------------------
-
-
-
-
-//地板墙纸替换---------------------------------------------------------------
-var bjWall1 = document.getElementById("bj-wall-1");
-var bjWall1Btn = document.getElementById("bj-wall-1-btn");
-var bjWall2 = document.getElementById("bj-wall-2");
-var bjWall2Btn = document.getElementById("bj-wall-2-btn");
-var bjWall3 = document.getElementById("bj-wall-3");
-var bjWall3Btn = document.getElementById("bj-wall-3-btn");
-var bjWall4 = document.getElementById("bj-wall-4");
-var bjWall4Btn = document.getElementById("bj-wall-4-btn");
-var bjWall5 = document.getElementById("bj-wall-5");
-var bjWall5Btn = document.getElementById("bj-wall-5-btn");
-var bjWall6 = document.getElementById("bj-wall-6");
-var bjWall6Btn = document.getElementById("bj-wall-6-btn");
-var bjWall7 = document.getElementById("bj-wall-7");
-var bjWall7Btn = document.getElementById("bj-wall-7-btn");
-var wallBj = document.getElementById("wall-bj");
-var wallBjBtn = document.getElementById("wall-bj-btn");
-var bjFloor1 = document.getElementById("bj-floor-1");
-var bjFloor1Btn = document.getElementById("bj-floor-1-btn");
-var bjFloor2 = document.getElementById("bj-floor-2");
-var bjFloor2Btn = document.getElementById("bj-floor-2-btn");
-var bjFloor3 = document.getElementById("bj-floor-3");
-var bjFloor3Btn = document.getElementById("bj-floor-3-btn");
-var bjFloor4 = document.getElementById("bj-floor-4");
-var bjFloor4Btn = document.getElementById("bj-floor-4-btn");
-var bjFloor5 = document.getElementById("bj-floor-5");
-var bjFloor5Btn = document.getElementById("bj-floor-5-btn");
-var bjFloor6 = document.getElementById("bj-floor-6");
-var bjFloor6Btn = document.getElementById("bj-floor-6-btn");
-var bjFloor7 = document.getElementById("bj-floor-7");
-var bjFloor7Btn = document.getElementById("bj-floor-7-btn");
-var floorBj = document.getElementById("floor-bj");
-var floorBjBtn = document.getElementById("floor-bj-btn");
-var homeBtn = document.getElementById("home-btn");
-bjWall1Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjWall1.style.background = "url(" + ImgWallBj + ")";
-        bjWall1.style.backgroundSize = "1em";
-})
-bjWall2Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjWall2.style.background = "url(" + ImgWallBj + ")";
-        bjWall2.style.backgroundSize = "1em";
-})
-bjWall3Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjWall3.style.background = "url(" + ImgWallBj + ")";
-        bjWall3.style.backgroundSize = "1em";
-})
-bjWall4Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjWall4.style.background = "url(" + ImgWallBj + ")";
-        bjWall4.style.backgroundSize = "1em";
-})
-bjWall5Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjWall5.style.background = "url(" + ImgWallBj + ")";
-        bjWall5.style.backgroundSize = "1em";
-})
-bjWall6Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjWall6.style.background = "url(" + ImgWallBj + ")";
-        bjWall6.style.backgroundSize = "1em";
-})
-bjWall7Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjWall7.style.background = "url(" + ImgWallBj + ")";
-        bjWall7.style.backgroundSize = "1em";
-})
-bjFloor1Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjFloor1.style.background = "url(" + ImgFloorBj + ")";
-        bjFloor1.style.backgroundSize = "2em";
-})
-bjFloor2Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjFloor2.style.background = "url(" + ImgFloorBj + ")";
-        bjFloor2.style.backgroundSize = "2em";
-})
-bjFloor3Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjFloor3.style.background = "url(" + ImgFloorBj + ")";
-        bjFloor3.style.backgroundSize = "2em";
-})
-bjFloor4Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjFloor4.style.background = "url(" + ImgFloorBj + ")";
-        bjFloor4.style.backgroundSize = "2em";
-})
-bjFloor5Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjFloor5.style.background = "url(" + ImgFloorBj + ")";
-        bjFloor5.style.backgroundSize = "2em";
-})
-bjFloor6Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjFloor6.style.background = "url(" + ImgFloorBj + ")";
-        bjFloor6.style.backgroundSize = "2em";
-})
-bjFloor7Btn.addEventListener('click',function(e){
-        console.log(e.target);
-        bjFloor7.style.background = "url(" + ImgFloorBj + ")";
-        bjFloor7.style.backgroundSize = "2em";
-})
-function wallBtn(){
-	wallBjBtn.style.pointerEvents = "";
-	floorBjBtn.style.pointerEvents = "none";
-	mouse.firstElementChild.src = ImgWallBjBtn;
-	mouseImg.style.width = "1em";
-	mouseImg.style.height = "1em";
-}
-function floorBtn(){
-	floorBjBtn.style.pointerEvents = "";
-	wallBjBtn.style.pointerEvents = "none";
-	mouse.firstElementChild.src = ImgFloorBjBtn;
-	mouseImg.style.width = "1em";
-	mouseImg.style.height = "1em";
-}
-Wall.addEventListener('click',function(e){
-	console.log(e.target.index);
-	if (e.target.index < 112) {
-		window.ImgWallBj = "imges/Wall/" + e.target.index + ".png";
-		window.ImgWallBjBtn = "imges/icon/Wall/" + e.target.index + ".png";
-		wallBtn()
+	name_text_1.innerHTML = name_txt;//写入名称栏
+	name_text_2.innerHTML = name_txt;//写入名称栏
+	describe_1.innerHTML = describe_text;//写入内容栏
+	describe_2.innerHTML = describe_text;//写入内容栏
+	// console.log(signX);
+	// console.log(signY);
+	// console.log(IMG_W);
+	// console.log(IMG_H);
+	// console.log(IMG_T);
+	// console.log(signX);
+	// console.log(signY);
+	// console.log(IMG_icon_T);
+	// console.log(IMG_icon_W);
+	// console.log(IMG_icon_H);
+	if (menuBodySign != 6 && GoodsNumber != 1) {
+		if (GoodsNumber == 20) {
+			document.getElementById("Discoloration").style.display = "block";
+		}else{
+			document.getElementById("rotate").style.display = "block";
+		}
 	}else{
-		window.ImgFloorBj = "imges/Wall/" + e.target.index + ".png";
-		window.ImgFloorBjBtn = "imges/icon/Wall/" + e.target.index + ".png";
-		floorBtn()
-	}
-})
-//地板墙纸替换---------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-//跟随鼠标模块---------------------------------------------------------
-var mouse=document.getElementById('mouse');
-document.onmousemove=function(ev){
-    var oEvent=ev||event;
-    var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
-    var scrollLeft=document.documentElement.scrollLeft||document.body.scrollLeft;
-    mouse.style.left=oEvent.clientX+scrollLeft+'px';
-    mouse.style.top=oEvent.clientY+scrollTop+'px';
-}
-
-
-
-
-//缩放功能---------------------------------------------------------
-function narrow(){
-	var zoomImg = document.getElementById("zoom");
-	if (zoomNum == 4) {
-		window.zoomNum = 3;
-		document.body.id = "body-3";
-		zoomImg.style.background = "url(imges/zoom-75.png)";
-	}else if (zoomNum == 3) {
-		window.zoomNum = 2;
-		document.body.id = "body-2";
-		zoomImg.style.background = "url(imges/zoom-50.png)";
-	}else if (zoomNum == 2) {
-		window.zoomNum = 1;
-		document.body.id = "body-1";
-		zoomImg.style.background = "url(imges/zoom-25.png)";
+		document.getElementById("Discoloration").style.display = "none";
+		document.getElementById("rotate").style.display = "none";
 	}
 }
-function enlarge(){
-	var zoomImg = document.getElementById("zoom");
-	if (zoomNum == 1) {
-		window.zoomNum = 2;
-		document.body.id = "body-2";
-		zoomImg.style.background = "url(imges/zoom-50.png)";
-	}else if (zoomNum == 2){
-		window.zoomNum = 3;
-		document.body.id = "body-3";
-		zoomImg.style.background = "url(imges/zoom-75.png)";
-	}else if (zoomNum == 3){
-		window.zoomNum = 4;
-		document.body.id = "body-4";
-		zoomImg.style.background = "url(imges/zoom-100.png)";
+
+
+
+
+
+
+function IsAdd() {//将物品信息写入数据库
+	if (menuBodySign == 3) {
+		carpet_Position.push(IsE);//写入坐标
+		carpet_Catalog.push(menuBodySign);//写入目录序号
+		carpet_name.push(otherSign);//写入物品序号
+		carpet_Number.push(GoodsNumber);//写入变化状态数量
+		carpet_state.push(Is_state);//写入当前状态
+		carpet_X.splice(IsE,1,signX);//写入物品宽度
+		carpet_Y.splice(IsE,1,signY);//写入物品高度
+	}else{
+		Position.push(IsE);//写入坐标
+		Position_Catalog.push(menuBodySign);//写入目录序号
+		Position_name.push(otherSign);//写入物品序号
+		Position_Number.push(GoodsNumber);//写入变化状态数量
+		Position_state.push(Is_state);//写入当前状态
+		sign_X.splice(IsE,1,signX);//写入物品宽度
+		sign_Y.splice(IsE,1,signY);//写入物品高度
+	}
+		
+	HouseNumM[IsE].firstChild.style.top = IMG_T;//设置纵向偏移
+	HouseNumM[IsE].firstChild.style.width = IMG_W;//设置物品宽度
+	HouseNumM[IsE].firstChild.style.height = IMG_H;//设置物品高度
+		// console.log(Position);
+		// console.log(Position_name);
+		// console.log(Position_Catalog);
+		// console.log(Position_Season_spring);
+		// console.log(Position_Season_summer);
+		// console.log(Position_Season_autumn);
+		// console.log(Position_Season_winter);
+		// console.log(Position_Number);
+		// console.log(sign_X);
+		// console.log(sign_Y);
+}
+
+
+
+
+
+
+
+
+
+
+
+function Initialization() {//将所有未标记地块设置为可选
+	// console.log("Initialization");
+	for (var i = 0; i < sign_X.length; i++) {
+		if (sign_X[i] == 0) {
+			HouseNumB[i].style.pointerEvents = "auto";
+			HouseNumB[i].firstChild.style.background = "";
+			HouseNumB[i].firstChild.style.opacity =  "1";
+			HouseNumT[i].firstChild.src = "imges/0.png";
+			if (Grid_status == true) {
+				HouseNumT[i].firstChild.src = "imges/yes.png";
+			}
+		}else{
+			HouseNumB[i].style.pointerEvents = "none";
+			HouseNumT[i].firstChild.src = "imges/0.png";
+			// HouseNumT[i].firstChild.src = "imges/no.png";
+		}
 	}
 }
-//缩放功能---------------------------------------------------------
-
-
-
-
-
-
-var preview = document.getElementById('preview');
-var preview1 = document.getElementById('preview1');
-function screenshot(){
-	var screenshot = document.getElementById('screenshot');
-	preview.style.display = "flex";
-	huanchong();
+function signMap() {//设置高度大于2的物品纵向禁用地块
+	// console.log("signMap");
+	for (var i = 0; i < sign_X.length; i++) {
+		if (sign_X[i] != 0) {
+			for (var x = 0; x < sign_X[i]; x++) {
+				for (var y = 0; y < sign_Y[i]; y++) {
+					HouseNumB[i+x-MapWidth*y].style.pointerEvents = "none";
+					HouseNumT[i+x-MapWidth*y].firstChild.src = "imges/0.png";
+					// HouseNumT[i+x-MapWidth*y].firstChild.src = "imges/no.png";
+				}
+			}
+		}
+	}
 }
-function huanchong(){
-	html2canvas(camera).then(function(canvas) {
+
+function signMapX() {
+	// console.log("signMapX");
+	for (var i = 0; i < sign_X.length; i++) {
+		if (sign_X[i] != 0 && i-signX+1 > 0) {
+			for (var x = 0; x < signX; x++) {
+				HouseNumB[i-x].style.pointerEvents = "none";
+				HouseNumT[i-x].firstChild.src = "imges/0.png";
+				// HouseNumT[i-x].firstChild.src = "imges/no.png";
+				for (var y = 0; y < sign_Y[i]; y++) {
+					if (i-x-MapWidth*y > 0) {
+						HouseNumB[i-x-MapWidth*y].style.pointerEvents = "none";
+						HouseNumT[i-x-MapWidth*y].firstChild.src = "imges/0.png";
+						// HouseNumT[i-x-MapWidth*y].firstChild.src = "imges/no.png";
+					}
+				}
+			}
+		}
+		if (sign_X[i] != 0) {
+			for (var x = 0; x < sign_X[i]; x++) {
+				for (var y = 0; y < signY; y++) {
+					if (i+x+MapWidth*y < Map_Num) {
+						HouseNumB[i+MapWidth*y+x].style.pointerEvents = "none";
+						HouseNumT[i+MapWidth*y+x].firstChild.src = "imges/0.png";
+						// HouseNumT[i+MapWidth*y+x].firstChild.src = "imges/no.png";
+					}
+				}
+			}
+			for (var x = 0; x < signX; x++) {
+				for (var y = 1; y < signY; y++) {
+					if (i+MapWidth*y-x > 0 && i+MapWidth*y-x <Map_Num) {
+						HouseNumB[i-x+MapWidth*y].style.pointerEvents = "none";
+						HouseNumT[i-x+MapWidth*y].firstChild.src = "imges/0.png";
+						// HouseNumT[i-x+MapWidth*y].firstChild.src = "imges/no.png";
+					}
+				}
+			}
+		}
+	}
+}
+
+function sign_carpet() {//设置高度大于2的物品纵向禁用地块
+	// console.log("signMap");
+	for (var i = 0; i < carpet_X.length; i++) {
+		if (carpet_X[i] != 0) {
+			for (var x = 0; x < carpet_X[i]; x++) {
+				for (var y = 0; y < carpet_Y[i]; y++) {
+					HouseNumB[i+x-MapWidth*y].style.pointerEvents = "none";
+					HouseNumT[i+x-MapWidth*y].firstChild.src = "imges/0.png";
+				}
+				// 	HouseNumT[i+x-MapWidth*y].firstChild.src = "imges/no.png";
+				// }
+			}
+		}
+	}
+}
+
+function sign_carpet_X() {
+	// console.log("signMapX");
+	for (var i = 0; i < carpet_X.length; i++) {
+		if (carpet_X[i] != 0 && i-signX+1 > 0) {
+			for (var x = 0; x < signX; x++) {
+				HouseNumB[i-x].style.pointerEvents = "none";
+				HouseNumT[i-x].firstChild.src = "imges/0.png";
+				// HouseNumT[i-x].firstChild.src = "imges/no.png";
+				for (var y = 0; y < carpet_Y[i]; y++) {
+					if (i-x-MapWidth*y > 0) {
+						HouseNumB[i-x-MapWidth*y].style.pointerEvents = "none";
+						HouseNumT[i-x-MapWidth*y].firstChild.src = "imges/0.png";
+						// HouseNumT[i-x-MapWidth*y].firstChild.src = "imges/no.png";
+					}
+				}
+			}
+		}
+		if (carpet_X[i] != 0) {
+			for (var x = 0; x < carpet_X[i]; x++) {
+				for (var y = 0; y < signY; y++) {
+					if (i+x+MapWidth*y < Map_Num) {
+						HouseNumB[i+MapWidth*y+x].style.pointerEvents = "none";
+						HouseNumT[i+MapWidth*y+x].firstChild.src = "imges/0.png";
+						// HouseNumT[i+MapWidth*y+x].firstChild.src = "imges/no.png";
+					}
+				}
+			}
+			for (var x = 0; x < signX; x++) {
+				for (var y = 1; y < signY; y++) {
+					if (i+MapWidth*y-x > 0 && i+MapWidth*y-x <Map_Num) {
+						HouseNumB[i-x+MapWidth*y].style.pointerEvents = "none";
+						HouseNumT[i-x+MapWidth*y].firstChild.src = "imges/0.png";
+						// HouseNumT[i-x+MapWidth*y].firstChild.src = "imges/no.png";
+					}
+				}
+			}
+		}
+	}
+}
+
+
+
+
+
+
+function wall_sign() {
+	for (var i = 0; i < HouseNumB.length; i++) {
+		HouseNumB[i].style.pointerEvents = "none";
+		HouseNumT[i].firstChild.src = "imges/0.png";
+		// HouseNumT[i].firstChild.src = "imges/no.png";
+		sign_wall_X.splice(e,1,1)
+	}
+	for (var i = 0; i < wall_sign_Arr.length; i++) {
+		var e = wall_sign_Arr[i]
+		console.log(HouseNumB[e]);
+		HouseNumB[e].style.pointerEvents = "auto";
+		if (Grid_status == true) {
+			HouseNumT[e].firstChild.src = "imges/yes.png";
+		}
+		sign_wall_X.splice(e,1,0)
+	}
+}
+
+
+function wall_sign_X() {
+	for (var i = 0; i < wall_X.length; i++) {
+		var e = wall_Position[i];
+		var x = wall_X[i];
+		for (var n = 0; n < x; n++) {
+			HouseNumB[e+n].style.pointerEvents = "none";
+			HouseNumT[e+n].firstChild.src = "imges/0.png";
+			// HouseNumT[e+n].firstChild.src = "imges/no.png";
+		}
+		for (var n = 0; n < signX; n++) {
+			HouseNumB[e-n].style.pointerEvents = "none";
+			HouseNumT[e-n].firstChild.src = "imges/0.png";
+			// HouseNumT[e-n].firstChild.src = "imges/no.png";
+		}	
+	}
+	for (var i = 0; i < sign_wall_X.length; i++) {
+		if (sign_wall_X[i] != 0 && i-signX > 0) {
+			for (var x = 0; x < signX; x++) {
+				HouseNumB[i-x].style.pointerEvents = "none";
+				HouseNumT[i-x].firstChild.src = "imges/0.png";
+				// HouseNumT[i-x].firstChild.src = "imges/no.png";
+			}
+		}
+	}
+}
+
+
+function floor() {
+	for (var i = 0 ; i < carpet_Position.length; i++) {
+		var up = carpet_name[carpet_Position.indexOf(carpet_Position[i] - MapWidth)];
+		var down = carpet_name[carpet_Position.indexOf(carpet_Position[i] + MapWidth)];
+		var left = carpet_name[carpet_Position.indexOf(carpet_Position[i] - 1)];
+		var right = carpet_name[carpet_Position.indexOf(carpet_Position[i] + 1)];
+		var L_up = carpet_name[carpet_Position.indexOf(carpet_Position[i] - MapWidth - 1)];
+		var L_down = carpet_name[carpet_Position.indexOf(carpet_Position[i] + MapWidth - 1)];
+		var R_up = carpet_name[carpet_Position.indexOf(carpet_Position[i] - MapWidth + 1)];
+		var R_down = carpet_name[carpet_Position.indexOf(carpet_Position[i] + MapWidth + 1)];
+		var name = carpet_name[i];
+		var coordinate = [up,down,left,right,L_up,L_down,R_up,R_down];
+		var Binary = 0; 
+		for (var x = 0 ; x < coordinate.length; x++) {
+			if (coordinate[x] == name) {
+				Binary = Binary + "1";
+			}else{
+				Binary = Binary + "0";
+			}
+		}
+		var Binary_4 = parseInt(Binary.substring(1,5),2);
+		if (name > 12 && name != 23) {
+			n = 0;
+			if (name > 12 && name < 19) {
+				// Binary[5,1,7]坐
+				// Binary[3,0,4]标
+				// Binary[6.2.8]系
+				switch(Binary_4){
+					case 10:
+						var n = Binary[5];
+					break;
+					case 9:
+						var n = Binary[7];
+					break;
+					case 6:
+						var n = Binary[6];
+					break;
+					case 5:
+						var n = Binary[8];
+					break;
+					case 11:
+						var n = Binary[5] + Binary[7];
+					break;
+					case 7:
+						var n = Binary[6] + Binary[8];
+					break;
+					case 14:
+						var n = Binary[5] + Binary[6];
+					break;
+					case 13:
+						var n = Binary[7] + Binary[8];
+					break;
+					case 15:
+						var n = Binary[5] + Binary[6] + Binary[7] + Binary[8];
+					break;
+				}
+			}
+			Binary_8 = parseInt(n,2);
+			var Is_state = Binary_4 + "-" + Binary_8;
+			HouseNumB[carpet_Position[i]].firstChild.src = "imges/3/" + name + "/" + Is_state + ".png";
+			Timg = HouseNumB[carpet_Position[i]].firstChild.src;
+		}
+		if (state == "Pickaxe") {
+			HouseNumB[carpet_Position[i]].style.pointerEvents = "auto";
+		}
+		Binary = undefined;
+	}
+}
+
+document.body.style.width = screen.width + "px";
+document.body.style.height = screen.height + "px";
+
+
+function Grid() {//开启网格系统
+	var Grid_Btn = document.getElementById("Grid");
+	if (Grid_status == false) {
+		Grid_Btn.src = "imges/Grid-2.png";
+		Grid_status = true;
+		if (menuBodySign == 1) {
+			Initialization();
+			wall_sign();
+		 	wall_sign_X();
+		}else if (menuBodySign == 3) {
+			Initialization();
+			sign_carpet();
+			sign_carpet_X();
+		}else if (menuBodySign == 0 || menuBodySign == 2) {
+			Initialization();
+			signMap();
+		 	signMapX();
+		}
+	}else{
+		Grid_Btn.src = "imges/Grid-1.png";
+		Grid_status = false;
+		if (menuBodySign == 1) {
+			Initialization();
+			wall_sign();
+		 	wall_sign_X();
+		}else if (menuBodySign == 3) {
+			Initialization();
+			sign_carpet();
+			sign_carpet_X();
+		}else if (menuBodySign == 0 || menuBodySign == 2) {
+			Initialization();
+			signMap();
+		 	signMapX();
+		}
+	}
+}
+function Pickaxe() {//开启十字镐状态
+	var Pickaxe_Btn = document.getElementById("Pickaxe");
+	if (state == "common") {
+		Pickaxe_Btn.src = "imges/Pickaxe-2.png";
+		document.getElementById("del").style.display = "block";
+		document.getElementById("rotate").style.display = "none";
+		document.getElementById("Discoloration").style.display = "none";
+		state = "Pickaxe";
+		for (var i = 0; i < HouseNumB.length; i++) {
+			HouseNumB[i].style.pointerEvents = "auto";
+			if (Grid_status == true) {
+				HouseNumT[i].firstChild.src = "imges/yes.png";
+			}	
+		}
+	}else{
+		Pickaxe_Btn.src = "imges/Pickaxe-1.png";
+		document.getElementById("del").style.display = "none";
+		state = "common";
+		if (menuBodySign == 1) {
+			Initialization();
+			wall_sign();
+		 	wall_sign_X();
+		}else if (menuBodySign == 3) {
+			Initialization();
+			sign_carpet();
+			sign_carpet_X();
+		}else if (menuBodySign == 0 || menuBodySign == 2) {
+			Initialization();
+			signMap();
+		 	signMapX();
+		}
+	}
+}
+
+
+var change_Num = 0;
+House.oncontextmenu = function(e) {
+	e.preventDefault();
+	if (menuBodySign < 4 && menuBodySign != 1 && NAME[5] != 1) {
+		var n = NAME[5];
+		if (menuBodySign== 3) {
+			var Z = HouseNumB;
+		}else{
+			var Z = HouseNumM;
+		}
+		if (change_Num < n && n != 20) {
+			switch(change_Num) {
+				case 0:
+				change_Num++;
+				signX = NAME[8];//获取当前物品占地宽度
+				signY = NAME[9];//获取当前物品占地高度
+				IMG_W = NAME[10];//获取当前物品宽度
+				IMG_H = NAME[11];//获取当前物品高度
+				IMG_T = NAME[12];//获取当前物品向上偏移量				
+				break;
+				case 1:
+				if (n == 2) {
+					change_Num = 0;
+				}else{
+					change_Num++;
+				}
+				signX = NAME[0];//获取当前物品占地宽度
+				signY = NAME[1];//获取当前物品占地高度
+				IMG_W = NAME[2];//获取当前物品宽度
+				IMG_H = NAME[3];//获取当前物品高度
+				IMG_T = NAME[4];//获取当前物品向上偏移量
+				break;
+				case 2:
+				change_Num++;
+				signX = NAME[8];//获取当前物品占地宽度
+				signY = NAME[9];//获取当前物品占地高度
+				IMG_W = NAME[10];//获取当前物品宽度
+				IMG_H = NAME[11];//获取当前物品高度
+				IMG_T = NAME[12];//获取当前物品向上偏移量
+				break;
+				case 3:
+				change_Num = 0;
+				signX = NAME[0];//获取当前物品占地宽度
+				signY = NAME[1];//获取当前物品占地高度
+				IMG_W = NAME[2];//获取当前物品宽度
+				IMG_H = NAME[3];//获取当前物品高度
+				IMG_T = NAME[4];//获取当前物品向上偏移量
+				break;
+			}
+		}else{
+			if (change_Num < 20) {
+				change_Num++;
+			}else if (change_Num == 20) {
+				change_Num = 0;
+			}
+			signX = NAME[0];//获取当前物品占地宽度
+			signY = NAME[1];//获取当前物品占地高度
+			IMG_W = NAME[2];//获取当前物品宽度
+			IMG_H = NAME[3];//获取当前物品高度
+			IMG_T = NAME[4];//获取当前物品向上偏移量
+			console.log(change_Num)
+		}
+		if (menuBodySign== 3) {
+			var Z = HouseNumB;
+		}else{
+			var Z = HouseNumM;
+		}
+		IMG = "imges/" + menuBodySign + "/" + otherSign + "/" + change_Num + ".png";
+		if (e.target.index != undefined) {
+			Z[e.target.index].firstChild.src = "imges/" + menuBodySign + "/" + otherSign + "/" + change_Num + ".png";
+			Z[e.target.index].firstChild.style.top = IMG_T;
+			Z[e.target.index].firstChild.style.width = IMG_W;
+			Z[e.target.index].firstChild.style.height = IMG_H;
+		}
+		
+		// console.log(NAME)
+		Initialization();
+		if (menuBodySign == 0) {
+			signMap();
+			signMapX();
+		}else if (menuBodySign == 3) {
+			sign_carpet();
+			sign_carpet_X();
+		}
+	}
+}
+function Statistics() {
+	var Statistics_0 = [];
+	var Statistics_1 = [];
+	var Statistics_2 = [];
+	var Statistics_3 = [];
+	var Statistics_4 = [];
+	for (var i = 0 ; i < Position_Catalog.length; i++) {
+		switch (Position_Catalog[i]){
+			case 0:
+			var n1 = Position_name[i];
+			var n2 = furniture_Arr[n1];
+			var n3 = n2[6];
+			Statistics_0.push(n3)
+			break;
+			case 2:
+			var n1 = Position_name[i];
+			var n2 = toolNum[n1];
+			var n3 = n2[6];
+			Statistics_1.push(n3)
+			break;
+		}
+	}
+	for (var i = 0 ; i < wall_name.length; i++) {
+		var n1 = wall_name[i];
+		var n2 = wall_name_text[n1];
+		Statistics_2.push(n2)
+	}
+	for (var i = 0 ; i < carpet_name.length; i++) {
+		var n1 = carpet_name[i];
+		var n2 = carpetNum[n1];
+		var n3 = n2[6];
+		Statistics_3.push(n3)
+	}
+	console.log(Statistics_0)
+	console.log(Statistics_1)
+	console.log(Statistics_2)
+	console.log(Statistics_3)
+	var Statistics_name = [Statistics_0,Statistics_1,Statistics_2,Statistics_3,Statistics_4];
+	var Statistics_name_s = [];
+	for (var x = 0; x < Statistics_name.length; x++) {
+		Statistics_name[x].sort();
+		for (var i = 0; i < Statistics_name[x].length;) {
+			var count = 0;
+			for (var j = i; j < Statistics_name[x].length; j++) {  
+				if ((Statistics_name[x])[i] == (Statistics_name[x])[j]) {  
+					count++;  
+				}
+			}
+			Statistics_name_s.push([(Statistics_name[x])[i], count]);  
+			i += count;
+		}
+		var Statistics_0_name_Num = [];
+		for (var i = 0; i < Statistics_name_s.length; i++) {
+			Statistics_0_name_Num.push(Statistics_name_s[i][0] + ":" + Statistics_name_s[i][1]);
+		}
+	}
+
+	console.log(Statistics_0_name_Num);
+	for (var i = 0 ; i < Statistics_0_name_Num.length; i++) {
+		if (i < 105) {
+			StatisticsArr[i].innerHTML = "&bull; " + Statistics_0_name_Num[i];
+			var x = "none";
+		}else{
+			StatisticsArr[i].innerHTML = "&bull; " + Statistics_0_name_Num[i];
+			var x = "block";
+		}
+		document.getElementById("Statistics-prev").style.display = x;
+		document.getElementById("Statistics-next").style.display = x;
+		document.getElementById("Statistics_table-1-img").style.display = x;
+	}
+	document.getElementById("Statistics").style.display = "block";
+}
+var StatisticsArr = Statistics_table.getElementsByClassName("Statistics-text");
+
+function Statistics_X() {//关闭统计表
+	document.getElementById("Statistics").style.display = "none";
+	var StatisticsArr = Statistics_table.getElementsByClassName("Statistics-text");
+	for (var i = 0 ; i < StatisticsArr.length; i++) {
+		StatisticsArr[i].innerHTML = "";
+	}
+	document.getElementById("Statistics_table-1").style.display = "flex";
+	document.getElementById("Statistics_table-2").style.display = "none";
+	document.getElementById("Statistics-prev").style.display = "none";
+	document.getElementById("Statistics-next").style.display = "none";
+	document.getElementById("Statistics_table-1-img").style.display = "none";
+}
+for (var i = 0 ; i < 105; i++) {
+	Statistics_add_1();
+	Statistics_add_2();
+}
+function Statistics_add_1(){//统计页1
+	var Statistics_table_1 = document.getElementById("Statistics_table-1");
+	var div = document.createElement("div");
+	Statistics_table_1.appendChild(div).className = "Statistics-text";
+}
+function Statistics_add_2(){//统计页2
+	var Statistics_table_2 = document.getElementById("Statistics_table-2");
+	var div = document.createElement("div");
+	Statistics_table_2.appendChild(div).className = "Statistics-text";
+}
+function Statistics_prev() {
+	document.getElementById("Statistics_table-1").style.display = "flex";
+	document.getElementById("Statistics_table-2").style.display = "none";
+}
+function Statistics_next() {
+	document.getElementById("Statistics_table-1").style.display = "none";
+	document.getElementById("Statistics_table-2").style.display = "flex";
+}
+
+function Farm() {//跳转到装修模拟器
+	window.open("http://bishengming.gitee.io/stardewvalleyfarm/")
+}
+
+function author() {//显示联系作者联系方式
+	document.getElementById("author").style.display = "block";
+}
+function author_X() {//关闭作者联系方式
+	document.getElementById("author").style.display = "none";
+}
+function Explain() {//开启教程页面
+	var Explain_Btn = document.getElementById("Explain");
+	document.getElementById("Course_content").style.display = "block";
+}
+var Course_Num = 0;//教程页码
+function Course_prev() {//说明书上一页
+	var Course_arr = document.getElementById("Course_content");
+	var ARR = Course_arr.getElementsByClassName("Course_content");
+	if (Course_Num > 0) {
+		Course_Num = Course_Num - 1;	
+	}else if (Course_Num == 0) {
+		Course_Num = 0;
+	}
+	ARR[Course_Num].style.display = "block";
+	ARR[Course_Num+1].style.display = "none";
+}
+function Course_next() {//说明书下一页
+	var Course_arr = document.getElementById("Course_content");
+	var ARR = Course_arr.getElementsByClassName("Course_content");
+	if (Course_Num < 2) {
+		Course_Num = Course_Num + 1;	
+	}else if (Course_Num == 2) {
+		Course_Num = 2;
+	}
+	ARR[Course_Num].style.display = "block";
+	ARR[Course_Num-1].style.display = "none";
+}
+function Course_X() {//关闭说明
+	document.getElementById("Course_content").style.display = "none";
+}
+
+
+
+
+
+
+var time = 0;//计时
+var timeX = 0//时间状态
+var cloudY = document.getElementById("cloud");
+var cloudN = cloudY.querySelectorAll("div");
+var cloudX1 = cloudN[0].offsetLeft;//云1
+var cloudX2 = cloudN[1].offsetLeft;//云2
+var cloudX3 = cloudN[2].offsetLeft;//云3
+var cloudX4 = cloudN[3].offsetLeft;//云4
+var animation = setInterval("cloud()",50)//每50毫秒运行一次动画
+function cloud() {
+	if (timeX == 0) {
+		window.time = time + 1;
+		if (time == 300) {
+			window.timeX = 1
+		}
+	}else if (timeX == 1) {
+		window.time = time - 1;
+		if (time == 1) {
+			window.timeX = 0
+		}
+	}
+	cloudN[0].style.left = cloudX1 + time +"px";
+	cloudN[1].style.left = cloudX2 - time +"px";
+	cloudN[2].style.left = cloudX4 - time*2 +"px";
+	cloudN[3].style.left = cloudX3 + time*2 +"px";
+}
+function Course_yes() {//开启说明
+	document.getElementById("Course_content").style.display = "block";
+	document.getElementById("Course").style.display = "none";
+}
+function Course_no() {//拒绝开启说明
+	document.getElementById("Course").style.display = "none";
+}
+var preview = document.getElementById("preview");
+var preview1 = document.getElementById("preview1");
+function screenshot(){//开始生成图片
+	var screenshot = document.getElementById("screenshot");
+	preview.style.display = "flex";//显示下载弹窗
+	huanchong();//生成图片
+}
+function huanchong(){//将Frame生成图片
+	html2canvas(House).then(function(canvas) {
     preview1.appendChild(canvas);
-    var oCavans = document.getElementsByTagName('canvas')[0];
+    var oCavans = document.getElementsByTagName("canvas")[0];
     var strDataURI1 = oCavans.toDataURL();
     downLoadFn(strDataURI1);
 	});
 };
-
-
-
  //判断浏览器类型
 function myBrowser() {
 	var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
@@ -540,9 +1623,10 @@ function SaveAs5(imgURL) {
 }
 function download(strDataURI1) {
     var link = document.getElementById("IsA");
-    // link.innerHTML = 'download_canvas_image';
-    link.download = 'mypainting.png';
-    link.addEventListener('click', function(ev) {
+    // link.innerHTML = "download_canvas_image";
+    var name = document.getElementById("name-tenx").value;
+    link.download = name + "农场";
+    link.addEventListener("click", function(ev) {
     link.href = strDataURI1;
     }, false);
     document.getElementById("load").style.display = "none";
@@ -551,804 +1635,18 @@ function download(strDataURI1) {
     // document.body.appendChild(link);
 };
 function downLoadFn(url) {
-
     if(myBrowser() === "IE" || myBrowser() === "Edge") {
         SaveAs5(url);
     } else {
         download(url);
     }
 }
-
-
-
-//隐藏UI----------------------------------------------------
-function hide1(){
-	if (hide == 0) {
-		setTimeout(function(){ 
-			catalog.style.divacity = "1";
-			zoom.style.divacity = "1"; 
-		}, 40);
-		setTimeout(function(){ 
-			catalog.style.divacity = "0.8";
-			zoom.style.divacity = "0.8"; 
-		}, 80);
-		setTimeout(function(){ 
-			catalog.style.divacity = "0.6";
-			zoom.style.divacity = "0.6"; 
-		}, 120);
-		setTimeout(function(){ 
-			catalog.style.divacity = "0.4";
-			zoom.style.divacity = "0.4"; 
-		}, 160);
-		setTimeout(function(){ 
-			catalog.style.divacity = "0.2";
-			zoom.style.divacity = "0.2"; 
-		}, 200);
-		setTimeout(function(){ 
-			catalog.style.display = "none";
-			zoom.style.display = "none";
-		}, 240);
-		window.hide = 1;
-	}else{
-		setTimeout(function(){ 
-		catalog.style.display = "block";
-		zoom.style.display = "flex";
-		}, 40);
-		setTimeout(function(){ 
-			catalog.style.divacity = "0.4";
-			zoom.style.divacity = "0.4"; 
-		}, 80);
-		setTimeout(function(){ 
-			catalog.style.divacity = "0.6";
-			zoom.style.divacity = "0.6"; 
-		}, 120);
-		setTimeout(function(){ 
-			catalog.style.divacity = "0.8";
-			zoom.style.divacity = "0.8"; 
-		}, 160);
-		setTimeout(function(){ 
-			catalog.style.divacity = "1";
-			zoom.style.divacity = "1"; 
-		}, 200);
-		window.hide = 0;
-	}
-}
-//隐藏UI----------------------------------------------------
-
-
-
-
-Photo.addEventListener('click',function(e){
-	console.log(e.target.index);
-	var e = e.target.index;
-    window.IMGD = 1;
-    window.IMG = "imges/Photo/" + e + "-1.png";
-    window.IMGH = "0";
-    window.IMGHsign = 1;
-    window.IMGWsign = PhotoWsignArr[e];
-    window.IMGWidth = PhotoWidthArr[e];
-	window.IMGHeight = "2em";
-	window.IMGNum1 = PhotoNumArr[e];
-	window.IMGNum = e;
-	window.o = 1;
-	window.ImgesUrl = "imges/Photo/";
-	zhaopianSign();
-	PhotoSignX();
-	mouseImg.src = IMG;
-	mouseImg.style.top = IMGH;
-	mouseImg.style.width = IMGWidth;
-	mouseImg.style.height = IMGHeight;
-	ziliao();
-})
-function ziliao() {
-	if (kongzhitai1 == 1) {
-		document.getElementById("zoom").style.display = "block";
-		document.getElementById("text-2").innerHTML ="IMG: " + IMG;
-		document.getElementById("text-3").innerHTML ="IMGH: " + IMGH;
-		document.getElementById("text-4").innerHTML ="IMGHsign: " + IMGHsign;
-		document.getElementById("text-5").innerHTML ="IMGWsign: " + IMGWsign;
-		document.getElementById("text-6").innerHTML ="IMGWidth: " + IMGWidth;
-		document.getElementById("text-7").innerHTML ="IMGHeight: " + IMGHeight;
-		document.getElementById("text-8").innerHTML ="IMGNum1: " + IMGNum1;
-		document.getElementById("text-9").innerHTML ="IMGNum: " + IMGNum;
-		document.getElementById("text-10").innerHTML ="ImgesUrl: " + ImgesUrl;
-	}
-}
-var kongzhitai1 = 0;
-function kongzhitai() {
-	if (kongzhitai1 == 0) {
-		document.getElementById("dddiv").style.display = "block";
-		window.kongzhitai1 = 1;
-	}else if (kongzhitai1 == 1) {
-		document.getElementById("dddiv").style.display = "none";
-		window.kongzhitai1 = 0;
-	}
-	
-}
-function zhaopianSign(){
-		for (var i = 0; i < PhotoArr.length; i++) {
-			if (PhotoArr[i] == 0) {
-				// canvasNum[i].parentNode.style.background = "#000";
-				// canvasNum[i].parentNode.style.opacity =  "0.5";
-				canvasNum[i].parentNode.style.pointerEvents = "none";
-			}else if (PhotoArr[i] == 1) {
-				canvasNum[i].parentNode.style.background = "";
-				canvasNum[i].parentNode.style.pointerEvents = "auto";
-				// canvasNum[i].parentNode.style.background = "blue";
-				// canvasNum[i].parentNode.style.opacity =  "0.5";
-			}
-		}
-		for (var i = 0; i < PhotoWarr.length; i++) {
-			if (PhotoWarr[i] != 0) {
-				console.log(PhotoWarr[i]);
-				for (var n = 0; n < PhotoWarr[i]; n++) {
-					console.log(i+n);
-					canvasNum[i+n].parentNode.style.pointerEvents = "none";
-					// canvasNum[i+n].parentNode.style.background = "#fff";
-					// canvasNum[i+n].parentNode.style.opacity =  "0.5";
-				}
-					
-			}
-		}
-	}
-function PhotoSignX() {
-	for (var i = 1; i < PhotoSign.length; i++) {
-		if (PhotoSign[i] == 1 || PhotoArr[i] == 0) {	
-			if (i-(IMGWsign-1) > 0 && IMGWsign-1 > 0) {
-				canvasNum[i-(IMGWsign-1)].parentNode.style.pointerEvents = "none";
-				// canvasNum[i-(IMGWsign-1)].parentNode.style.background = "red";
-				// canvasNum[i-(IMGWsign-1)].parentNode.style.opacity =  "0.5";
-			}
-			if (i-(IMGWsign-2) > 0 && IMGWsign-2 > 0) {
-				canvasNum[i-(IMGWsign-2)].parentNode.style.pointerEvents = "none";
-				// canvasNum[i-(IMGWsign-2)].parentNode.style.background = "red";
-				// canvasNum[i-(IMGWsign-2)].parentNode.style.opacity =  "0.5";
-			}
-		}
-	}
-}
-
-
-
-
-
-furniture.addEventListener('click',function(e){
-	if (e.target.nodeName == "IMG") {
-		console.log(e.target.index);
-		var e = e.target.index;
-		window.IMGD = 1;
-		window.IMG = "imges/furniture/" + e + "-1.png";
-		window.IMGH = IMGHArr[e];
-		window.IMGHsign = IMGHsignArr[e];
-		window.IMGWsign = IMGWsignArr[e];
-		window.IMGWidth = IMGWidthArr[e];
-		window.IMGHeight = IMGHeightArr[e];
-		window.IMGNum1 = IMGNumArr[e];
-		window.IMGNum = e;
-		window.o = 1;
-		window.ImgesUrl = "imges/furniture/";
-		signZ();
-		signX1();
-		signY1();
-		ziliao();
-		mouseImg.src = IMG;
-		mouseImg.style.top = IMGH;
-		console.log(IMGWidth);
-		mouseImg.style.width = IMGWidth;
-		console.log(IMGHeight);
-		mouseImg.style.height = IMGHeight;
-	}
-	
-})
-
-
-
-var signHarr = [];
-var signWarr = [];
-var signXarr = [];
-var sign = [];
-var PhotoArr = [];
-var PhotoHarr = [];
-var PhotoWarr = [];
-var PhotoSign = [];
-var Choice = document.getElementById("Choice");
-Choice.style.width = screen.width + "px";
-Choice.style.height = screen.height + "px";
-console.log(PhotoIcon);
-function LV1(){
-	NOanimation()
-	div0.style.left = "";
-	window.homeNum = 144;
-	window.z = 12;
-	Choice.style.display = "none";
-	SignArray();
-	window.canvasNum = canvas.querySelectorAll("img");
-	window.ssr = canvasNum[0].src;
-	home.className = "home-S";
-	canvas.className = "canvas-S";
-	canvasGrid.className = "canvas-S";
-	camera.className = "camera-S";
-	for (var i = 0; i < canvasNum.length; i++) {
-        canvasNum[i].index = i;
-	}
-	var Nwall = [bjWall1,bjWall2,bjWall3,bjWall4,bjWall5,bjWall6,bjWall7];
-	var NwallBtn = [bjWall1Btn,bjWall2Btn,bjWall3Btn,bjWall4Btn,bjWall5Btn,bjWall6Btn,bjWall7Btn];
-	var Nfloor = [bjFloor1,bjFloor2,bjFloor3,bjFloor4,bjFloor5,bjFloor6,bjFloor7];
-	var NfloorBtn = [bjFloor1Btn,bjFloor2Btn,bjFloor3Btn,bjFloor4Btn,bjFloor5Btn,bjFloor6Btn,bjFloor7Btn];
-	for(var i = 0; i < 7; i++){
-		Nwall[i].className = "bj-wall-" + (i + 1) +"-S";
-		NwallBtn[i].className = "bj-wall-" + (i + 1) +"-S";
-		Nfloor[i].className = "bj-floor-" + (i + 1) +"-S";
-		NfloorBtn[i].className = "bj-floor-" + (i + 1) +"-S";
-	}
-	canvasNum[120].src = "imges/home-1-bj-x.png";
-	canvasNum[120].classList.add("home-S-bj-x");
-	canvasNum[105].src = "imges/bed.png";
-	canvasNum[105].classList.add("bed");
-	var signD = [48,60,72,84,96,108,120,59,71,83,95,107,119,131,105,106,117,118,129,130];
-	for (var i = 0; i < signD.length; i++) {
-		signXarr.splice(signD[i],1,1);
-	}
-	for (var i = 0; i < 48; i++) {
-		signXarr.splice(i,1,1);
-	}
-	for (var i = 132; i < 144; i++) {
-		signXarr.splice(i,1,1);
-	}
-	for (var i = 13; i < 23; i++) {
-		PhotoArr.splice(i,1,1);
-	}
-	console.log(PhotoSign);
-	Roommate1()
-	signZ()
-	roommateBtn.style.display = "none";
-	document.getElementById("roommate1").style.opacity = "0.2";
-	document.getElementById("roommate1").style.pointerEvents = "auto";
-}
-function LV2(){
-	NOanimation()
-	window.homeNum = 360;
-	window.z = 30;
-	Choice.style.display = "none";
-	SignArray();
-	window.canvasNum = canvas.querySelectorAll("img");
-	window.ssr = canvasNum[0].src;
-	home.className = "home-M";
-	canvas.className = "canvas-M";
-	canvasGrid.className = "canvas-M";
-	camera.className = "camera-M";
-	var Nwall = [bjWall1,bjWall2,bjWall3,bjWall4,bjWall5,bjWall6,bjWall7];
-	var NwallBtn = [bjWall1Btn,bjWall2Btn,bjWall3Btn,bjWall4Btn,bjWall5Btn,bjWall6Btn,bjWall7Btn];
-	var Nfloor = [bjFloor1,bjFloor2,bjFloor3,bjFloor4,bjFloor5,bjFloor6,bjFloor7];
-	var NfloorBtn = [bjFloor1Btn,bjFloor2Btn,bjFloor3Btn,bjFloor4Btn,bjFloor5Btn,bjFloor6Btn,bjFloor7Btn];
-	for(var i = 0; i < 7; i++){
-		Nwall[i].className = "bj-wall-" + (i + 1) +"-M";
-		NwallBtn[i].className = "bj-wall-" + (i + 1) +"-M";
-		Nfloor[i].className = "bj-floor-" + (i + 1) +"-M";
-		NfloorBtn[i].className = "bj-floor-" + (i + 1) +"-M";
-	}
-	Nwall[1].style.background = "url(imges/Wall/0.png)";
-	Nwall[1].style.backgroundSize = "1em";
-	Nwall[2].style.background = "url(imges/Wall/0.png)";
-	Nwall[2].style.backgroundSize = "1em";
-	Nfloor[0].style.background = "url(imges/Kitchen-floor.png)";
-	Nfloor[0].style.backgroundSize = "2em";
-	Nfloor[3].style.background = "url(imges/floor-1.png)";
-	Nfloor[3].style.backgroundSize = "2em";
-	for (var i = 0; i < canvasNum.length; i++) {
-        canvasNum[i].index = i;
-	}
-	var canvasN = [62,61,81,300];
-	var canvasSrc = ["imges/kitchen-R-M.png","imges/kitchen-L-M.png","imges/DoubleBed.png","imges/home-2-bj-x.png"];
-	var canvasClass = ["kitchen-R-M","kitchen-L-M","DoubleBed","home-M-bj-x"];
-	for (var i = 0; i < canvasN.length; i++){
-		canvasNum[canvasN[i]].src = canvasSrc[i];
-		canvasNum[canvasN[i]].classList.add(canvasClass[i]);
-	}
-	var signD = [120,121,122,123,124,125,126,150,151,180,181,210,211,240,241,270,300,149,179,209,239,269,299,329,141,142,143,171,172,173,138,139,168,169,198,199,228,229,258,259,318,319];
-	for (var i = 0; i < signD.length; i++) {
-		signXarr.splice(signD[i],1,1);
-	}
-	for (var i = 0; i < 30; i++) {
-		signXarr.splice(i,1,1);
-		signXarr.splice(i+z,1,1);
-		signXarr.splice(i+z*2,1,1);
-		signXarr.splice(i+z*3,1,1);
-	}
-	for (var i = 330; i < 360; i++) {
-		signXarr.splice(i,1,1);
-	}
-	for (var i = 31; i < 48; i++) {
-		PhotoArr.splice(i,1,1);
-	}
-	for (var i = 50; i < 59; i++) {
-		PhotoArr.splice(i,1,1);
-	}
-	window.roommateImg = "url(imges/home-2-2-bj.png)";
-	window.roommateImgX = "imges/home-2-bj-x.png";
-	window.roommateImg1 = "url(imges/home-2-1-bj.png)";
-	window.roommateImgX1 = "imges/home-2-bj-x.png";
-	window.roommateN = canvasNum[300];
-	roommate.className = "roommate-M";
-	window.roommateSize = "30em"
-	Roommate1();
-	signZ()
-	roommateBtn.style.display = "none";
-}
-function LV3(){
-	LV4();
-	home.style.background = "url(imges/home-3-1-bj.png)";
-	canvasNum[210].src = "imges/home-3-1-x-bj.png";
-	window.roommateImg = "url(imges/home-3-2-bj.png)";
-	window.roommateImgX = "imges/home-3-2-x-bj.png";
-	window.roommateImg1 = "url(imges/home-3-1-bj.png)";
-	window.roommateImgX1 = "imges/home-3-1-x-bj.png";
-	window.roommateN = canvasNum[210];
-	home.style.backgroundSize = "35em";
-	window.roommateSize = "35em"
-}
-function LV4(){
-	NOanimation()
-	home.className = "home-L";
-	window.z = 35;
-	Choice.style.display = "none";
-	window.homeNum = 875;
-	SignArray();
-	window.canvasNum = canvas.querySelectorAll("img");
-	window.ssr = canvasNum[0].src;
-	var canvasN = [412,127,131,85,389,386,210];
-	var canvasSrc = ["imges/DoubleBed.png","imges/bed.png","imges/bed.png","imges/BabyDed.png","imges/kitchen-R.png","imges/kitchen-L.png","imges/home-4-1-x-bj.png"];
-	var canvasClass = ["DoubleBed","bed","bed","BabyDed","kitchen-R","kitchen-L","home-L-2-bj-x"];
-	for (var i = 0; i < canvasN.length; i++){
-		canvasNum[canvasN[i]].src = canvasSrc[i];
-		canvasNum[canvasN[i]].classList.add(canvasClass[i]);
-	}
-	for (var i = 0; i < canvasNum.length; i++) {
-        canvasNum[i].index = i;
-	}
-	var signD = [153,154,188,189,168,203,238,273,308,281,282,283,284,285,286,287,288,289,290,316,317,318,319,320,321,322,323,324,325,258,259,293,294,476,477,511,512,546,547,581,582,616,617,686,687,197,198,232,233,201,202,236,237,482,483,484,517,518,519,162,163,166,167,157,156,155,190,191,192];
-	for (var i = 0; i < signD.length; i++) {
-		signXarr.splice(signD[i],1,1);
-	}
-	var arr1 = [0,328,169,204,239,274,309,351,387,422,459,363,398,433,710,806,780,745];
-	var arr2 = [140,350,175,210,245,280,315,361,396,431,465,385,420,455,723,840,793,758];
-	for (var i = 0; i < arr1.length; i++) {
-
-		for (var x = arr1[i]; x < arr2[i]; x++) {
-			signXarr.splice(x,1,1);
-		}        
-	}
-	for (var i = 0; i < 21; i++) {
-		var x = 140 + (35*i);
-		signXarr.splice(x,1,1);
-	}
-	for (var i = 0; i < 9; i++) {
-		var x = 386 + (35*i);
-		signXarr.splice(x,1,1);
-	}
-	for (var i = 0; i < 10; i++) {
-		var x = 489 + (35*i);
-		signXarr.splice(x,1,1);
-	}
-	for (var i = 36; i < 48; i++) {
-		PhotoArr.splice(i,1,1);
-	}
-	for (var i = 50; i < 62; i++) {
-		PhotoArr.splice(i,1,1);
-	}
-	for (var i = 351; i < 360; i++) {
-		PhotoArr.splice(i,1,1);
-	}
-	for (var i = 364; i < 371; i++) {
-		PhotoArr.splice(i,1,1);
-	}
-	for (var i = 373; i < 384; i++) {
-		PhotoArr.splice(i,1,1);
-	}
-	for (var i = 457; i < 489; i++) {
-		canvasNum[i].style.zIndex="31"
-	}
-	signX1();
-	signY1();
-	signZ();
-	window.roommateImg = "url(imges/home-4-2-bj.png)";
-	window.roommateImgX = "imges/home-4-2-x-bj.png";
-	window.roommateImg1 = "url(imges/home-4-1-bj.png)";
-	window.roommateImgX1 = "imges/home-4-1-x-bj.png";
-	home.style.background = "url(imges/home-4-1-bj.png)";
-	home.style.backgroundSize = "35em";
-	window.roommateSize = "35em"
-	window.roommateN = canvasNum[210];
-	roommate.className = "roommate-L";
-	window.LV = 4;
-	Roommate1()
-	roommateBtn.style.display = "none";
-}
-function SignArray(){
-	for(var i = 0; i < homeNum; i++){
-		createHtml();
-		createHtml1()
-		signHarr.push(0);
-		signWarr.push(0);
-		signXarr.push(0);
-		sign.push(0);
-		PhotoSign.push(0);
-		PhotoArr.push(0);
-		PhotoHarr.push(0);
-		PhotoWarr.push(0);
-	}
-}
-var canvasGridNnm = 0;
-function createHtml(){
-	var div = document.createElement("div");
-	var Img = document.createElement("img");
-	Img.src = "imges/y.png";
-	div.appendChild(Img);
-	canvas.appendChild(div);
-}
-function createHtml1(){
-	var div = document.createElement("div");
-	var Img = document.createElement("img");
-	Img.src = "imges/t.png";
-	div.appendChild(Img);
-	canvasGrid.appendChild(div);
-}
-function Grid(){
-	if (canvasGridNnm == 0) {
-		canvasGrid.style.display = "flex";
-		window.canvasGridNnm = 1;
-	}else if (canvasGridNnm == 1) {
-		canvasGrid.style.display = "none";
-		window.canvasGridNnm = 0;
-	}
-	
-}
-function Roommate1(){
-	window.roommateBtnImg = roommateBtn.querySelectorAll("img");
-	for (var i = 0; i < roommateBtnImg.length; i++) {
-        roommateBtnImg[i].index = i;
-	}
-}
-canvas.addEventListener('click',function(e){
-	if (e.target.nodeName == "DIV") {
-			e.target.firstChild.src = IMG;
-			e.target.firstChild.style.width = IMGWidth;
-			e.target.firstChild.style.height = IMGHeight;
-			console.log(e.target.firstChild.index);
-			var H = e.target.firstChild.index;
-			e.target.firstChild.style.top = IMGH;
-			window.sssr = IMG;
-			if (IMGD == 1 && Label == 0) {
-				signHarr.splice(H,1,IMGHsign);
-				signWarr.splice(H,1,IMGWsign);
-				sign.splice(H,1,1);
-				console.log(signHarr[H]);
-				console.log(signWarr[H]);
-			}else if (IMGD == 1 && Label == 1) {
-				PhotoHarr.splice(H,1,IMGHsign);
-				PhotoWarr.splice(H,1,IMGWsign);
-				PhotoSign.splice(H,1,1);
-				console.log(PhotoHarr);
-				console.log(PhotoWarr);
-			}
-		}
-		if (IMGD == 1) {
-			var r = e.target.firstChild.index;
-			for (var i = 0; i < IMGWsign; i++){
-				for (var n = 0; n < IMGHsign; n++){
-					canvasNum[r-(z*n)].parentNode.style.pointerEvents = "none";
-					// canvasNum[r-(z*n)].parentNode.style.background = "red";
-					// canvasNum[r-(z*n)].parentNode.style.opacity =  "0.5";
-					signXarr.splice(r-(z*n),1,1);
-				}
-				// console.log(signXarr[r]);
-				var r = r + 1;
-			}
-			console.log(canvasNum[e.target.firstChild.index]);
-			// console.log(signXarr);
-			if (Label == 0) {
-				signX1();
-				signY1();
-			}else if (Label == 1) {
-				PhotoSignX()
-			}
-			
-		}else if (IMGD == 0) {
-			console.log(signHarr[H]);
-			console.log(signWarr[H]);
-			var r = e.target.firstChild.index;
-			for (var i = 0 ; i < signWarr[H]; i++) {
-				for (var n = 0 ; n < signHarr[H]; n++) {
-					canvasNum[r-(z*n)].parentNode.style.background = "";
-					canvasNum[r-(z*n)].parentNode.style.pointerEvents = "auto";
-					signXarr.splice(r-(z*n),1,0);
-				}
-				var r = r + 1;
-			}
-			signHarr.splice(H,1,0);
-			signWarr.splice(H,1,0);
-			// console.log(signXarr);
-		}	
-})
-function signZ(){
-	for (var i = 0; i < signXarr.length; i++) {
-		if (signXarr[i] == 0) {
-			canvasNum[i].parentNode.style.background = "";
-			// canvasNum[i].parentNode.style.background = "green";
-			// canvasNum[i].parentNode.style.opacity =  "0.5";
-			canvasNum[i].parentNode.style.pointerEvents = "auto";
-		}else if (signXarr[i] == 1) {
-			// canvasNum[i].parentNode.style.background = "red";
-			// canvasNum[i].parentNode.style.opacity =  "0.5";
-			canvasNum[i].parentNode.style.pointerEvents = "none";
-		}
-	}
-	for (var i = 1; i < signXarr.length; i++) {
-		if (sign[i] == 1) {
-			canvasNum[i].parentNode.style.background = "";
-			canvasNum[i].parentNode.style.pointerEvents = "auto";
-		}
-	}
-	for (var i = 1; i < PhotoSign.length; i++) {
-		if (PhotoSign[i] == 1) {
-			canvasNum[i].parentNode.style.background = "";
-			canvasNum[i].parentNode.style.pointerEvents = "auto";
-		}
-	}
-}
-
-function signX1(){
-	for (var i = 1; i < signXarr.length; i++) {
-		if (signXarr[i] == 1) {
-			if (i-(IMGWsign-1) > 0) {
-				canvasNum[i-(IMGWsign-1)].parentNode.style.pointerEvents = "none";
-				// canvasNum[i-(IMGWsign-1)].parentNode.style.background = "red";
-				// canvasNum[i-(IMGWsign-1)].parentNode.style.opacity =  "0.5";
-				if (IMGHsign == 2 || IMGHsign == 3) {
-					if (canvasNum[i-(IMGWsign-1)+(z*(IMGHsign-1))] != undefined) {
-						canvasNum[i-(IMGWsign-1)+(z*(IMGHsign-1))].parentNode.style.pointerEvents = "none";
-						// canvasNum[i-(IMGWsign-1)+(z*(IMGHsign-1))].parentNode.style.background = "#eee";
-						// canvasNum[i-(IMGWsign-1)+(z*(IMGHsign-1))].parentNode.style.opacity =  "0.5";
-					}
-				}
-				if (canvasNum[i-(IMGWsign-2)] != undefined && IMGWsign-2 > 0) {
-					canvasNum[i-(IMGWsign-2)].parentNode.style.pointerEvents = "none";
-					// canvasNum[i-(IMGWsign-2)].parentNode.style.background = "red";
-					// canvasNum[i-(IMGWsign-2)].parentNode.style.opacity =  "0.5";
-				}
-				if (canvasNum[i-(IMGWsign-3)] != undefined && IMGWsign-3 > 0) {
-					canvasNum[i-(IMGWsign-3)].parentNode.style.pointerEvents = "none";
-					// canvasNum[i-(IMGWsign-3)].parentNode.style.background = "green";
-					// canvasNum[i-(IMGWsign-3)].parentNode.style.opacity =  "0.5";
-				}
-				if (canvasNum[i-(IMGWsign-3)+z] != undefined && IMGWsign-3 > 0) {
-					canvasNum[i-(IMGWsign-3)+z].parentNode.style.pointerEvents = "none"
-					// canvasNum[i-(IMGWsign-3)+z].parentNode.style.background = "green";
-					// canvasNum[i-(IMGWsign-3)+z].parentNode.style.opacity =  "0.5";
-				};	
-			}	
-		}	
-	}
-}
-
-function signY1(){
-	for (var i = 1; i < signXarr.length; i++) {
-		if (signXarr[i] == 1) {
-			// if (canvasNum[i+z*(IMGHsign-1)-1] != undefined && IMGHsign-1 > 0) {
-			// 	canvasNum[i+z*(IMGHsign-1)-1].parentNode.style.pointerEvents = "none";
-			// 	canvasNum[i+z*(IMGHsign-1)-1].parentNode.style.background = "blue";
-				// canvasNum[i+z*(IMGHsign-1)-1].parentNode.style.opacity =  "0.5";
-			// }
-			if (canvasNum[i+z*(IMGHsign-1)] != undefined) {
-				canvasNum[i+z*(IMGHsign-1)].parentNode.style.pointerEvents = "none";
-				// canvasNum[i+z*(IMGHsign-1)].parentNode.style.background = "#000";
-				// canvasNum[i+z*(IMGHsign-1)].parentNode.style.opacity =  "0.5";
-			}
-			if (LV == 4) {
-				var a = [222,221,220,219]
-				var b = [650,649,648,647]
-				for (var c = 0; c < IMGWsign - 1; c++) {
-					if (canvasNum[a[c]] != undefined) {
-						canvasNum[a[c]].parentNode.style.pointerEvents = "none";
-						// canvasNum[a[c]].parentNode.style.background = "#000";
-						// canvasNum[a[c]].parentNode.style.opacity =  "0.5";
-					}
-					if (canvasNum[b[c]] != undefined) {
-						canvasNum[b[c]].parentNode.style.pointerEvents = "none";
-						// canvasNum[b[c]].parentNode.style.background = "#000";
-						// canvasNum[b[c]].parentNode.style.opacity =  "0.5";
-					}
-				}
-			}	
-		}	
-	}
-}
-
-function television1(){
-	window.IMGD = 1;
-	window.IMG = "imges/television-1.png";
-	window.IMGH = "-2em";
-	window.IMGHsign = 2;
-	window.IMGWsign = 2;
-	window.IMGWidth = "2em";
-	window.IMGHeight = "3em";
-	signZ();
-	signX1();
-	signY1();
-}
-function del(){
-	window.IMGD = 0;
-	window.IMG = "imges/y.png";
-	window.IMGH = "0";
-	window.IMGHsign = "0";
-	window.IMGWsign = "0";
-	mouseImg.src = IMG;
-	mouseImg.style.top = IMGH;
-	mouseImg.style.width = IMGWidth;
-	mouseImg.style.height = IMGHeight;
-	signZ()
-	console.log(IMG);
-}
-canvas.onmouseover = function(e){
-	if (e.target.nodeName == "DIV" && IMGD != 0) {
-		window.sssr = e.target.firstChild.src;
-		if (e.target.firstChild.src == ssr) {
-			// e.target.style.background = "#00ff00";
-			// e.target.style.opacity =  "0.7";
-			e.target.firstChild.src = IMG;
-			e.target.firstChild.style.top = IMGH;
-			mouseImg.src = "";
-			e.target.firstChild.style.width = IMGWidth;
-			e.target.firstChild.style.height = IMGHeight;
-		}else{
-			mouse.style.background = "red";
-			mouseImg.src = IMG;
-			mouseImg.style.top = IMGH;
-			mouseImg.style.width = IMGWidth;
-			mouseImg.style.height = IMGHeight;
-		}
-	}else if (e.target.nodeName == "DIV" && IMGD == 0 && e.target.id != "canvas") {
-		if (e.target.firstChild.src != ssr) {
-			// e.target.style.background = "#00ff00";
-			// e.target.style.opacity =  "0.7";
-		}
-	}
-}
-canvas.onmouseout = function(e){
-	if (e.target.nodeName == "DIV" && IMGD != 0) {
-			e.target.style.background = "";
-			e.target.style.opacity =  "1";
-			e.target.firstChild.src = sssr;
-			mouse.style.background = "";
-	}else if (e.target.nodeName == "DIV" && IMGD == 0 && e.target.id != "canvas") {
-		if (e.target.firstChild.src != ssr) {
-			e.target.style.background = "";
-			e.target.style.opacity =  "1";
-		}
-	}else{
-		mouse.style.background = "";
-	}
-}
-
-function Roommate(){
-		home.style.background = roommateImg;
-		home.style.backgroundSize = roommateSize;
-		roommate.style.display = "block";
-		roommateN.src = roommateImgX;
-		roommateBtn.style.display = "block";
-}
-roommateBtn.addEventListener('click',function(e){
-	if (e.target.index == 16) {
-		home.style.background = roommateImg1;
-		home.style.backgroundSize = roommateSize;
-		roommate.style.display = "none";
-		roommateN.src = roommateImgX1;
-		window.RoommateSign1 = 0;
-		roommateBtn.style.display = "none";
-		window.RoommateSign = 0;
-	}else if (e.target.index == 17) {
-		roommateBtn.style.display = "none";
-	}else if (e.target.index != undefined) {
-		document.getElementById("roommate123").src = "imges/roommate/" + e.target.index + ".png";
-		document.getElementById("roommate1").src = "imges/roommate/roommate-" + e.target.index + ".png";
-		console.log(e.target.index != undefined);
-	}
-})
-
-
-
-
-var menu = document.getElementById("menu");
-var menuNum = menu.getElementsByClassName("menuNum");
-var menuNumWall = Wall.getElementsByClassName("menuNum");
-var WallIcon = Wall.getElementsByClassName("Wall-icon");
-var menuNumPhoto = Photo.getElementsByClassName("menuNum");
-
-// console.log(menuNum.length);
-for (var i = 0 ; i < 14; i++) {
-	var N = menuNum[i];
-	for (var x = 0 ; x < 18; x++) {
-		var Img = document.createElement("img");
-		Img.src = "imges/icon/furniture/" + (x+i*18) + ".png";
-		if (x+i*18 > 236) {
-			Img.src = "imges/y.png";
-			Img.style.pointerEvents = "none";
-		}
-		N.appendChild(Img).className = "furniture-icon";
-	}
-}
-
-for (var i = 0 ; i < 10; i++) {
-	var N = menuNumWall[i];
-	for (var x = 0 ; x < 18; x++) {
-		var Img = document.createElement("img");
-		Img.src = "imges/icon/wall/" + (x+i*18) + ".png";
-		if (x+i*18 > 167) {
-			Img.src = "imges/y.png";
-			Img.style.pointerEvents = "none";
-		}
-		N.appendChild(Img).className = "Wall-icon";
-	}
-}
-for (var i = 0 ; i < 3; i++) {
-	var N = menuNumPhoto[i];
-	for (var x = 0 ; x < 18; x++) {
-		var Img = document.createElement("img");
-		Img.src = "imges/icon/Photo/" + (x+i*18) + ".png";
-		if (x+i*18 > 48) {
-			Img.src = "imges/y.png";
-			Img.style.pointerEvents = "none";
-		}
-		N.appendChild(Img).className = "Photo-icon";
-	}
-}
-for (var i = 0; i < furnitureIcon.length; i++) {
-        furnitureIcon[i].index = i;
-	}
-for (var i = 0; i < PhotoIcon.length; i++) {
-        PhotoIcon[i].index = i;
-	}
-for (var i = 0; i < WallIcon.length; i++) {
-        WallIcon[i].index = i;
-	}
-
-
-
-function cancel() {
-	var oCavans = document.getElementsByTagName('canvas')[0];
+function cancel() {//关闭下载弹窗并删除图片预览
+	var oCavans = document.getElementsByTagName("canvas")[0];
 	preview1.removeChild(oCavans);
 	preview.style.display = "none";
-
+	document.getElementById("load").style.display = "block";
+    document.getElementById("save").style.display = "none";
+    document.getElementById("cancel").style.display = "none";
 }
 
-
-var time = 0;
-	var timeX = 0
-	var cloudY = document.getElementById("cloud");
-	var cloudN = cloudY.querySelectorAll("div");
-	var cloudX1 = cloudN[0].offsetLeft;
-	var cloudX2 = cloudN[1].offsetLeft;
-	var cloudX3 = cloudN[2].offsetLeft;
-	var cloudX4 = cloudN[3].offsetLeft;
-	var animation = setInterval("cloud()",50)
-	function cloud() {
-		if (timeX == 0) {
-			window.time = time + 1;
-
-			if (time == 300) {
-				window.timeX = 1
-			}
-		}else if (timeX == 1) {
-			window.time = time - 1;
-			if (time == 1) {
-				window.timeX = 0
-			}
-		}
-		cloudN[0].style.left = cloudX1 + time +"px";
-		cloudN[1].style.left = cloudX2 - time +"px";
-		cloudN[2].style.left = cloudX4 - time*2 +"px";
-		cloudN[3].style.left = cloudX3 + time*2 +"px";
-	}
-function NOanimation() {
-		clearInterval(animation);
-	}
