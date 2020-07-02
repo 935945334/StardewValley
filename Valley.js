@@ -1656,3 +1656,6 @@ if (/(iPhone|iPod|iOS|Android)/i.test(navigator.userAgent)) {
 	document.getElementById("warning").style.display = "block"
 	document.getElementById("Choice-1").style.display = "none"
 }
+function Choice() {
+	window.location.href="http://bishengming.gitee.io/pixel/";
+}
