@@ -1044,3 +1044,11 @@ img{
 	display: none;
 	background: url(imges/Choice/warning-1.png);
 }
+#f11{
+	top: 30%;
+	left: 50%;
+	margin-left: -320px;
+	position: absolute;
+	z-index: 1112;
+	display: none;
+}
