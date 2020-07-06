@@ -868,7 +868,16 @@ img{
 	margin-left: -640px;
 	display: none;
 }
-
+#nuannuan{
+	width: 1280px;
+	height: 768px;
+	position: absolute;
+	z-index: 99;
+	top: 5%;
+	left: 50%;
+	margin-left: -640px;
+	display: none;
+}
 
 #rotate{
 	width: 7em;
@@ -1035,9 +1044,9 @@ img{
 }
 #warning{
 	width: 320px;
-	height: 176px;
+	height: 400px;
 	position: absolute;
-	top: 30%;
+	top: 20%;
 	left: 50%;
 	margin-left: -160px;
 	z-index: 1111;

@@ -1681,3 +1681,9 @@ document.onkeydown=function(event){
 	    document.getElementById("Choice-1").style.display = "block"
 	}
 }; 
+function nuannuan() {
+	document.getElementById("nuannuan").style.display = "block";
+}
+function nuannuan_X() {//关闭作者联系方式
+	document.getElementById("nuannuan").style.display = "none";
+}
