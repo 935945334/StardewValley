@@ -70,7 +70,9 @@ function LV_1() {
 	HouseNumM[105].firstChild.src = "imges/bj/bed.png";
 	HouseNumM[132].firstChild.src = "imges/bj/home-1-bj-x.png";
 	HouseNumM[132].firstChild.className = "home-1-bj-x";
-	HouseNumM[132].firstChild.style.zIndex = 80;
+	for(var i = 0; i < HouseNumM.length; i++){//调整物品层层次
+		HouseNumM[i].firstChild.style.zIndex = i+20;
+	}
 	for (var i = 0 ; i < Is_map.length; i++) {
 		for (var x = 0 ; x < Is_map[i].length; x++) {
 			var e = (Is_map[i])[x];
@@ -134,7 +136,9 @@ function LV_2() {
 	HouseNumM[141].firstChild.className = "DoubleBed";
 	HouseNumM[330].firstChild.src = "imges/bj/home-2-bj-x.png";
 	HouseNumM[330].firstChild.className = "home-2-bj-x";
-	HouseNumM[330].firstChild.style.zIndex = 80;
+	for(var i = 0; i < HouseNumM.length; i++){//调整物品层层次
+		HouseNumM[i].firstChild.style.zIndex = i+20;
+	}
 	for (var i = 0 ; i < Is_map.length; i++) {
 		for (var x = 0 ; x < Is_map[i].length; x++) {
 			var e = (Is_map[i])[x];
@@ -195,7 +199,9 @@ function LV_4() {
 	HouseNumM[315].firstChild.style.zIndex = 80;
 	HouseNumM[840].firstChild.src = "imges/bj/home-4-b-bj.png";
 	HouseNumM[840].firstChild.className = "home-4-2-b-bj";
-	HouseNumM[840].firstChild.style.zIndex = 80;
+	for(var i = 0; i < HouseNumM.length; i++){//调整物品层层次
+		HouseNumM[i].firstChild.style.zIndex = i+20;
+	}
 	for (var i = 0 ; i < Is_map.length; i++) {
 		for (var x = 0 ; x < Is_map[i].length; x++) {
 			var e = (Is_map[i])[x];
