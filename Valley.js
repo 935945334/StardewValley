@@ -525,8 +525,8 @@ function MenuSwitch() {//显示/隐藏菜单功能
 
 
 
-var menuBody0Num = [55,21,27,8,19,19,5,2];//菜单页内按钮行数
-var menuBody0Num1 = [164,61,78,23,56,55,13,4];//菜单页内按钮数量
+var menuBody0Num = [55,21,27,8,38,19,5,2];//菜单页内按钮行数
+var menuBody0Num1 = [164,61,78,23,112,55,13,4];//菜单页内按钮数量
 var menuBody0Class = "other-icon";//菜单页内按钮class
 for (var i = 0 ; i < menuBodyNum.length; i++) {//生成按钮
 	var N = menuBodyNum[i];
