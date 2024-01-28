@@ -1505,7 +1505,7 @@ function Statistics_next() {
 }
 
 function Farm() {//跳转到装修模拟器
-	window.open("http://bishengming.gitee.io/stardewvalleyfarm/")
+	window.open("https://xlg-bj.netlify.app/")
 }
 
 function author() {//显示联系作者联系方式
